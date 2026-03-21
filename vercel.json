@@ -2,11 +2,501 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
+  "redirects": [
+    {
+      "source": "/4",
+      "destination": "/entry/사이트맵",
+      "permanent": true
+    },
+    {
+      "source": "/6",
+      "destination": "/entry/가게-소개-글쓰기-기본-폼",
+      "permanent": true
+    },
+    {
+      "source": "/7",
+      "destination": "/entry/자료",
+      "permanent": true
+    },
+    {
+      "source": "/9",
+      "destination": "/entry/중간-광고",
+      "permanent": true
+    },
+    {
+      "source": "/10",
+      "destination": "/entry/아름다운-세계-여행-여행지-추천-top10-(죽기전에-가봐야-할-곳)",
+      "permanent": true
+    },
+    {
+      "source": "/11",
+      "destination": "/entry/여친이랑-가면-좋은-외국-느낌나는-국내-리조트",
+      "permanent": true
+    },
+    {
+      "source": "/12",
+      "destination": "/entry/국내-해수욕장-번호표",
+      "permanent": true
+    },
+    {
+      "source": "/14",
+      "destination": "/entry/플롬",
+      "permanent": true
+    },
+    {
+      "source": "/16",
+      "destination": "/entry/대만-정보",
+      "permanent": true
+    },
+    {
+      "source": "/17",
+      "destination": "/entry/부산-돼지국밥-맛집-추천-BEST-3",
+      "permanent": true
+    },
+    {
+      "source": "/18",
+      "destination": "/entry/발리-럭셔리-리조트-추천---엣지-(위치_-사진-모음)",
+      "permanent": true
+    },
+    {
+      "source": "/19",
+      "destination": "/entry/라라랜드-촬영지-9곳-LA-관광지-(투어를-위한-소개)",
+      "permanent": true
+    },
+    {
+      "source": "/20",
+      "destination": "/entry/터키-카파도키아-위치_열기구-가격-(너무-아름다워-비현실적인-공간)",
+      "permanent": true
+    },
+    {
+      "source": "/21",
+      "destination": "/entry/현혹-장황-인사말",
+      "permanent": true
+    },
+    {
+      "source": "/22",
+      "destination": "/entry/2020년-국내-추천-여행지",
+      "permanent": true
+    },
+    {
+      "source": "/23",
+      "destination": "/entry/제부도-물때-공식-시간표-보는법-(통행시간-확인)",
+      "permanent": true
+    },
+    {
+      "source": "/24",
+      "destination": "/entry/쿠팡-관심-기반",
+      "permanent": true
+    },
+    {
+      "source": "/25",
+      "destination": "/entry/쿠팡-기획전",
+      "permanent": true
+    },
+    {
+      "source": "/26",
+      "destination": "/entry/쿠팡-카테고리베스트-국내여행",
+      "permanent": true
+    },
+    {
+      "source": "/27",
+      "destination": "/entry/쿠팡-카테고리베스트-해외여행",
+      "permanent": true
+    },
+    {
+      "source": "/28",
+      "destination": "/entry/아르헨티나-vs-한국-간략-비교-(땅-면적,-인구-등)",
+      "permanent": true
+    },
+    {
+      "source": "/30",
+      "destination": "/entry/식스센스-롤러코스터-식당-(해외-위치_사진_영상)",
+      "permanent": true
+    },
+    {
+      "source": "/31",
+      "destination": "/entry/[독일]-노이슈반슈타인-성-위치-(지도,-입장료,-주변-호텔)✈여행지-추천",
+      "permanent": true
+    },
+    {
+      "source": "/32",
+      "destination": "/entry/캐나다-vs-한국-간략-비교-(땅-면적,-인구-등)",
+      "permanent": true
+    },
+    {
+      "source": "/33",
+      "destination": "/entry/대만-vs-한국-간략-비교-(땅-면적,-인구-등)",
+      "permanent": true
+    },
+    {
+      "source": "/34",
+      "destination": "/entry/34",
+      "permanent": true
+    },
+    {
+      "source": "/35",
+      "destination": "/entry/35",
+      "permanent": true
+    },
+    {
+      "source": "/36",
+      "destination": "/entry/두바이---위치,-지도,-랜드마크-관광지-(정보-다-모음)",
+      "permanent": true
+    },
+    {
+      "source": "/37",
+      "destination": "/entry/칠레✈산-알폰소-델-마르(San-Alfonso-del-Mar)-수영장",
+      "permanent": true
+    },
+    {
+      "source": "/38",
+      "destination": "/entry/강릉-일출명소-추천-3,한적한곳2(일출시간)-2021",
+      "permanent": true
+    },
+    {
+      "source": "/39",
+      "destination": "/entry/미얀마-vs-한국-간략-비교-(땅-면적,-인구수,-위치-등)",
+      "permanent": true
+    },
+    {
+      "source": "/40",
+      "destination": "/entry/텐트-처음-구입하는-초보를-위한-정보-(텐트-종류,-명칭)",
+      "permanent": true
+    },
+    {
+      "source": "/42",
+      "destination": "/entry/모카포트-사용법-(실패-없이-끓이는-노하우)",
+      "permanent": true
+    },
+    {
+      "source": "/43",
+      "destination": "/entry/싱가포르-vs-한국-간략-비교-(땅-면적,-인구,-지도-등)",
+      "permanent": true
+    },
+    {
+      "source": "/44",
+      "destination": "/entry/이스라엘-vs-한국-간략-비교(땅-면적,-인구,-팔레스타인-가자-위치)",
+      "permanent": true
+    },
+    {
+      "source": "/45",
+      "destination": "/entry/콩고민주공화국-vs-한국-간략-비교(땅-면적,-인구,-니라공고-화산-위치)",
+      "permanent": true
+    },
+    {
+      "source": "/46",
+      "destination": "/entry/중국-우한-위치-(크기,-인구,-우한-연구소-위치)",
+      "permanent": true
+    },
+    {
+      "source": "/47",
+      "destination": "/entry/영국-vs-한국-비교(땅-면적,-지도-비교,-인구)",
+      "permanent": true
+    },
+    {
+      "source": "/48",
+      "destination": "/entry/스페인-vs-한국-비교(땅-면적,-지도-비교,-인구)",
+      "permanent": true
+    },
+    {
+      "source": "/49",
+      "destination": "/entry/오스트리아-vs-한국-비교(땅-면적,-지도-비교,-인구)",
+      "permanent": true
+    },
+    {
+      "source": "/50",
+      "destination": "/entry/vs-한국-비교(땅-면적,-지도-비교,-인구)",
+      "permanent": true
+    },
+    {
+      "source": "/51",
+      "destination": "/entry/홍콩-vs-한국-비교(땅-면적,-지도-비교,-인구)",
+      "permanent": true
+    },
+    {
+      "source": "/53",
+      "destination": "/entry/남아프리카공화국-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/54",
+      "destination": "/entry/아이티-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/55",
+      "destination": "/entry/[오스트리아]-할슈타트-위치-(지도,-숙소,-주변-관광지)✈여행-추천",
+      "permanent": true
+    },
+    {
+      "source": "/56",
+      "destination": "/entry/터키-vs-한국-비교(튀르키예-땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/57",
+      "destination": "/entry/아프가니스탄-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/58",
+      "destination": "/entry/뉴질랜드-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/59",
+      "destination": "/entry/노르웨이-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/60",
+      "destination": "/entry/통가-vs-한국-비교(위치,-지도,-땅-면적,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/61",
+      "destination": "/entry/예멘-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/62",
+      "destination": "/entry/우크라이나-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/63",
+      "destination": "/entry/캘리포니아-vs-한국-(땅-면적,-지도-크기-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/64",
+      "destination": "/entry/돈바스-위치-(루간스크,-도네츠크)-지도_-정보",
+      "permanent": true
+    },
+    {
+      "source": "/65",
+      "destination": "/entry/벨라루스-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/66",
+      "destination": "/entry/러시아-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/67",
+      "destination": "/entry/폴란드-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/68",
+      "destination": "/entry/68",
+      "permanent": true
+    },
+    {
+      "source": "/69",
+      "destination": "/entry/69",
+      "permanent": true
+    },
+    {
+      "source": "/70",
+      "destination": "/entry/우루과이-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/71",
+      "destination": "/entry/71",
+      "permanent": true
+    },
+    {
+      "source": "/72",
+      "destination": "/entry/스웨덴-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/73",
+      "destination": "/entry/남극-빙하가-모두-녹으면-생기는일-(해수면-상승,-발생-문제점)",
+      "permanent": true
+    },
+    {
+      "source": "/75",
+      "destination": "/entry/수리남-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/76",
+      "destination": "/entry/포르투갈-vs-한국-비교(땅-면적,-지도-비교,-인구수)",
+      "permanent": true
+    },
+    {
+      "source": "/77",
+      "destination": "/entry/플로리다-새니벨섬-쉘비치-(소개,-사진,-지도)",
+      "permanent": true
+    },
+    {
+      "source": "/78",
+      "destination": "/entry/크로아티아-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/80",
+      "destination": "/entry/LA-추천-관광지-10곳-입니다.-(여행-계획-시-참고하세요)",
+      "permanent": true
+    },
+    {
+      "source": "/81",
+      "destination": "/entry/무료-동영상-편집-프로그램-5가지-추천",
+      "permanent": true
+    },
+    {
+      "source": "/82",
+      "destination": "/entry/도쿄-디즈니랜드-입장권-가격-(티켓-종류)",
+      "permanent": true
+    },
+    {
+      "source": "/84",
+      "destination": "/entry/도쿄-디즈니랜드-공식-제휴-호텔-종류_정보",
+      "permanent": true
+    },
+    {
+      "source": "/85",
+      "destination": "/entry/이탈리아-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/88",
+      "destination": "/entry/필리핀-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/90",
+      "destination": "/entry/스위스-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/91",
+      "destination": "/entry/모로코-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/92",
+      "destination": "/entry/이스라엘-팔레스타인-분쟁-원인-정리-(바로-이해됩니다)",
+      "permanent": true
+    },
+    {
+      "source": "/93",
+      "destination": "/entry/아이슬란드-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/94",
+      "destination": "/entry/도미니카공화국-vs-한국-비교(땅-면적,-지도-비교,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/95",
+      "destination": "/entry/미국-지역-구분-&-이미지-(서부,-중서부,-남부,-북동부)",
+      "permanent": true
+    },
+    {
+      "source": "/96",
+      "destination": "/entry/미국-50개-주별-이미지-(특징+51개-주)",
+      "permanent": true
+    },
+    {
+      "source": "/97",
+      "destination": "/entry/커피한잔",
+      "permanent": true
+    },
+    {
+      "source": "/98",
+      "destination": "/entry/레바논-vs-한국-비교(땅-면적,-지도-위치,-인구수,-여행,-치안)",
+      "permanent": true
+    },
+    {
+      "source": "/99",
+      "destination": "/entry/하와이-vs-한국-비교(땅-면적,-지도-위치,-인구수,-여행,-치안,-물가)",
+      "permanent": true
+    },
+    {
+      "source": "/100",
+      "destination": "/entry/일본-vs-한국-비교(땅-면적,-지도,-섬-구성,-인구수,-여행,-날씨)",
+      "permanent": true
+    },
+    {
+      "source": "/101",
+      "destination": "/entry/중국-vs-한국-비교(땅-면적,-지도-위치,-인구수,-여행,-치안,-물가)",
+      "permanent": true
+    },
+    {
+      "source": "/102",
+      "destination": "/entry/102",
+      "permanent": true
+    },
+    {
+      "source": "/103",
+      "destination": "/entry/크루즈-여행-비용-(세계-5대-크루즈-노선-비교)",
+      "permanent": true
+    },
+    {
+      "source": "/105",
+      "destination": "/entry/105",
+      "permanent": true
+    },
+    {
+      "source": "/106",
+      "destination": "/entry/106",
+      "permanent": true
+    },
+    {
+      "source": "/107",
+      "destination": "/entry/107",
+      "permanent": true
+    },
+    {
+      "source": "/108",
+      "destination": "/entry/108",
+      "permanent": true
+    },
+    {
+      "source": "/109",
+      "destination": "/entry/109",
+      "permanent": true
+    },
+    {
+      "source": "/111",
+      "destination": "/entry/111",
+      "permanent": true
+    },
+    {
+      "source": "/113",
+      "destination": "/entry/그리스-역사-간략-설명-(고대-그리스-부터-현재까지-초간단-설명)",
+      "permanent": true
+    },
+    {
+      "source": "/114",
+      "destination": "/entry/114",
+      "permanent": true
+    },
+    {
+      "source": "/115",
+      "destination": "/entry/네팔-vs-한국-비교(땅-면적,-지도-위치,-인구수,-여행,-치안,-물가)",
+      "permanent": true
+    },
+    {
+      "source": "/116",
+      "destination": "/entry/8000미터가-넘는-전세계-산의-이름을-높이-순으로-알려줘",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/admin/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
       ]
     }
   ]
