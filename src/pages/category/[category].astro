@@ -36,7 +36,7 @@ const { posts, category } = Astro.props;
 
       return (
         <a
-          href={`/${post.data.slug}`}
+          href={`/${post.slug}`}
           class="group flex flex-col gap-2 rounded-lg border border-border bg-background p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30"
         >
           <h2 class="text-lg font-semibold leading-snug tracking-tight group-hover:text-primary/80 transition-colors">
