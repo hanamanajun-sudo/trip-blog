@@ -1,0 +1,64 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = '세계 여행, 나라 정보, 역사 이야기를 담은 블로그', ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- OG Tags -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content="website" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <!-- Sitemap -->
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- 폰트: Pretendard (한글 최적화) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+</head>
+<body class="min-h-screen bg-background font-sans antialiased">
+
+  <!-- 헤더 -->
+  <header class="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+    <div class="container mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
+      <a href="/" class="flex items-center gap-2 font-bold text-lg tracking-tight">
+        ✈️ <span>lalalakorea</span>
+      </a>
+      <nav class="flex items-center gap-4 text-sm text-muted-foreground">
+        <a href="/" class="hover:text-foreground transition-colors">홈</a>
+        <a href="/category/해외 여행" class="hover:text-foreground transition-colors">해외여행</a>
+        <a href="/category/국내 여행" class="hover:text-foreground transition-colors">국내여행</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 메인 -->
+  <main class="container mx-auto max-w-4xl px-4 py-8">
+    <slot />
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="border-t border-border mt-16">
+    <div class="container mx-auto max-w-4xl px-4 py-8 text-center text-sm text-muted-foreground">
+      <p>© {new Date().getFullYear()} lalalakorea. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

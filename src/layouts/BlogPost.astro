@@ -1,0 +1,74 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  date: Date;
+  category: string;
+  description?: string;
+  thumbnail?: string;
+}
+
+const { title, date, category, description, thumbnail } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date);
+---
+
+<BaseLayout title={`${title} | lalalakorea`} description={description} ogImage={thumbnail}>
+  <article class="mx-auto max-w-3xl">
+
+    <!-- 헤더 영역 -->
+    <div class="mb-8 space-y-4">
+      <!-- 카테고리 뱃지 -->
+      <a
+        href={`/category/${category}`}
+        class="inline-flex items-center rounded-md border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent"
+      >
+        {category}
+      </a>
+
+      <!-- 제목 -->
+      <h1 class="text-3xl font-bold leading-tight tracking-tight text-foreground lg:text-4xl">
+        {title}
+      </h1>
+
+      <!-- 날짜 -->
+      <div class="flex items-center gap-2 text-sm text-muted-foreground">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+      </div>
+
+      <!-- 구분선 -->
+      <hr class="border-border" />
+    </div>
+
+    <!-- 본문 -->
+    <div class="prose prose-neutral max-w-none
+      prose-headings:font-semibold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:leading-7 prose-p:text-foreground
+      prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:text-primary/80
+      prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:bg-muted prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:px-4
+      prose-img:rounded-lg prose-img:shadow-sm
+      prose-strong:text-foreground
+      prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-sm
+    ">
+      <slot />
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <div class="mt-12 pt-8 border-t border-border">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      >
+        ← 목록으로 돌아가기
+      </a>
+    </div>
+
+  </article>
+</BaseLayout>

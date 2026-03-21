@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// 카테고리 목록
+const categories = [...new Set(posts.map(p => p.data.category))];
+---
+
+<BaseLayout title="lalalakorea - 세계 여행, 나라 정보, 역사 이야기">
+
+  <!-- 히어로 섹션 -->
+  <section class="py-10 mb-8">
+    <div class="space-y-2">
+      <h1 class="text-4xl font-bold tracking-tight">✈️ lalalakorea</h1>
+      <p class="text-lg text-muted-foreground">세계 여행, 나라 정보, 역사 이야기</p>
+    </div>
+
+    <!-- 카테고리 필터 -->
+    <div class="flex flex-wrap gap-2 mt-6">
+      <a
+        href="/"
+        class="inline-flex items-center rounded-md border border-border bg-primary text-primary-foreground px-3 py-1 text-sm font-medium transition-colors"
+      >
+        전체
+      </a>
+      {categories.map(cat => (
+        <a
+          href={`/category/${cat}`}
+          class="inline-flex items-center rounded-md border border-border bg-background px-3 py-1 text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
+        >
+          {cat}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- 글 목록 -->
+  <section>
+    <div class="grid gap-4">
+      {sortedPosts.map(post => {
+        const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }).format(new Date(post.data.date));
+
+        return (
+          <a
+            href={`/${post.data.slug}`}
+            class="group flex flex-col gap-2 rounded-lg border border-border bg-background p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div class="space-y-1 flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex items-center rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                    {post.data.category}
+                  </span>
+                </div>
+                <h2 class="text-lg font-semibold leading-snug tracking-tight group-hover:text-primary/80 transition-colors line-clamp-2">
+                  {post.data.title}
+                </h2>
+                {post.data.description && (
+                  <p class="text-sm text-muted-foreground line-clamp-2">{post.data.description}</p>
+                )}
+              </div>
+              {post.data.thumbnail && (
+                <img
+                  src={post.data.thumbnail}
+                  alt={post.data.title}
+                  class="w-20 h-20 rounded-md object-cover flex-shrink-0"
+                />
+              )}
+            </div>
+            <time class="text-xs text-muted-foreground">{formattedDate}</time>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+</BaseLayout>

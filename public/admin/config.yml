@@ -1,0 +1,35 @@
+backend:
+  name: github
+  repo: hanamanajun-sudo/trip-blog
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+locale: ko
+
+collections:
+  - name: blog
+    label: 블로그 글
+    label_singular: 글
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "제목", name: "title", widget: "string" }
+      - { label: "날짜", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - label: "카테고리"
+        name: "category"
+        widget: "select"
+        options:
+          - "해외 여행"
+          - "국내 여행"
+          - "나라 정보"
+          - "역사 이야기"
+          - "여행 정보"
+          - "맛집"
+        default: "해외 여행"
+      - { label: "슬러그 (URL)", name: "slug", widget: "string", hint: "URL에 사용될 주소입니다 (예: 100)" }
+      - { label: "요약 설명", name: "description", widget: "text", required: false }
+      - { label: "썸네일 이미지", name: "thumbnail", widget: "image", required: false }
+      - { label: "본문", name: "body", widget: "markdown" }
