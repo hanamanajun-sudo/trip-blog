@@ -1,25 +1,15 @@
 ---
+// 기존 숫자 URL(/116 등) → /entry/제목 으로 301 리다이렉트
 import { getCollection } from 'astro:content';
-import BlogPost from '../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map(post => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { entrySlug: post.data.entry_slug || post.slug },
   }));
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const { entrySlug } = Astro.props;
+return Astro.redirect(`/entry/${entrySlug}`, 301);
 ---
-
-<BlogPost
-  title={post.data.title}
-  date={new Date(post.data.date)}
-  category={post.data.category}
-  description={post.data.description}
-  thumbnail={post.data.thumbnail}
->
-  <Content />
-</BlogPost>
