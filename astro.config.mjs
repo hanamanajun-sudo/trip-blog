@@ -1,10 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://trip.lalalakorea.com',
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind()],
   markdown: {
     shikiConfig: {
       theme: 'github-light',
