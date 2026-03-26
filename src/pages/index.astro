@@ -107,16 +107,16 @@ const categoryGradients: Record<string, string> = {
           >
             {/* 썸네일 */}
             {thumbnail ? (
-              <div class={`overflow-hidden bg-muted ${isFeatured ? 'h-56' : 'h-40'}`}>
+              <div class={`overflow-hidden bg-muted ${isFeatured ? 'h-44' : 'h-36'}`}>
                 <img
                   src={thumbnail}
                   alt={post.data.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
               </div>
             ) : (
-              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} ${isFeatured ? 'h-40' : 'h-28'}`}>
+              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} ${isFeatured ? 'h-36' : 'h-28'}`}>
                 <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-white/80`}></i>
                 <span class="text-xs text-white/70 font-medium">{post.data.category}</span>
               </div>
