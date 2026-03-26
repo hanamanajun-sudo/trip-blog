@@ -10,12 +10,38 @@ const sortedPosts = posts.sort((a, b) =>
 // 카테고리 목록
 const categories = [...new Set(posts.map(p => p.data.category))].sort();
 
+// 본문에서 첫 번째 이미지 추출
+function getFirstImage(body: string): string | null {
+  const match = body.match(/!\[.*?\]\((\/images\/[^)]+)\)/);
+  return match ? match[1] : null;
+}
+
 // 카테고리별 아이콘
 const categoryIcons: Record<string, string> = {
   '해외 여행': 'ph-globe',
   '국내 여행': 'ph-map-pin',
   '나라 정보': 'ph-flag',
   '역사': 'ph-book-open',
+  '여행': 'ph-airplane',
+  '캠핑': 'ph-tent',
+  '커피': 'ph-coffee',
+  '지구 상식': 'ph-planet',
+  '지구 위기& 재난 대비': 'ph-warning',
+  '유튜버 되기 자료': 'ph-video-camera',
+};
+
+// 카테고리별 그라디언트 (이미지 없을 때)
+const categoryGradients: Record<string, string> = {
+  '해외 여행': 'from-sky-400 to-blue-600',
+  '국내 여행': 'from-emerald-400 to-teal-600',
+  '나라 정보': 'from-violet-400 to-purple-600',
+  '역사': 'from-amber-400 to-orange-600',
+  '여행': 'from-cyan-400 to-sky-600',
+  '캠핑': 'from-green-400 to-emerald-600',
+  '커피': 'from-yellow-600 to-amber-800',
+  '지구 상식': 'from-blue-400 to-indigo-600',
+  '지구 위기& 재난 대비': 'from-red-400 to-rose-600',
+  '유튜버 되기 자료': 'from-pink-400 to-fuchsia-600',
 };
 ---
 
@@ -72,6 +98,7 @@ const categoryIcons: Record<string, string> = {
         }).format(new Date(post.data.date));
 
         const isFeatured = index === 0;
+        const thumbnail = post.data.thumbnail || getFirstImage(post.body);
 
         return (
           <a
@@ -79,17 +106,19 @@ const categoryIcons: Record<string, string> = {
             class={`group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40 ${isFeatured ? 'md:col-span-2' : ''}`}
           >
             {/* 썸네일 */}
-            {post.data.thumbnail ? (
+            {thumbnail ? (
               <div class={`overflow-hidden bg-muted ${isFeatured ? 'h-56' : 'h-40'}`}>
                 <img
-                  src={post.data.thumbnail}
+                  src={thumbnail}
                   alt={post.data.title}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
             ) : (
-              <div class={`flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5 ${isFeatured ? 'h-32' : 'h-24'}`}>
-                <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-primary/30`}></i>
+              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} ${isFeatured ? 'h-40' : 'h-28'}`}>
+                <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-white/80`}></i>
+                <span class="text-xs text-white/70 font-medium">{post.data.category}</span>
               </div>
             )}
 
