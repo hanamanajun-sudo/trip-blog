@@ -7,20 +7,25 @@ export default {
         sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
-        border: 'hsl(214.3 31.8% 91.4%)',
-        background: 'hsl(0 0% 100%)',
-        foreground: 'hsl(222.2 84% 4.9%)',
+        // Travel theme: Sky Blue + Adventure Orange (ui/ux pro max 추천)
+        border: '#BAE6FD',
+        background: '#F0F9FF',
+        foreground: '#0C4A6E',
         muted: {
-          DEFAULT: 'hsl(210 40% 96.1%)',
-          foreground: 'hsl(215.4 16.3% 46.9%)',
+          DEFAULT: '#E0F2FE',
+          foreground: '#64748B',
         },
         accent: {
-          DEFAULT: 'hsl(210 40% 96.1%)',
-          foreground: 'hsl(222.2 47.4% 11.2%)',
+          DEFAULT: '#EA580C',
+          foreground: '#FFFFFF',
         },
         primary: {
-          DEFAULT: 'hsl(222.2 47.4% 11.2%)',
-          foreground: 'hsl(210 40% 98%)',
+          DEFAULT: '#0EA5E9',
+          foreground: '#FFFFFF',
+        },
+        card: {
+          DEFAULT: '#FFFFFF',
+          foreground: '#0C4A6E',
         },
       },
       typography: {

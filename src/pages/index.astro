@@ -8,75 +8,128 @@ const sortedPosts = posts.sort((a, b) =>
 );
 
 // 카테고리 목록
-const categories = [...new Set(posts.map(p => p.data.category))];
+const categories = [...new Set(posts.map(p => p.data.category))].sort();
+
+// 카테고리별 아이콘
+const categoryIcons: Record<string, string> = {
+  '해외 여행': 'ph-globe',
+  '국내 여행': 'ph-map-pin',
+  '나라 정보': 'ph-flag',
+  '역사': 'ph-book-open',
+};
 ---
 
 <BaseLayout title="lalalakorea - 세계 여행, 나라 정보, 역사 이야기">
 
   <!-- 히어로 섹션 -->
-  <section class="py-10 mb-8">
-    <div class="space-y-2">
-      <h1 class="text-4xl font-bold tracking-tight">✈️ lalalakorea</h1>
-      <p class="text-lg text-muted-foreground">세계 여행, 나라 정보, 역사 이야기</p>
-    </div>
-
-    <!-- 카테고리 필터 -->
-    <div class="flex flex-wrap gap-2 mt-6">
-      <a
-        href="/"
-        class="inline-flex items-center rounded-md border border-border bg-primary text-primary-foreground px-3 py-1 text-sm font-medium transition-colors"
-      >
-        전체
-      </a>
-      {categories.map(cat => (
-        <a
-          href={`/category/${cat}`}
-          class="inline-flex items-center rounded-md border border-border bg-background px-3 py-1 text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
-        >
-          {cat}
-        </a>
-      ))}
+  <section class="relative rounded-2xl overflow-hidden mb-10 bg-gradient-to-br from-primary to-sky-700 text-white px-8 py-12 shadow-lg">
+    <!-- 배경 패턴 -->
+    <div class="absolute inset-0 opacity-10" style="background-image: url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-3">
+        <i class="ph ph-airplane-takeoff text-4xl text-white/90"></i>
+        <h1 class="text-4xl font-bold tracking-tight">lalalakorea</h1>
+      </div>
+      <p class="text-lg text-white/80 mb-6">세계 여행 · 나라 정보 · 역사 이야기</p>
+      <div class="flex items-center gap-2 text-sm text-white/70">
+        <i class="ph ph-article text-base"></i>
+        <span>총 {posts.length}개의 글</span>
+        <span class="mx-2">·</span>
+        <i class="ph ph-tag text-base"></i>
+        <span>{categories.length}개 카테고리</span>
+      </div>
     </div>
   </section>
 
-  <!-- 글 목록 -->
+  <!-- 카테고리 필터 -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <a
+      href="/"
+      class="inline-flex items-center gap-1.5 rounded-full bg-primary text-white px-4 py-1.5 text-sm font-medium shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
+    >
+      <i class="ph ph-squares-four text-sm"></i>
+      전체
+    </a>
+    {categories.map(cat => (
+      <a
+        href={`/category/${cat}`}
+        class="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-4 py-1.5 text-sm font-medium text-foreground/70 hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
+      >
+        <i class={`ph ${categoryIcons[cat] || 'ph-tag'} text-sm`}></i>
+        {cat}
+      </a>
+    ))}
+  </div>
+
+  <!-- 글 목록 - 카드 그리드 -->
   <section>
-    <div class="grid gap-4">
-      {sortedPosts.map(post => {
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {sortedPosts.map((post, index) => {
         const formattedDate = new Intl.DateTimeFormat('ko-KR', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         }).format(new Date(post.data.date));
 
+        const isFeatured = index === 0;
+
         return (
           <a
             href={`/entry/${post.data.entry_slug || post.slug}`}
-            class="group flex flex-col gap-2 rounded-lg border border-border bg-background p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30"
+            class={`group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40 ${isFeatured ? 'md:col-span-2' : ''}`}
           >
-            <div class="flex items-start justify-between gap-4">
-              <div class="space-y-1 flex-1">
-                <div class="flex items-center gap-2">
-                  <span class="inline-flex items-center rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
-                    {post.data.category}
-                  </span>
-                </div>
-                <h2 class="text-lg font-semibold leading-snug tracking-tight group-hover:text-primary/80 transition-colors line-clamp-2">
-                  {post.data.title}
-                </h2>
-                {post.data.description && (
-                  <p class="text-sm text-muted-foreground line-clamp-2">{post.data.description}</p>
-                )}
-              </div>
-              {post.data.thumbnail && (
+            {/* 썸네일 */}
+            {post.data.thumbnail ? (
+              <div class={`overflow-hidden bg-muted ${isFeatured ? 'h-56' : 'h-40'}`}>
                 <img
                   src={post.data.thumbnail}
                   alt={post.data.title}
-                  class="w-20 h-20 rounded-md object-cover flex-shrink-0"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+              </div>
+            ) : (
+              <div class={`flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5 ${isFeatured ? 'h-32' : 'h-24'}`}>
+                <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-primary/30`}></i>
+              </div>
+            )}
+
+            {/* 콘텐츠 */}
+            <div class="flex flex-col gap-2 p-5 flex-1">
+              {/* 카테고리 배지 */}
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2.5 py-0.5 text-xs font-semibold">
+                  <i class={`ph ${categoryIcons[post.data.category] || 'ph-tag'} text-xs`}></i>
+                  {post.data.category}
+                </span>
+                {isFeatured && (
+                  <span class="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent px-2.5 py-0.5 text-xs font-semibold">
+                    <i class="ph ph-star text-xs"></i>
+                    최신글
+                  </span>
+                )}
+              </div>
+
+              {/* 제목 */}
+              <h2 class={`font-bold leading-snug tracking-tight group-hover:text-primary transition-colors line-clamp-2 ${isFeatured ? 'text-xl' : 'text-base'}`}>
+                {post.data.title}
+              </h2>
+
+              {/* 설명 */}
+              {post.data.description && (
+                <p class="text-sm text-muted-foreground line-clamp-2 flex-1">
+                  {post.data.description}
+                </p>
               )}
+
+              {/* 날짜 + 화살표 */}
+              <div class="flex items-center justify-between mt-2">
+                <time class="flex items-center gap-1 text-xs text-muted-foreground">
+                  <i class="ph ph-calendar text-xs"></i>
+                  {formattedDate}
+                </time>
+                <i class="ph ph-arrow-right text-sm text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+              </div>
             </div>
-            <time class="text-xs text-muted-foreground">{formattedDate}</time>
           </a>
         );
       })}
