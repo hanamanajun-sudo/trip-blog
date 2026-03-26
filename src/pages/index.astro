@@ -100,14 +100,15 @@ const categoryGradients: Record<string, string> = {
         const isFeatured = index === 0;
         const thumbnail = post.data.thumbnail || getFirstImage(post.body);
 
-        return (
+        return isFeatured ? (
+          /* Featured 카드: 이미지 왼쪽 + 텍스트 오른쪽 수평 레이아웃 */
           <a
             href={`/entry/${post.data.entry_slug || post.slug}`}
-            class={`group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40 ${isFeatured ? 'md:col-span-2' : ''}`}
+            class="group md:col-span-2 flex flex-col sm:flex-row rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40"
           >
-            {/* 썸네일 */}
+            {/* 이미지 - 왼쪽 고정 크기 */}
             {thumbnail ? (
-              <div class={`overflow-hidden bg-muted ${isFeatured ? 'h-44' : 'h-36'}`}>
+              <div class="overflow-hidden bg-muted sm:w-64 sm:shrink-0 h-48 sm:h-auto">
                 <img
                   src={thumbnail}
                   alt={post.data.title}
@@ -116,7 +117,57 @@ const categoryGradients: Record<string, string> = {
                 />
               </div>
             ) : (
-              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} ${isFeatured ? 'h-36' : 'h-28'}`}>
+              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} sm:w-64 sm:shrink-0 h-36 sm:h-auto`}>
+                <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-white/80`}></i>
+                <span class="text-xs text-white/70 font-medium">{post.data.category}</span>
+              </div>
+            )}
+            {/* 텍스트 - 오른쪽 */}
+            <div class="flex flex-col gap-3 p-6 flex-1 justify-center">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2.5 py-0.5 text-xs font-semibold">
+                  <i class={`ph ${categoryIcons[post.data.category] || 'ph-tag'} text-xs`}></i>
+                  {post.data.category}
+                </span>
+                <span class="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent px-2.5 py-0.5 text-xs font-semibold">
+                  <i class="ph ph-star text-xs"></i>
+                  최신글
+                </span>
+              </div>
+              <h2 class="text-xl font-bold leading-snug tracking-tight group-hover:text-primary transition-colors line-clamp-2">
+                {post.data.title}
+              </h2>
+              {post.data.description && (
+                <p class="text-sm text-muted-foreground line-clamp-3">{post.data.description}</p>
+              )}
+              <div class="flex items-center justify-between">
+                <time class="flex items-center gap-1 text-xs text-muted-foreground">
+                  <i class="ph ph-calendar text-xs"></i>
+                  {formattedDate}
+                </time>
+                <span class="flex items-center gap-1 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  읽기 <i class="ph ph-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        ) : (
+          /* 일반 카드: 세로 레이아웃 */
+          <a
+            href={`/entry/${post.data.entry_slug || post.slug}`}
+            class="group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40"
+          >
+            {thumbnail ? (
+              <div class="overflow-hidden bg-muted h-36">
+                <img
+                  src={thumbnail}
+                  alt={post.data.title}
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${categoryGradients[post.data.category] || 'from-sky-400 to-blue-600'} h-28`}>
                 <i class={`ph ${categoryIcons[post.data.category] || 'ph-image'} text-4xl text-white/80`}></i>
                 <span class="text-xs text-white/70 font-medium">{post.data.category}</span>
               </div>
@@ -124,33 +175,18 @@ const categoryGradients: Record<string, string> = {
 
             {/* 콘텐츠 */}
             <div class="flex flex-col gap-2 p-5 flex-1">
-              {/* 카테고리 배지 */}
               <div class="flex items-center gap-2">
                 <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 text-primary px-2.5 py-0.5 text-xs font-semibold">
                   <i class={`ph ${categoryIcons[post.data.category] || 'ph-tag'} text-xs`}></i>
                   {post.data.category}
                 </span>
-                {isFeatured && (
-                  <span class="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent px-2.5 py-0.5 text-xs font-semibold">
-                    <i class="ph ph-star text-xs"></i>
-                    최신글
-                  </span>
-                )}
               </div>
-
-              {/* 제목 */}
-              <h2 class={`font-bold leading-snug tracking-tight group-hover:text-primary transition-colors line-clamp-2 ${isFeatured ? 'text-xl' : 'text-base'}`}>
+              <h2 class="text-base font-bold leading-snug tracking-tight group-hover:text-primary transition-colors line-clamp-2">
                 {post.data.title}
               </h2>
-
-              {/* 설명 */}
               {post.data.description && (
-                <p class="text-sm text-muted-foreground line-clamp-2 flex-1">
-                  {post.data.description}
-                </p>
+                <p class="text-sm text-muted-foreground line-clamp-2 flex-1">{post.data.description}</p>
               )}
-
-              {/* 날짜 + 화살표 */}
               <div class="flex items-center justify-between mt-2">
                 <time class="flex items-center gap-1 text-xs text-muted-foreground">
                   <i class="ph ph-calendar text-xs"></i>
@@ -162,6 +198,7 @@ const categoryGradients: Record<string, string> = {
           </a>
         );
       })}
+
     </div>
   </section>
 
