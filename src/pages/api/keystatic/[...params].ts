@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import { makeGenericAPIRouteHandler } from '@keystatic/core/api/generic';
-import config from '../../../keystatic.config';
+import config from '../../../../keystatic.config';
 
 const handler = makeGenericAPIRouteHandler({ config });
 
