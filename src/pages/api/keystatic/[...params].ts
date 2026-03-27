@@ -5,36 +5,36 @@ import config from '../../../../keystatic.config';
 
 const handler = makeGenericAPIRouteHandler({ config });
 
-function fixUrl(url: string): string {
+function fixLocalhostUrl(url: string): string {
   return url.replace(/https?:\/\/localhost(:\d+)?/g, 'https://trip.lalalakorea.com');
 }
 
 export async function ALL(context: any) {
   let { request } = context;
 
-  // localhost URL을 실제 도메인으로 교체
+  // localhost URL → 실제 도메인으로 교체
   if (request.url.includes('localhost')) {
-    request = new Request(fixUrl(request.url), {
+    request = new Request(fixLocalhostUrl(request.url), {
       method: request.method,
       headers: request.headers,
       body: ['GET', 'HEAD'].includes(request.method) ? null : request.body,
     });
   }
 
-  // Keystatic handler 호출
-  const response = await handler(request);
+  // Keystatic handler 호출 → { body, status, headers: [[key,val],...] } 형태 반환
+  const result = await handler(request) as any;
+  const { body, status, headers: rawHeaders } = result;
 
-  // Location 헤더도 localhost면 교체
-  const location = response.headers.get('location');
-  if (location && location.includes('localhost')) {
-    const newHeaders = new Headers(response.headers);
-    newHeaders.set('location', fixUrl(location));
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: newHeaders,
-    });
+  // headers 배열을 ResponseInit 형태로 변환
+  const responseHeaders: [string, string][] = [];
+  if (Array.isArray(rawHeaders)) {
+    for (const [key, value] of rawHeaders) {
+      const fixedValue = key.toLowerCase() === 'location' && value.includes('localhost')
+        ? fixLocalhostUrl(value)
+        : value;
+      responseHeaders.push([key, fixedValue]);
+    }
   }
 
-  return response;
+  return new Response(body ?? null, { status, headers: responseHeaders });
 }
