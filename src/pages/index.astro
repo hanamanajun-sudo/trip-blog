@@ -98,12 +98,12 @@ const categoryGradients: Record<string, string> = {
         }).format(new Date(post.data.date));
 
         const isFeatured = index === 0;
-        const thumbnail = post.data.thumbnail || getFirstImage(post.body);
+        const thumbnail = post.data.thumbnail || getFirstImage(post.body ?? '');
 
         return isFeatured ? (
           /* Featured 카드: 이미지 왼쪽 + 텍스트 오른쪽 수평 레이아웃 */
           <a
-            href={`/entry/${post.data.entry_slug || post.slug}`}
+            href={`/entry/${post.data.entry_slug || post.id}`}
             class="group md:col-span-2 flex flex-col sm:flex-row rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40"
           >
             {/* 이미지 - 왼쪽 고정 크기 */}
@@ -154,7 +154,7 @@ const categoryGradients: Record<string, string> = {
         ) : (
           /* 일반 카드: 세로 레이아웃 */
           <a
-            href={`/entry/${post.data.entry_slug || post.slug}`}
+            href={`/entry/${post.data.entry_slug || post.id}`}
             class="group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40"
           >
             {thumbnail ? (

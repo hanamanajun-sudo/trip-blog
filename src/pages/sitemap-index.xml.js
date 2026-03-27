@@ -4,7 +4,7 @@ export async function GET() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
 
   const urls = posts.map(post => {
-    const slug = post.data.entry_slug || post.slug;
+    const slug = post.data.entry_slug || post.id;
     const date = new Date(post.data.date).toISOString().split('T')[0];
     return `  <url>
     <loc>https://trip.lalalakorea.com/entry/${slug}</loc>
