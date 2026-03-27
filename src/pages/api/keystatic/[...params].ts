@@ -6,9 +6,22 @@ import config from '../../../../keystatic.config';
 const handler = makeGenericAPIRouteHandler({ config });
 
 export async function ALL(context: any) {
-  const { request } = context;
+  let { request } = context;
 
-  // Keystatic handler 호출
+  // localhost URL을 실제 도메인으로 교체 후 handler에 전달
+  if (request.url.includes('localhost')) {
+    const fixedUrl = request.url.replace(
+      /https?:\/\/localhost(:\d+)?/g,
+      'https://trip.lalalakorea.com'
+    );
+    request = new Request(fixedUrl, {
+      method: request.method,
+      headers: request.headers,
+      body: ['GET', 'HEAD'].includes(request.method) ? null : request.body,
+    });
+  }
+
+  // 수정된 request로 Keystatic handler 호출
   const result = await handler(request) as any;
   const { body, headers: rawHeaders, status } = result;
 
