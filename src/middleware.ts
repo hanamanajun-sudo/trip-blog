@@ -1,37 +1,26 @@
 import { defineMiddleware } from 'astro:middleware';
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  // Keystatic 경로에서 localhost URL을 실제 도메인으로 교체
-  if (
-    context.url.pathname.startsWith('/api/keystatic') ||
-    context.url.pathname.startsWith('/keystatic')
-  ) {
-    const requestUrl = context.request.url;
+  const response = await next();
 
-    if (requestUrl.includes('localhost')) {
-      const forwardedHost =
-        context.request.headers.get('x-forwarded-host') ||
-        context.request.headers.get('host') ||
-        'trip.lalalakorea.com';
-      const forwardedProto =
-        context.request.headers.get('x-forwarded-proto') || 'https';
-
-      const fixedUrl = requestUrl.replace(
-        /https?:\/\/localhost(:\d+)?/,
-        `${forwardedProto}://${forwardedHost}`
+  // Keystatic OAuth 리다이렉트 응답의 Location 헤더에서
+  // localhost를 실제 도메인으로 교체
+  if (context.url.pathname.startsWith('/api/keystatic')) {
+    const location = response.headers.get('location');
+    if (location && location.includes('localhost')) {
+      const fixedLocation = location.replace(
+        /https?:\/\/localhost(:\d+)?/g,
+        'https://trip.lalalakorea.com'
       );
-
-      const newRequest = new Request(fixedUrl, {
-        method: context.request.method,
-        headers: context.request.headers,
-        body: ['GET', 'HEAD'].includes(context.request.method)
-          ? undefined
-          : context.request.body,
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('location', fixedLocation);
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders,
       });
-
-      return next(newRequest);
     }
   }
 
-  return next();
+  return response;
 });
