@@ -5,7 +5,7 @@ import keystatic from '@keystatic/astro';
 
 export default defineConfig({
   site: 'https://trip.lalalakorea.com',
-  output: 'static',
+  output: 'server',
   adapter: vercel({ webAnalytics: { enabled: false } }),
   integrations: [tailwind(), keystatic()],
   markdown: {
