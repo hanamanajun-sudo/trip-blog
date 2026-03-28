@@ -1,0 +1,50 @@
+export const prerender = false;
+
+export async function GET() {
+  const yaml = `backend:
+  name: github
+  repo: hanamanajun-sudo/trip-blog
+  branch: master
+  base_url: https://trip.lalalakorea.com
+  auth_endpoint: api/oauth
+
+media_folder: public/images
+public_folder: /images
+
+locale: ko
+
+collections:
+  - name: blog
+    label: 블로그 글
+    folder: src/content/blog
+    create: true
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: 제목, name: title, widget: string }
+      - { label: 날짜, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - label: 카테고리
+        name: category
+        widget: select
+        options:
+          - 해외 여행
+          - 국내 여행
+          - 여행
+          - 지구 상식
+          - 캠핑
+          - 커피
+          - "지구 위기& 재난 대비"
+          - 유튜버 되기 자료
+        default: 해외 여행
+      - { label: "URL 슬러그", name: entry_slug, widget: string, required: false }
+      - { label: 요약 설명, name: description, widget: text, required: false }
+      - { label: 본문, name: body, widget: markdown }
+`;
+
+  return new Response(yaml, {
+    headers: {
+      'Content-Type': 'text/yaml; charset=utf-8',
+      'Cache-Control': 'no-cache',
+    },
+  });
+}
