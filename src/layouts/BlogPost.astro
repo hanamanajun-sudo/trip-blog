@@ -16,9 +16,37 @@ const formattedDate = new Intl.DateTimeFormat('ko-KR', {
   month: 'long',
   day: 'numeric',
 }).format(date);
+
+const siteUrl = 'https://trip.lalalakorea.com';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "datePublished": date.toISOString(),
+  "dateModified": date.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": "lalalakorea",
+    "url": siteUrl
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "lalalakorea",
+    "url": siteUrl
+  },
+  "description": description || title,
+  "url": pageUrl,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": pageUrl
+  },
+  ...(thumbnail ? { "image": thumbnail } : {})
+};
 ---
 
-<BaseLayout title={`${title} | lalalakorea`} description={description} ogImage={thumbnail}>
+<BaseLayout title={`${title} | lalalakorea`} description={description} ogImage={thumbnail} jsonLd={jsonLd}>
   <article class="mx-auto max-w-3xl">
 
     <!-- 헤더 영역 -->
