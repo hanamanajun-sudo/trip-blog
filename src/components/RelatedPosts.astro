@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  category: string;
+  currentId: string;
+}
+
+const { category, currentId } = Astro.props;
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// 같은 카테고리 + 현재 글 제외 + 최신순 + 최대 4개
+const relatedPosts = allPosts
+  .filter(p => p.data.category === category && p.id !== currentId)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 4);
+
+// 본문에서 첫 번째 이미지 추출
+function getFirstImage(body: string): string | null {
+  const match = body.match(/!\[.*?\]\((\/images\/[^)]+)\)/);
+  return match ? match[1] : null;
+}
+---
+
+{relatedPosts.length > 0 && (
+  <div class="mt-10 pt-8 border-t border-border">
+    <h2 class="text-lg font-bold tracking-tight mb-4 flex items-center gap-2">
+      <i class="ph ph-newspaper text-primary"></i>
+      같은 카테고리 글
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {relatedPosts.map(post => {
+        const thumbnail = post.data.thumbnail || getFirstImage(post.body ?? '');
+        const href = `/entry/${post.data.entry_slug || post.id}`;
+        const formattedDate = new Intl.DateTimeFormat('ko-KR', {
+          year: 'numeric', month: 'long', day: 'numeric',
+        }).format(new Date(post.data.date));
+
+        return (
+          <a
+            href={href}
+            class="group flex gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary/40 hover:shadow-md transition-all"
+          >
+            {/* 썸네일 */}
+            <div class="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-muted">
+              {thumbnail ? (
+                <img
+                  src={thumbnail}
+                  alt={post.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-sky-200">
+                  <i class="ph ph-image text-2xl text-primary/50"></i>
+                </div>
+              )}
+            </div>
+
+            {/* 텍스트 */}
+            <div class="flex flex-col justify-between flex-1 min-w-0">
+              <p class="text-sm font-semibold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                {post.data.title}
+              </p>
+              <time class="text-xs text-muted-foreground mt-1">
+                {formattedDate}
+              </time>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+)}

@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import { slugify } from '../utils/slugify';
 import ShareButtons from '../components/ShareButtons.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 
 export interface Props {
   title: string;
@@ -9,9 +10,10 @@ export interface Props {
   category: string;
   description?: string;
   thumbnail?: string;
+  currentId?: string;
 }
 
-const { title, date, category, description, thumbnail } = Astro.props;
+const { title, date, category, description, thumbnail, currentId } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric',
@@ -96,6 +98,9 @@ const jsonLd = {
     ">
       <slot />
     </div>
+
+    <!-- 관련 글 추천 -->
+    {currentId && <RelatedPosts category={category} currentId={currentId} />}
 
     <!-- 소셜 공유 버튼 -->
     <ShareButtons title={title} url={pageUrl} />
