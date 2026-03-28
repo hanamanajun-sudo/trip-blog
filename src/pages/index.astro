@@ -2,6 +2,7 @@
 export const prerender = true;
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { slugify } from '../utils/slugify';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) =>
@@ -79,7 +80,7 @@ const categoryGradients: Record<string, string> = {
     </a>
     {categories.map(cat => (
       <a
-        href={`/category/${cat}`}
+        href={`/category/${slugify(cat)}`}
         class="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-4 py-1.5 text-sm font-medium text-foreground/70 hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
       >
         <i class={`ph ${categoryIcons[cat] || 'ph-tag'} text-sm`}></i>
