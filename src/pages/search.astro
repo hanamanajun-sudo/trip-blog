@@ -1,0 +1,161 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="검색 - lalalakorea" description="lalalakorea 블로그에서 여행, 나라 정보, 역사 글을 검색해보세요">
+  <div class="max-w-3xl mx-auto py-8">
+
+    <!-- 타이틀 -->
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-primary mb-2">
+        <i class="ph ph-magnifying-glass mr-2 text-accent"></i>블로그 검색
+      </h1>
+      <p class="text-muted-foreground text-sm">109개 글에서 원하는 여행지·나라 정보를 찾아보세요</p>
+    </div>
+
+    <!-- Pagefind 검색 UI -->
+    <div id="search" class="pagefind-search-wrap"></div>
+
+  </div>
+</BaseLayout>
+
+<!-- Pagefind UI 스타일 -->
+<style is:global>
+  /* Pagefind 기본 변수 오버라이드 */
+  :root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #2563eb;
+    --pagefind-ui-text: #1e293b;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-ui-border: #e2e8f0;
+    --pagefind-ui-tag: #f1f5f9;
+    --pagefind-ui-border-width: 1.5px;
+    --pagefind-ui-border-radius: 10px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-font: 'Pretendard', sans-serif;
+  }
+
+  /* 검색 입력창 */
+  .pagefind-ui__search-input {
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-size: 1rem !important;
+    font-family: 'Pretendard', sans-serif !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+    transition: border-color 0.2s !important;
+  }
+  .pagefind-ui__search-input:focus {
+    border-color: #2563eb !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important;
+  }
+
+  /* 검색 버튼 */
+  .pagefind-ui__search-clear {
+    color: #94a3b8 !important;
+  }
+
+  /* 결과 카드 */
+  .pagefind-ui__result {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    margin-bottom: 10px !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+  }
+  .pagefind-ui__result:hover {
+    border-color: #2563eb !important;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.1) !important;
+  }
+
+  /* 결과 제목 */
+  .pagefind-ui__result-title {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+  }
+  .pagefind-ui__result-title a {
+    color: #1e40af !important;
+    text-decoration: none !important;
+  }
+  .pagefind-ui__result-title a:hover {
+    color: #2563eb !important;
+    text-decoration: underline !important;
+  }
+
+  /* 결과 미리보기 */
+  .pagefind-ui__result-excerpt {
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    line-height: 1.6 !important;
+    margin-top: 4px !important;
+  }
+
+  /* 강조 키워드 */
+  .pagefind-ui__result-excerpt mark {
+    background: #dbeafe !important;
+    color: #1d4ed8 !important;
+    border-radius: 3px !important;
+    padding: 0 2px !important;
+  }
+
+  /* "더 보기" 버튼 */
+  .pagefind-ui__button {
+    border-radius: 10px !important;
+    background: #f8fafc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    color: #2563eb !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+  }
+  .pagefind-ui__button:hover {
+    background: #2563eb !important;
+    color: white !important;
+  }
+
+  /* "결과 없음" 메시지 */
+  .pagefind-ui__message {
+    color: #94a3b8 !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    padding: 20px 0 !important;
+  }
+</style>
+
+<!-- Pagefind UI 초기화 스크립트 -->
+<link href="/_pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/_pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // @ts-ignore
+    new PagefindUI({
+      element: '#search',
+      showSubResults: false,
+      showImages: false,
+      resetStyles: false,
+      translations: {
+        placeholder: '여행지, 나라 이름, 키워드를 검색하세요...',
+        zero_results: '"[SEARCH_TERM]" 검색 결과가 없습니다',
+        many_results: '"[SEARCH_TERM]" 검색 결과: [COUNT]개',
+        one_result: '"[SEARCH_TERM]" 검색 결과: [COUNT]개',
+        load_more: '더 보기',
+        searching: '검색 중...',
+      }
+    });
+
+    // URL의 q 파라미터로 초기 검색어 설정
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q');
+    if (query) {
+      const input = document.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
+      if (input) {
+        input.value = query;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  });
+</script>
