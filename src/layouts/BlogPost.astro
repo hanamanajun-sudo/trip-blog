@@ -47,7 +47,14 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={`${title} | lalalakorea`} description={description} ogImage={thumbnail} jsonLd={jsonLd}>
+<BaseLayout
+  title={`${title} | lalalakorea`}
+  description={description}
+  ogImage={thumbnail}
+  jsonLd={jsonLd}
+  ogType="article"
+  ogDatePublished={date.toISOString()}
+>
   <article class="mx-auto max-w-3xl">
 
     <!-- 헤더 영역 -->
