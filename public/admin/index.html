@@ -6,6 +6,17 @@
     <meta name="robots" content="noindex" />
     <title>lalalakorea 블로그 관리자</title>
     <link rel="cms-config-url" type="text/yaml" href="/api/decap-config" />
+    <script>
+      // GitHub OAuth는 COOP 헤더로 window.opener를 null로 만들어버림
+      // BroadcastChannel로 우회해서 토큰을 받아 Decap CMS에 전달
+      var cmsBc = new BroadcastChannel('cms-auth');
+      cmsBc.onmessage = function(e) {
+        console.log('[CMS Auth] BroadcastChannel 메시지 수신:', e.data.substring(0, 50) + '...');
+        // Decap CMS의 message 리스너에 전달 (자기 자신에게 postMessage)
+        window.postMessage(e.data, window.location.origin);
+        cmsBc.close();
+      };
+    </script>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
