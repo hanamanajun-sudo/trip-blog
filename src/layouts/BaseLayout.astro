@@ -172,7 +172,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     async function loadPagefind() {
       if (!pagefind) {
         try {
-          pagefind = await import('/_pagefind/pagefind.js');
+          pagefind = await import(/* @vite-ignore */ '/_pagefind/pagefind.js');
           await pagefind.init();
         } catch (e) {
           console.warn('Pagefind 로딩 실패 (로컬 개발 환경에서는 정상):', e);
