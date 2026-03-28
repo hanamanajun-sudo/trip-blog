@@ -1,0 +1,78 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// H2, H3만 표시 (H4 이하는 너무 세분화됨)
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocHeadings.length > 1 && (
+  <nav
+    id="toc"
+    class="rounded-xl border border-border bg-muted/40 px-5 py-4 mb-8 text-sm"
+    aria-label="목차"
+  >
+    <p class="font-bold text-foreground mb-3 flex items-center gap-2">
+      <i class="ph ph-list-bullets text-primary text-base"></i>
+      목차
+    </p>
+    <ol class="space-y-1.5">
+      {tocHeadings.map(h => (
+        <li class={h.depth === 3 ? 'pl-4' : ''}>
+          <a
+            href={`#${h.slug}`}
+            class={`toc-link block leading-snug text-muted-foreground hover:text-primary transition-colors ${
+              h.depth === 3 ? 'text-xs' : 'text-sm font-medium'
+            }`}
+          >
+            {h.depth === 3 && (
+              <span class="mr-1 opacity-40">└</span>
+            )}
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<script is:inline>
+  // 스크롤 시 현재 섹션 하이라이트
+  (function () {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (!tocLinks.length) return;
+
+    const headingEls = Array.from(tocLinks).map(link => {
+      const id = link.getAttribute('href').replace('#', '');
+      return document.getElementById(id);
+    }).filter(Boolean);
+
+    function onScroll() {
+      let current = '';
+      headingEls.forEach(el => {
+        if (el.getBoundingClientRect().top <= 120) {
+          current = el.id;
+        }
+      });
+
+      tocLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === '#' + current;
+        link.classList.toggle('text-primary', isActive);
+        link.classList.toggle('font-semibold', isActive);
+        link.classList.toggle('text-muted-foreground', !isActive);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
