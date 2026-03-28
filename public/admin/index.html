@@ -6,6 +6,17 @@
     <meta name="robots" content="noindex" />
     <title>lalalakorea 블로그 관리자</title>
     <link rel="cms-config-url" type="text/yaml" href="/api/decap-config" />
+    <script>
+      // COOP로 window.opener가 끊어질 수 있으므로
+      // BroadcastChannel로 콜백 메시지를 받아 자신에게 전달
+      var _bc = new BroadcastChannel('cms-auth');
+      _bc.onmessage = function(e) {
+        console.log('[CMS Auth] BroadcastChannel 수신:', e.data.substring(0, 50));
+        _bc.close();
+        // Decap CMS는 e.origin === base_url 만 체크 (source 체크 없음)
+        window.postMessage(e.data, window.location.origin);
+      };
+    </script>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>

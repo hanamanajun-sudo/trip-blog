@@ -18,55 +18,37 @@ export async function GET({ url }: any) {
 
   const githubAuthUrl = `https://github.com/login/oauth/authorize?${params}`;
 
+  // Decap CMS는 2단계 핸드셰이크를 사용:
+  // 1) 팝업 → 부모: 'authorizing:github' 전송
+  // 2) 부모 → 팝업: 에코백
+  // 3) 팝업: GitHub로 리다이렉트
   const html = `<!doctype html>
 <html>
 <head><meta charset="utf-8"></head>
 <body>
-<p style="font-family:sans-serif;padding:20px;color:#666">GitHub 로그인 중...</p>
 <script>
-  var savedOpener = window.opener;
+  (function() {
+    var provider = 'github';
+    var origin = window.opener && window.opener.origin;
 
-  // localStorage 이전 값 초기화
-  localStorage.removeItem('cms-auth-result');
+    // 1단계: 핸드셰이크 메시지 전송
+    if (window.opener) {
+      window.opener.postMessage('authorizing:' + provider, origin || '*');
+    }
 
-  // GitHub OAuth를 서브 팝업으로 열기
-  var githubWindow = window.open(
-    ${JSON.stringify(githubAuthUrl)},
-    'github-oauth',
-    'width=600,height=700,toolbar=no,location=no,menubar=no'
-  );
-
-  if (!githubWindow || githubWindow.closed) {
-    document.querySelector('p').innerHTML = '팝업이 차단됨. <a href="${githubAuthUrl}" target="github-oauth">여기 클릭</a>';
-  }
-
-  // localStorage를 300ms마다 폴링 (COOP로 BroadcastChannel이 안 될 때를 대비)
-  var poll = setInterval(function() {
-    var stored = localStorage.getItem('cms-auth-result');
-    if (!stored) return;
-
-    try {
-      var result = JSON.parse(stored);
-      // 2분 이내 결과만 사용
-      if (Date.now() - result.ts > 120000) {
-        localStorage.removeItem('cms-auth-result');
-        return;
+    // 2단계: 부모의 에코백을 기다린 후 GitHub로 이동
+    window.addEventListener('message', function onMsg(e) {
+      if (e.data === 'authorizing:' + provider) {
+        window.removeEventListener('message', onMsg);
+        window.location.href = ${JSON.stringify(githubAuthUrl)};
       }
-      clearInterval(poll);
-      localStorage.removeItem('cms-auth-result');
+    });
 
-      if (githubWindow && !githubWindow.closed) githubWindow.close();
-
-      if (savedOpener) {
-        // 이 창(팝업A)에서 postMessage → event.source = 팝업A = authWindow ✓
-        savedOpener.postMessage(result.msg, '*');
-      }
-      setTimeout(function() { window.close(); }, 300);
-    } catch(e) {}
-  }, 300);
-
-  // 5분 후 타임아웃
-  setTimeout(function() { clearInterval(poll); }, 300000);
+    // 에코가 1초 안에 안 오면 그냥 진행
+    setTimeout(function() {
+      window.location.href = ${JSON.stringify(githubAuthUrl)};
+    }, 1000);
+  })();
 <\/script>
 </body>
 </html>`;
