@@ -1,0 +1,124 @@
+---
+interface Props {
+  title: string;
+  url: string;
+}
+const { title, url } = Astro.props;
+
+const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+const naverUrl = `https://share.naver.com/web/shareView?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+---
+
+<div class="mt-10 pt-8 border-t border-border">
+  <p class="text-sm font-semibold text-muted-foreground mb-4 flex items-center gap-2">
+    <i class="ph ph-share-network text-base"></i>
+    이 글이 도움됐다면 공유해보세요 😊
+  </p>
+  <div class="flex flex-wrap gap-2">
+
+    <!-- 링크 복사 -->
+    <button
+      id="copy-link-btn"
+      class="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted transition-all"
+    >
+      <i class="ph ph-link text-base"></i>
+      링크 복사
+    </button>
+
+    <!-- 카카오톡 -->
+    <button
+      id="kakao-share-btn"
+      class="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-[#3C1E1E] transition-all hover:opacity-90 hover:shadow-md"
+      style="background-color: #FEE500;"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#3C1E1E">
+        <path d="M12 3C6.477 3 2 6.477 2 11c0 2.99 1.657 5.61 4.14 7.14L5 21l3.27-1.78C9.41 19.7 10.67 20 12 20c5.523 0 10-3.477 10-8S17.523 3 12 3z"/>
+      </svg>
+      카카오톡
+    </button>
+
+    <!-- X (트위터) -->
+    <a
+      href={twitterUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 transition-all hover:shadow-md"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 5.977 5.45-5.977zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+      X 공유
+    </a>
+
+    <!-- 페이스북 -->
+    <a
+      href={facebookUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-md"
+      style="background-color: #1877F2;"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      페이스북
+    </a>
+
+    <!-- 네이버 블로그 -->
+    <a
+      href={naverUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-md"
+      style="background-color: #03C75A;"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/>
+      </svg>
+      네이버
+    </a>
+
+  </div>
+</div>
+
+<script is:inline>
+  // 링크 복사
+  const copyBtn = document.getElementById('copy-link-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(window.location.href).then(function () {
+        copyBtn.innerHTML = '<i class="ph ph-check text-base"></i> 복사됐어요!';
+        copyBtn.style.backgroundColor = '#f0fdf4';
+        copyBtn.style.color = '#16a34a';
+        copyBtn.style.borderColor = '#86efac';
+        setTimeout(function () {
+          copyBtn.innerHTML = '<i class="ph ph-link text-base"></i> 링크 복사';
+          copyBtn.style.backgroundColor = '';
+          copyBtn.style.color = '';
+          copyBtn.style.borderColor = '';
+        }, 2000);
+      });
+    });
+  }
+
+  // 카카오톡 공유 (SDK 없이 모바일 URL 스킴 사용)
+  const kakaoBtn = document.getElementById('kakao-share-btn');
+  if (kakaoBtn) {
+    kakaoBtn.addEventListener('click', function () {
+      const pageUrl = window.location.href;
+      const pageTitle = document.title;
+      // 모바일 앱 스킴 시도 → 실패 시 클립보드 복사로 안내
+      const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+      if (isMobile) {
+        // 모바일: 카카오링크 앱 스킴
+        window.location.href = 'kakaotalk://msg/send?text=' + encodeURIComponent(pageTitle + '\n' + pageUrl);
+      } else {
+        // PC: 클립보드 복사 후 안내
+        navigator.clipboard.writeText(pageUrl).then(function () {
+          alert('✅ 링크가 복사됐어요!\n카카오톡에서 직접 붙여넣기 해주세요 😊');
+        });
+      }
+    });
+  }
+</script>
