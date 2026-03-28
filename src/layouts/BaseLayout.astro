@@ -19,6 +19,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
   <!-- OG Tags -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
@@ -60,11 +63,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <i class="ph ph-house text-base"></i>
           <span class="hidden sm:inline">홈</span>
         </a>
-        <a href="/category/해외 여행" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
+        <a href="/category/해외-여행" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
           <i class="ph ph-globe text-base"></i>
           <span class="hidden sm:inline">해외여행</span>
         </a>
-        <a href="/category/국내 여행" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
+        <a href="/category/국내-여행" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
           <i class="ph ph-map-pin text-base"></i>
           <span class="hidden sm:inline">국내여행</span>
         </a>

@@ -2,13 +2,14 @@
 export const prerender = true;
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { slugify } from '../../utils/slugify';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const categories = [...new Set(posts.map(p => p.data.category))];
 
   return categories.map(category => ({
-    params: { category },
+    params: { category: slugify(category) },
     props: {
       posts: posts
         .filter(p => p.data.category === category)

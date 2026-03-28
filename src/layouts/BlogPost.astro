@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { slugify } from '../utils/slugify';
 
 export interface Props {
   title: string;
@@ -53,7 +54,7 @@ const jsonLd = {
     <div class="mb-8 space-y-4">
       <!-- 카테고리 뱃지 -->
       <a
-        href={`/category/${category}`}
+        href={`/category/${slugify(category)}`}
         class="inline-flex items-center rounded-md border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent"
       >
         {category}
