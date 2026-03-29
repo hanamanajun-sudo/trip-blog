@@ -6,7 +6,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="검색 - lalalakorea" description="lalalakorea 블로그에서 여행, 나라 정보, 역사 글을 검색해보세요">
   <div class="max-w-3xl mx-auto py-8">
 
-    <!-- 타이틀 -->
     <div class="mb-8 text-center">
       <h1 class="text-3xl font-bold text-primary mb-2">
         <i class="ph ph-magnifying-glass mr-2 text-accent"></i>블로그 검색
@@ -14,108 +13,127 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="text-muted-foreground text-sm">109개 글에서 원하는 여행지·나라 정보를 찾아보세요</p>
     </div>
 
-    <!-- Pagefind 검색 UI -->
-    <div id="search" class="pagefind-search-wrap"></div>
+    <!-- 검색 입력창 -->
+    <div class="relative mb-6">
+      <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-lg"></i>
+      <input
+        id="search-page-input"
+        type="text"
+        placeholder="여행지, 나라 이름, 키워드를 검색하세요..."
+        class="w-full pl-11 pr-4 py-3 border border-border rounded-xl text-base outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-white"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- 결과 수 표시 -->
+    <p id="result-count" class="text-sm text-muted-foreground mb-4 hidden"></p>
+
+    <!-- 검색 결과 -->
+    <div id="search-page-results">
+      <div class="py-16 text-center text-muted-foreground">
+        <i class="ph ph-compass text-5xl mb-4 block text-accent/40"></i>
+        <p class="text-base font-medium mb-1">검색어를 입력해보세요</p>
+        <p class="text-sm">나라 이름, 여행지, 궁금한 주제 뭐든지 OK</p>
+      </div>
+    </div>
 
   </div>
 </BaseLayout>
 
-<!-- Pagefind UI 스타일 -->
-<style is:global>
-  :root {
-    --pagefind-ui-scale: 1;
-    --pagefind-ui-primary: #2563eb;
-    --pagefind-ui-text: #1e293b;
-    --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #e2e8f0;
-    --pagefind-ui-tag: #f1f5f9;
-    --pagefind-ui-border-width: 1.5px;
-    --pagefind-ui-border-radius: 10px;
-    --pagefind-ui-image-border-radius: 8px;
-    --pagefind-ui-font: 'Pretendard', sans-serif;
-  }
-  .pagefind-ui__search-input {
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 12px 16px !important;
-    font-size: 1rem !important;
-    font-family: 'Pretendard', sans-serif !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
-    transition: border-color 0.2s !important;
-  }
-  .pagefind-ui__search-input:focus {
-    border-color: #2563eb !important;
-    outline: none !important;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important;
-  }
-  .pagefind-ui__search-clear { color: #94a3b8 !important; }
-  .pagefind-ui__result {
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 12px !important;
-    padding: 16px 20px !important;
-    margin-bottom: 10px !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
-  }
-  .pagefind-ui__result:hover {
-    border-color: #2563eb !important;
-    box-shadow: 0 2px 8px rgba(37,99,235,0.1) !important;
-  }
-  .pagefind-ui__result-title { font-size: 1rem !important; font-weight: 700 !important; color: #1e293b !important; }
-  .pagefind-ui__result-title a { color: #1e40af !important; text-decoration: none !important; }
-  .pagefind-ui__result-title a:hover { color: #2563eb !important; text-decoration: underline !important; }
-  .pagefind-ui__result-excerpt { font-size: 0.85rem !important; color: #64748b !important; line-height: 1.6 !important; margin-top: 4px !important; }
-  .pagefind-ui__result-excerpt mark { background: #dbeafe !important; color: #1d4ed8 !important; border-radius: 3px !important; padding: 0 2px !important; }
-  .pagefind-ui__button {
-    border-radius: 10px !important; background: #f8fafc !important;
-    border: 1.5px solid #e2e8f0 !important; color: #2563eb !important;
-    font-weight: 600 !important; padding: 10px 20px !important;
-    cursor: pointer !important; transition: all 0.2s !important;
-  }
-  .pagefind-ui__button:hover { background: #2563eb !important; color: white !important; }
-  .pagefind-ui__message { color: #94a3b8 !important; font-size: 0.9rem !important; text-align: center !important; padding: 20px 0 !important; }
-</style>
+<!-- Fuse.js CDN (빌드 과정에 영향 없음) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js" is:inline></script>
 
-<!-- Pagefind UI 동적 로딩 (빌드 시 처리 방지) -->
 <script is:inline>
-  window.addEventListener('DOMContentLoaded', function() {
-    // CSS 동적 주입
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/_pagefind/pagefind-ui.css';
-    document.head.appendChild(link);
+  var fuse = null;
+  var searchData = [];
 
-    // JS 동적 주입 후 UI 초기화
-    var script = document.createElement('script');
-    script.src = '/_pagefind/pagefind-ui.js';
-    script.onload = function() {
-      new PagefindUI({
-        element: '#search',
-        showSubResults: false,
-        showImages: false,
-        resetStyles: false,
-        translations: {
-          placeholder: '여행지, 나라 이름, 키워드를 검색하세요...',
-          zero_results: '"[SEARCH_TERM]" 검색 결과가 없습니다',
-          many_results: '"[SEARCH_TERM]" 검색 결과: [COUNT]개',
-          one_result: '"[SEARCH_TERM]" 검색 결과: [COUNT]개',
-          load_more: '더 보기',
-          searching: '검색 중...',
-        }
+  // 검색 인덱스 로드
+  fetch('/search-index.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      searchData = data;
+      fuse = new Fuse(data, {
+        keys: [
+          { name: 'title', weight: 0.6 },
+          { name: 'description', weight: 0.3 },
+          { name: 'category', weight: 0.1 },
+        ],
+        threshold: 0.4,
+        includeScore: true,
+        minMatchCharLength: 2,
       });
 
       // URL ?q= 파라미터로 초기 검색
       var params = new URLSearchParams(window.location.search);
-      var query = params.get('q');
-      if (query) {
-        setTimeout(function() {
-          var input = document.querySelector('.pagefind-ui__search-input');
-          if (input) {
-            input.value = query;
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-        }, 100);
+      var q = params.get('q');
+      if (q) {
+        var input = document.getElementById('search-page-input');
+        if (input) {
+          input.value = q;
+          doSearch(q);
+        }
       }
-    };
-    document.head.appendChild(script);
+    })
+    .catch(function(e) { console.warn('검색 인덱스 로드 실패:', e); });
+
+  function doSearch(query) {
+    var results = document.getElementById('search-page-results');
+    var count = document.getElementById('result-count');
+    if (!results) return;
+
+    if (!query.trim()) {
+      count.classList.add('hidden');
+      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-compass text-5xl mb-4 block text-accent/40"></i><p class="text-base font-medium mb-1">검색어를 입력해보세요</p><p class="text-sm">나라 이름, 여행지, 궁금한 주제 뭐든지 OK</p></div>';
+      return;
+    }
+
+    if (!fuse) {
+      results.innerHTML = '<div class="py-8 text-center text-sm text-muted-foreground">검색 준비 중...</div>';
+      return;
+    }
+
+    var found = fuse.search(query);
+
+    if (found.length === 0) {
+      count.classList.add('hidden');
+      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-smiley-sad text-5xl mb-4 block"></i><p class="text-base font-medium mb-1">"' + query + '" 검색 결과가 없어요</p><p class="text-sm">다른 키워드로 검색해보세요</p></div>';
+      return;
+    }
+
+    count.textContent = '"' + query + '" 검색 결과 ' + found.length + '개';
+    count.classList.remove('hidden');
+
+    results.innerHTML = found.map(function(r) {
+      var item = r.item;
+      var categoryColors = {
+        '해외 여행': 'bg-sky-50 text-sky-700',
+        '국내 여행': 'bg-emerald-50 text-emerald-700',
+        '나라 정보': 'bg-violet-50 text-violet-700',
+        '지구 상식': 'bg-blue-50 text-blue-700',
+        '역사': 'bg-amber-50 text-amber-700',
+      };
+      var badgeClass = categoryColors[item.category] || 'bg-gray-50 text-gray-600';
+
+      return '<a href="' + item.url + '" class="flex flex-col gap-2 p-4 rounded-xl border border-border hover:border-primary/40 hover:bg-primary/5 transition-all mb-3 group">' +
+        '<div class="flex items-start justify-between gap-3">' +
+          '<div class="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 flex-1">' + item.title + '</div>' +
+          (item.category ? '<span class="text-xs px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ' + badgeClass + '">' + item.category + '</span>' : '') +
+        '</div>' +
+        (item.description ? '<div class="text-sm text-muted-foreground line-clamp-2">' + item.description + '</div>' : '') +
+      '</a>';
+    }).join('');
+  }
+
+  // 입력 이벤트 (디바운스)
+  var timer;
+  document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('search-page-input');
+    if (input) {
+      input.addEventListener('input', function(e) {
+        clearTimeout(timer);
+        timer = setTimeout(function() { doSearch(e.target.value); }, 200);
+      });
+      input.focus();
+    }
   });
 </script>

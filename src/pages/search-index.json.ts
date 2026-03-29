@@ -1,0 +1,20 @@
+export const prerender = true;
+
+import { getCollection } from 'astro:content';
+import { slugify } from '../utils/slugify';
+
+export async function GET() {
+  const posts = await getCollection('blog', ({ data }: any) => !data.draft);
+
+  const index = posts.map((post: any) => ({
+    title: post.data.title || '',
+    description: post.data.description || '',
+    category: post.data.category || '',
+    url: `/entry/${slugify(post.data.title)}`,
+    slug: post.slug,
+  }));
+
+  return new Response(JSON.stringify(index), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
