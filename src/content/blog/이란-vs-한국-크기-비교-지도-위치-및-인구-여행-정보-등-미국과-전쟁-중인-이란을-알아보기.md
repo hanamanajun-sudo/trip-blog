@@ -6,11 +6,7 @@ entry_slug: iran-vs-korea-size-population-travel
 description: 최근 심각한 분쟁 소식으로 매일 뉴스에 오르내리는 이란. 막연한 불안감을 덜기 위해 이란의 진짜 면적, 인구, 문화,
   현재 여행 상황까지 한국과 꼼꼼하게 비교해 본다.
 ---
-![나시르 알 물크 모스크](/images/akbar-nemati-paclif3-3sc-unsplash-1-.jpg)
-
-
-
-`<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4125.151318526203!2d52.548490325652594!3d29.608774377852974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fb20d6dd1e1a9e1%3A0xa5db54d59b5f73fe!2z64KY7Iuc66W0IOyVjCDrrLztgawg66qo7Iqk7YGs!5e0!3m2!1sko!2sjp!4v1775489504665!5m2!1sko!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
+![나시르 알 물크 모스크](/images/akbar-nemati-paclif3-3sc-unsplash-1-.jpg "[나시르 알 물크 모스크] 분홍 타일로 꾸민 내부와 다채로운 스테인드글라스 창문으로 유명한 19세기 모스크")
 
 \
 최근 연일 보도되는 이란과 미국의 심각한 무력 충돌과 전쟁 소식을 접하며 마음 한구석에 불안함이 커져가는 요즘이다. 
