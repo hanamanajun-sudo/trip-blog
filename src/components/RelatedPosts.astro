@@ -18,7 +18,8 @@ const relatedPosts = allPosts
 
 // 본문에서 첫 번째 이미지 추출
 function getFirstImage(body: string): string | null {
-  const match = body.match(/!\[.*?\]\((\/images\/[^)]+)\)/);
+  // 이미지 마크다운: ![alt](/images/path.jpg) 또는 ![alt](/images/path.jpg "타이틀")
+  const match = body.match(/!\[.*?\]\((\/images\/[^\s")]+)/);
   return match ? match[1] : null;
 }
 ---
