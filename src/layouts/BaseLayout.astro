@@ -6,6 +6,7 @@ export interface Props {
   jsonLd?: object;
   ogType?: string;
   ogDatePublished?: string;
+  canonicalUrl?: string;
 }
 
 const {
@@ -15,9 +16,10 @@ const {
   jsonLd,
   ogType = 'website',
   ogDatePublished,
+  canonicalUrl,
 } = Astro.props;
 const siteOgImage = ogImage || 'https://trip.lalalakorea.com/og-default.png';
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = canonicalUrl ? new URL(canonicalUrl) : new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>

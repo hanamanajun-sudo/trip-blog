@@ -13,9 +13,10 @@ export interface Props {
   thumbnail?: string;
   currentId?: string;
   headings?: { depth: number; slug: string; text: string }[];
+  canonicalUrl?: string;
 }
 
-const { title, date, category, description, thumbnail, currentId, headings = [] } = Astro.props;
+const { title, date, category, description, thumbnail, currentId, headings = [], canonicalUrl } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric',
@@ -59,6 +60,7 @@ const jsonLd = {
   jsonLd={jsonLd}
   ogType="article"
   ogDatePublished={date.toISOString()}
+  canonicalUrl={canonicalUrl}
 >
   <article class="mx-auto max-w-3xl">
 

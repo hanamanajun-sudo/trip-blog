@@ -23,6 +23,10 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
+
+// 항상 entry_slug URL을 canonical로 사용 (숫자 ID URL은 중복으로 처리되지 않도록)
+const canonicalSlug = post.data.entry_slug || post.id;
+const canonicalUrl = `https://trip.lalalakorea.com/entry/${canonicalSlug}`;
 ---
 
 <BlogPost
@@ -33,6 +37,7 @@ const { Content, headings } = await render(post);
   thumbnail={post.data.thumbnail}
   currentId={post.id}
   headings={headings}
+  canonicalUrl={canonicalUrl}
 >
   <Content />
 </BlogPost>
