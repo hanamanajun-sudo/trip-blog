@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://trip.lalalakorea.com',
+  trailingSlash: 'never',
   output: 'static',
   adapter: vercel(),
   integrations: [tailwind(), react()],
