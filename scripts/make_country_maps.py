@@ -146,7 +146,8 @@ def label_pt(proj, to_px, clip=None):
 
 def render_scene(out_name, title, caption, anchor_isos, anchor_center, focus_iso,
                  move_iso, placement, move_fill, protagonist_iso,
-                 side="right", window=None, poi=None, move_opacity=None, width=940):
+                 side="right", window=None, poi=None, move_opacity=None,
+                 move_label_size=13, width=940):
     anchor = {iso: project(load_polygons(iso), anchor_center) for iso in anchor_isos}
     focus_proj = anchor[focus_iso]
 
@@ -234,7 +235,7 @@ def render_scene(out_name, title, caption, anchor_isos, anchor_center, focus_iso
     if move_iso != "KOR":  # 한국은 이름 라벨 생략
         mlp = label_pt(m_placed, to_px)
         if mlp:
-            s.append(f'<text x="{mlp[0]:.0f}" y="{mlp[1]:.0f}" text-anchor="middle" font-size="13" '
+            s.append(f'<text x="{mlp[0]:.0f}" y="{mlp[1]:.0f}" text-anchor="middle" font-size="{move_label_size}" '
                      f'font-weight="700" fill="#7c2d12">{NAMES.get(move_iso, move_iso)}</text>')
 
     # POI (주인공 나라 한정, 맥락 투영 사용)
@@ -314,11 +315,13 @@ def build(slug):
     render_scene(f"{slug}-C-beside-eastasia.svg",
                  f"{kr}{ga(kr)} 한국 옆에 오면 (동아시아 크기 비교)",
                  f"주황이 {kr} — 한국 바로 옆에 두고 비교",
-                 EA_ISOS, ea_center, "KOR", iso, "beside", MOVE_ORANGE, iso, side="left", window=EA_WINDOW)
+                 EA_ISOS, ea_center, "KOR", iso, "beside", MOVE_ORANGE, iso, side="left",
+                 window=EA_WINDOW, move_opacity=0.5)
     render_scene(f"{slug}-D-over-eastasia.svg",
                  f"{kr}{ga(kr)} 한국 위에 포개지면",
                  f"주황이 {kr} — 한반도를 덮고도 남는다",
-                 EA_ISOS, ea_center, "KOR", iso, "inside", MOVE_ORANGE, iso, window=EA_WINDOW)
+                 EA_ISOS, ea_center, "KOR", iso, "inside", MOVE_ORANGE, iso,
+                 window=EA_WINDOW, move_label_size=34)
 
 
 if __name__ == "__main__":
