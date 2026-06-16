@@ -15,7 +15,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 GEODIR = os.path.join(HERE, "geodata")
 SRC = os.environ.get("NE_SRC", "/tmp/ne_50m.geojson")
 EPS = 0.05          # Douglas-Peucker 허용오차(도)
-MIN_RING = 0.4      # 이 둘레(도) 미만의 작은 섬은 버려 용량 절감
+MIN_RING = float(os.environ.get("MINRING", "0.4"))  # 이 둘레(도) 미만 작은 섬 제외
 # BBOX="minlon,minlat,maxlon,maxlat" 설정 시 중심이 이 창 밖인 폴리곤은 제외
 # (예: 미국 본토만 — 알래스카/하와이는 날짜변경선·원거리라 투영 왜곡)
 _b = os.environ.get("BBOX")
@@ -83,7 +83,8 @@ def extract(iso, features):
     feat = None
     for f in features:
         p = f.get("properties", {})
-        if p.get("ADM0_A3") == iso or p.get("ISO_A3") == iso or p.get("SOV_A3") == iso:
+        if p.get("ADM0_A3") == iso or p.get("ISO_A3") == iso or p.get("SOV_A3") == iso \
+                or p.get("SU_A3") == iso:
             feat = f
             break
     if feat is None:

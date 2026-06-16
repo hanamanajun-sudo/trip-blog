@@ -37,6 +37,11 @@ NAMES = {
     "MMR": "미얀마", "THA": "태국", "KHM": "캄보디아", "PHL": "필리핀",
     "EGY": "이집트", "LBY": "리비아", "SDN": "수단", "ISR": "이스라엘",
     "USA": "미국",
+    "SAU": "사우디아라비아", "SEN": "세네갈", "IRQ": "이라크", "UZB": "우즈베키스탄",
+    "DZA": "알제리", "TUN": "튀니지", "GHA": "가나", "CIV": "코트디부아르",
+    "NLD": "네덜란드", "BEL": "벨기에", "CZE": "체코", "BIH": "보스니아",
+    "JOR": "요르단", "PAN": "파나마", "CPV": "카보베르데", "CUW": "쿠라사오",
+    "SCT": "스코틀랜드",
 }
 CAPITALS = {  # ISO -> (한글명, lon, lat)
     "BRA": ("브라질리아", -47.882, -15.793),
@@ -45,6 +50,23 @@ CAPITALS = {  # ISO -> (한글명, lon, lat)
     "PRY": ("아순시온", -57.576, -25.264),
     "EGY": ("카이로", 31.236, 30.044),
     "USA": ("워싱턴", -77.036, 38.895),
+    "SAU": ("리야드", 46.72, 24.69),
+    "SEN": ("다카르", -17.45, 14.69),
+    "IRQ": ("바그다드", 44.36, 33.31),
+    "UZB": ("타슈켄트", 69.24, 41.31),
+    "DZA": ("알제", 3.06, 36.75),
+    "TUN": ("튀니스", 10.18, 36.81),
+    "GHA": ("아크라", -0.19, 5.56),
+    "CIV": ("야무수크로", -5.27, 6.83),
+    "NLD": ("암스테르담", 4.90, 52.37),
+    "BEL": ("브뤼셀", 4.35, 50.85),
+    "CZE": ("프라하", 14.42, 50.09),
+    "BIH": ("사라예보", 18.41, 43.86),
+    "JOR": ("암만", 35.93, 31.95),
+    "PAN": ("파나마시티", -79.52, 8.98),
+    "CPV": ("프라이아", -23.51, 14.92),
+    "CUW": ("빌렘스타트", -68.93, 12.11),
+    "SCT": ("에든버러", -3.19, 55.95),
     "KOR": ("서울", 126.978, 37.566),
 }
 
@@ -350,34 +372,74 @@ COUNTRIES = {
                                   (31.24, 30.04), (31.10, 31.40)])],
         },
     },
+    # --- 한국보다 큰 나라 (A/B/C/D) ---
+    "saudi": {"iso": "SAU", "neighbors": [], "ratio": "한국의 약 22배",
+              "poi": {"cities": [("제다", 39.20, 21.54)]}},
+    "senegal": {"iso": "SEN", "neighbors": [], "ratio": "한국의 약 2배"},
+    "iraq": {"iso": "IRQ", "neighbors": [], "ratio": "한국의 약 4.4배",
+             "poi": {"cities": [("바스라", 47.78, 30.51), ("모술", 43.13, 36.34)]}},
+    "uzbekistan": {"iso": "UZB", "neighbors": [], "ratio": "한국의 약 4.5배",
+                   "poi": {"cities": [("사마르칸트", 66.96, 39.65)]}},
+    "algeria": {"iso": "DZA", "neighbors": [], "ratio": "한국의 약 24배"},
+    "tunisia": {"iso": "TUN", "neighbors": [], "ratio": "한국의 약 1.6배"},
+    "ghana": {"iso": "GHA", "neighbors": [], "ratio": "한국의 약 2.4배"},
+    "ivorycoast": {"iso": "CIV", "neighbors": [], "ratio": "한국의 약 3.2배",
+                   "poi": {"cities": [("아비장", -4.02, 5.34)]}},
+    # --- 한국보다 작거나 비슷한 나라 (C/D만) ---
+    "netherlands": {"iso": "NLD", "neighbors": [], "ratio": "한국의 약 0.42배",
+                    "scenes": ["C", "D"], "smaller": True},
+    "belgium": {"iso": "BEL", "neighbors": [], "ratio": "한국의 약 0.30배",
+                "scenes": ["C", "D"], "smaller": True},
+    "scotland": {"iso": "SCT", "neighbors": [], "ratio": "한국의 약 0.79배",
+                 "scenes": ["C", "D"], "smaller": True},
+    "czechia": {"iso": "CZE", "neighbors": [], "ratio": "한국의 약 0.79배",
+                "scenes": ["C", "D"], "smaller": True},
+    "bosnia": {"iso": "BIH", "neighbors": [], "ratio": "한국의 약 0.51배",
+               "scenes": ["C", "D"], "smaller": True},
+    "jordan": {"iso": "JOR", "neighbors": [], "ratio": "한국의 약 0.89배",
+               "scenes": ["C", "D"], "smaller": True},
+    "panama": {"iso": "PAN", "neighbors": [], "ratio": "한국의 약 0.75배",
+               "scenes": ["C", "D"], "smaller": True},
+    "capeverde": {"iso": "CPV", "neighbors": [], "ratio": "한국의 약 25분의 1",
+                  "scenes": ["C", "D"], "smaller": True},
+    "curacao": {"iso": "CUW", "neighbors": [], "ratio": "서울보다 작은 섬",
+                "scenes": ["C", "D"], "smaller": True},
 }
 
 
 def build(slug):
     cfg = COUNTRIES[slug]
     iso, kr, ratio, poi = cfg["iso"], NAMES[cfg["iso"]], cfg["ratio"], cfg.get("poi")
+    scenes = cfg.get("scenes", ["A", "B", "C", "D"])
+    smaller = cfg.get("smaller", False)  # 한국보다 작은 나라
     sa = [iso] + cfg["neighbors"]
     sa_center = bbox_center(load_polygons(iso))
     ea_center = ((EA_WINDOW[0] + EA_WINDOW[2]) / 2, (EA_WINDOW[1] + EA_WINDOW[3]) / 2)
     print(f"[{slug}]")
-    render_scene(f"{slug}-A-korea-beside.svg",
-                 f"한국이 {kr} 옆에 가면 (실제 크기 비교)",
-                 f"빨강이 한국 — {kr}{eun(kr)} {ratio}",
-                 sa, sa_center, iso, "KOR", "beside", KOREA_RED, iso, side="right", poi=poi)
-    render_scene(f"{slug}-B-korea-inside.svg",
-                 f"한국이 {kr} 안에 들어가면",
-                 f"빨강이 한국 — {kr} 영토에 쏙 들어간다 ({ratio})",
-                 sa, sa_center, iso, "KOR", "inside", KOREA_RED, iso, poi=poi)
-    render_scene(f"{slug}-C-beside-eastasia.svg",
-                 f"{kr}{ga(kr)} 한국 옆에 오면 (동아시아 크기 비교)",
-                 f"주황이 {kr} — 한국 바로 옆에 두고 비교",
-                 EA_ISOS, ea_center, "KOR", iso, "beside", MOVE_ORANGE, iso, side="left",
-                 window=EA_WINDOW, move_opacity=0.4)
-    render_scene(f"{slug}-D-over-eastasia.svg",
-                 f"{kr}{ga(kr)} 한국 위에 포개지면",
-                 f"주황이 {kr} — 한반도를 덮고도 남는다",
-                 EA_ISOS, ea_center, "KOR", iso, "inside", MOVE_ORANGE, iso,
-                 window=EA_WINDOW, move_label_size=34)
+    if "A" in scenes:
+        render_scene(f"{slug}-A-korea-beside.svg",
+                     f"한국이 {kr} 옆에 가면 (실제 크기 비교)",
+                     f"빨강이 한국 — {kr}{eun(kr)} {ratio}",
+                     sa, sa_center, iso, "KOR", "beside", KOREA_RED, iso, side="right", poi=poi)
+    if "B" in scenes:
+        render_scene(f"{slug}-B-korea-inside.svg",
+                     f"한국이 {kr} 안에 들어가면",
+                     f"빨강이 한국 — {kr} 영토에 쏙 들어간다 ({ratio})",
+                     sa, sa_center, iso, "KOR", "inside", KOREA_RED, iso, poi=poi)
+    if "C" in scenes:
+        render_scene(f"{slug}-C-beside-eastasia.svg",
+                     f"{kr}{ga(kr)} 한국 옆에 오면 (동아시아 크기 비교)",
+                     f"주황이 {kr} — 한국 바로 옆에 두고 비교 ({ratio})",
+                     EA_ISOS, ea_center, "KOR", iso, "beside", MOVE_ORANGE, iso, side="left",
+                     window=EA_WINDOW, move_opacity=0.4)
+    if "D" in scenes:
+        d_title = f"{kr}{ga(kr)} 한국 안에 들어가면" if smaller else f"{kr}{ga(kr)} 한국 위에 포개지면"
+        d_cap = (f"주황이 {kr} — 한반도 안에 들어가는 크기 ({ratio})" if smaller
+                 else f"주황이 {kr} — 한반도를 덮고도 남는다")
+        render_scene(f"{slug}-D-over-eastasia.svg",
+                     d_title, d_cap,
+                     EA_ISOS, ea_center, "KOR", iso, "inside", MOVE_ORANGE, iso,
+                     window=EA_WINDOW, move_label_size=34)
 
 
 if __name__ == "__main__":
