@@ -33,13 +33,17 @@ NAMES = {
     "COL": "콜롬비아", "VEN": "베네수엘라", "GUY": "가이아나", "SUR": "수리남",
     "PRY": "파라과이", "URY": "우루과이", "CHL": "칠레", "ECU": "에콰도르",
     "KOR": "한국", "PRK": "북한", "CHN": "중국", "JPN": "일본", "TWN": "대만",
+    "RUS": "러시아", "MNG": "몽골", "VNM": "베트남", "LAO": "라오스",
+    "MMR": "미얀마", "THA": "태국", "KHM": "캄보디아", "PHL": "필리핀",
 }
 CAPITALS = {  # ISO -> (한글명, lon, lat)
     "BRA": ("브라질리아", -47.882, -15.793),
     "KOR": ("서울", 126.978, 37.566),
 }
 
-EA_ISOS = ["CHN", "KOR", "PRK", "JPN", "TWN"]
+# 동아시아 맥락: 주변국(중립)을 먼저, 한국을 마지막에 그려 위로 올림
+EA_ISOS = ["RUS", "MNG", "MMR", "THA", "LAO", "VNM", "KHM", "PHL",
+           "CHN", "TWN", "JPN", "PRK", "KOR"]
 EA_WINDOW = (104.0, 21.0, 149.0, 47.0)
 GAP_M = 20000.0  # beside 배치 간격 (20km, 바짝 붙임)
 
@@ -316,7 +320,7 @@ def build(slug):
                  f"{kr}{ga(kr)} 한국 옆에 오면 (동아시아 크기 비교)",
                  f"주황이 {kr} — 한국 바로 옆에 두고 비교",
                  EA_ISOS, ea_center, "KOR", iso, "beside", MOVE_ORANGE, iso, side="left",
-                 window=EA_WINDOW, move_opacity=0.5)
+                 window=EA_WINDOW, move_opacity=0.4)
     render_scene(f"{slug}-D-over-eastasia.svg",
                  f"{kr}{ga(kr)} 한국 위에 포개지면",
                  f"주황이 {kr} — 한반도를 덮고도 남는다",
