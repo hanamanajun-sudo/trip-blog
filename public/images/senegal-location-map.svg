@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#e8d9a3" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">세네갈 위치 — 서아프리카 최서단</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 모리타니</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">말리 · 기니</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 기니비사우</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">대서양</text>
+<g transform="translate(226.55,75.29) scale(0.5227)">
+  <path d="M519.2,277.7 L527.5,292.1 L525.8,299.0 L524.1,309.1 L542.5,331.5 L547.8,361.1 L539.9,382.9 L559.6,411.1 L565.9,404.0 L581.5,413.2 L598.5,444.2 L593.7,478.7 L593.8,481.0 L599.7,485.6 L599.2,492.3 L520.3,500.1 L464.2,482.2 L452.8,486.1 L450.9,473.2 L394.3,469.8 L266.1,469.3 L250.2,477.4 L232.9,486.1 L133.3,497.6 L129.2,482.2 L157.1,475.0 L143.6,465.4 L134.4,475.3 L130.7,476.9 L128.7,473.0 L129.4,434.0 L134.6,429.1 L139.5,426.0 L210.5,426.3 L212.4,411.2 L258.4,405.1 L270.3,390.8 L349.1,419.6 L369.3,414.1 L383.9,410.6 L385.7,404.1 L383.4,397.8 L372.5,392.0 L335.2,395.6 L274.0,367.9 L260.0,369.9 L246.3,375.4 L239.0,388.0 L147.4,387.3 L129.8,358.6 L142.9,346.6 L127.8,349.7 L95.7,292.3 L87.8,286.8 L80.4,284.2 L74.1,284.6 L71.7,291.0 L64.0,281.7 L74.8,278.5 L97.8,267.1 L124.5,234.1 L148.4,194.9 L160.0,152.8 L177.6,123.7 L218.0,128.1 L287.6,111.0 L344.2,119.9 L381.4,158.6 L412.5,159.6 L426.3,174.1 L438.6,205.9 L462.5,220.5 L468.9,239.3 L519.2,277.7 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="2.30" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">세네갈</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">서아프리카 — 아프리카 대륙 최서단, 대서양 연안</text>
+</svg>
