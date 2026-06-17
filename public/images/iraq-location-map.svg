@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#f0dfa8" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">이라크 위치 — 중동</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 터키 · 시리아</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">이란</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 쿠웨이트 · 페르시아만</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">요르단 · 시리아 · 사우디아라비아</text>
+<g transform="translate(229.75,65.90) scale(0.4727)">
+  <path d="M280.7,82.5 L304.5,64.0 L355.5,74.5 L380.4,69.1 L390.0,92.2 L408.4,77.9 L412.0,78.1 L415.5,78.6 L424.3,104.6 L432.3,111.7 L434.5,127.8 L445.4,135.9 L452.1,157.2 L452.7,160.0 L464.3,162.5 L476.9,173.4 L505.7,176.2 L489.9,188.3 L488.7,194.3 L489.0,197.7 L491.1,201.4 L497.2,208.6 L498.8,222.4 L472.7,246.4 L470.7,262.4 L466.2,262.5 L462.6,262.0 L459.1,274.0 L464.5,283.2 L465.6,288.1 L457.3,305.7 L478.0,331.5 L486.3,330.8 L486.1,339.2 L492.6,340.7 L495.0,344.5 L502.8,357.6 L501.3,377.0 L512.4,377.3 L517.1,378.6 L562.7,410.3 L577.8,412.8 L607.1,456.6 L603.0,470.5 L599.0,485.0 L599.7,503.5 L600.1,513.4 L609.7,513.4 L620.3,513.5 L622.1,550.8 L642.0,562.8 L649.1,580.2 L651.9,582.5 L656.3,585.2 L631.1,580.7 L621.2,585.3 L607.1,579.1 L602.0,578.0 L574.5,582.8 L533.5,651.4 L420.4,646.6 L257.8,511.8 L155.7,448.2 L82.3,432.2 L91.5,424.1 L89.1,416.4 L82.6,417.5 L76.6,419.1 L73.5,407.0 L78.1,405.8 L64.0,342.4 L197.5,271.8 L204.4,258.9 L210.3,247.9 L212.5,211.0 L221.1,186.1 L215.5,155.1 L219.0,133.1 L222.4,127.4 L226.1,123.9 L239.6,120.5 L247.5,118.4 L280.7,82.5 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="2.54" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">이라크</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">중동 — 티그리스·유프라테스 두 강 사이, 메소포타미아 문명의 땅</text>
+</svg>

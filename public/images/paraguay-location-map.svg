@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#e8d5a3" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">파라과이 위치 — 남미 내륙</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 볼리비아</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">브라질</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 아르헨티나</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">아르헨티나 · 볼리비아</text>
+<g transform="translate(-227.73,-828.16) scale(1.6241)">
+  <path d="M392.6,586.7 L399.0,604.1 L396.7,614.4 L396.5,627.2 L416.1,630.7 L422.0,630.0 L425.6,626.8 L429.4,630.7 L437.1,631.8 L441.4,639.4 L440.7,643.9 L444.7,666.2 L448.9,667.6 L459.8,663.6 L467.0,668.7 L465.5,670.4 L466.1,674.1 L462.6,691.0 L459.2,697.4 L458.4,709.3 L455.8,720.2 L448.5,728.3 L443.1,729.8 L439.1,737.0 L436.2,738.2 L429.3,736.1 L424.1,740.8 L421.1,739.0 L411.7,738.9 L392.2,734.7 L384.1,735.6 L383.8,731.8 L391.8,721.3 L391.6,716.1 L393.3,712.0 L397.4,708.4 L400.0,701.9 L403.5,698.6 L402.1,694.3 L396.2,688.4 L388.6,686.5 L373.0,678.3 L359.5,668.6 L337.7,661.9 L334.3,657.8 L322.9,650.3 L314.6,638.6 L306.0,630.9 L312.6,606.4 L312.3,595.9 L319.1,585.2 L322.1,576.6 L356.3,568.8 L374.4,568.4 L392.2,579.5 L393.0,583.2 L392.6,586.7 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.74" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">파라과이</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">남미 내륙국 — 볼리비아·브라질·아르헨티나에 둘러싸인 바다 없는 나라</text>
+</svg>

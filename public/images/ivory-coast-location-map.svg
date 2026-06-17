@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#e8d9a3" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">코트디부아르 위치 — 서아프리카</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 말리 · 부르키나파소</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">가나</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 기니만 (대서양)</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">기니 · 라이베리아</text>
+<g transform="translate(235.46,63.36) scale(0.4944)">
+  <path d="M552.0,561.1 L549.6,564.7 L537.9,562.5 L540.7,559.5 L552.0,561.1 Z M120.1,113.3 L135.6,106.8 L141.4,97.5 L149.1,89.9 L163.4,88.9 L175.1,105.0 L205.3,115.5 L211.2,97.8 L233.7,97.2 L237.3,69.9 L257.4,78.6 L257.2,68.6 L271.6,64.0 L277.7,92.8 L273.5,105.1 L277.2,107.7 L284.1,110.4 L291.4,111.1 L308.1,93.8 L321.2,89.9 L333.2,89.3 L373.2,106.9 L384.6,134.6 L414.8,153.8 L440.6,159.8 L446.3,151.1 L488.0,135.5 L537.7,137.1 L573.6,178.7 L584.2,173.7 L580.0,212.5 L593.0,234.2 L601.7,286.8 L576.9,311.6 L560.0,376.4 L538.2,411.8 L537.5,426.0 L559.6,509.2 L577.8,519.0 L576.0,558.8 L569.0,559.2 L564.3,561.9 L544.8,554.5 L546.2,541.6 L541.9,541.1 L528.9,561.0 L460.5,545.4 L417.2,552.0 L467.8,552.4 L412.5,557.7 L391.4,560.8 L357.5,554.4 L352.8,556.0 L350.0,559.7 L377.1,561.5 L332.5,565.1 L301.6,572.1 L156.8,630.4 L152.9,588.6 L154.9,565.5 L167.3,543.9 L165.3,497.9 L135.1,485.9 L127.0,462.8 L91.9,455.1 L64.0,438.1 L82.0,420.7 L88.1,412.1 L90.9,396.2 L74.9,344.7 L97.4,345.0 L117.2,298.7 L116.6,292.8 L113.9,290.6 L95.6,283.0 L96.8,269.3 L97.4,265.0 L114.0,261.6 L146.3,269.3 L145.5,255.8 L143.0,248.6 L137.4,241.7 L122.8,235.7 L122.5,227.5 L124.0,218.6 L127.2,215.3 L138.1,209.6 L125.9,200.0 L127.5,189.3 L127.9,179.8 L122.1,180.8 L116.1,181.3 L111.1,178.4 L106.9,172.6 L105.6,130.1 L120.1,113.3 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="2.43" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">코트디부아르</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">서아프리카 — '상아 해안(아이보리 코스트)', 카카오 세계 최대 수출국</text>
+</svg>
