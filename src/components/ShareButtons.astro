@@ -12,7 +12,7 @@ const naverUrl = `https://share.naver.com/web/shareView?url=${encodeURIComponent
 
 <div class="mt-10 pt-8 border-t border-border">
   <p class="text-sm font-semibold text-muted-foreground mb-4 flex items-center gap-2">
-    <i class="ph ph-share-network text-base"></i>
+    <i class="ph ph-share-network text-base" aria-hidden="true"></i>
     이 글이 도움됐다면 공유해보세요 😊
   </p>
   <div class="flex flex-wrap gap-2">
@@ -22,7 +22,7 @@ const naverUrl = `https://share.naver.com/web/shareView?url=${encodeURIComponent
       id="copy-link-btn"
       class="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted transition-all"
     >
-      <i class="ph ph-link text-base"></i>
+      <i class="ph ph-link text-base" aria-hidden="true"></i>
       링크 복사
     </button>
 
@@ -88,12 +88,12 @@ const naverUrl = `https://share.naver.com/web/shareView?url=${encodeURIComponent
   if (copyBtn) {
     copyBtn.addEventListener('click', function () {
       navigator.clipboard.writeText(window.location.href).then(function () {
-        copyBtn.innerHTML = '<i class="ph ph-check text-base"></i> 복사됐어요!';
+        copyBtn.innerHTML = '<i class="ph ph-check text-base" aria-hidden="true"></i> 복사됐어요!';
         copyBtn.style.backgroundColor = '#f0fdf4';
         copyBtn.style.color = '#16a34a';
         copyBtn.style.borderColor = '#86efac';
         setTimeout(function () {
-          copyBtn.innerHTML = '<i class="ph ph-link text-base"></i> 링크 복사';
+          copyBtn.innerHTML = '<i class="ph ph-link text-base" aria-hidden="true"></i> 링크 복사';
           copyBtn.style.backgroundColor = '';
           copyBtn.style.color = '';
           copyBtn.style.borderColor = '';

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#d4e8c8" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">벨기에 위치 — 서유럽</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 네덜란드</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">독일 · 룩셈부르크</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 프랑스</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">북해</text>
+<g transform="translate(-1122.85,-864.00) scale(3.5000)">
+  <path d="M432.2,296.8 L433.2,297.3 L434.0,297.4 L435.6,295.1 L437.2,296.2 L438.6,294.8 L439.8,296.5 L442.0,295.2 L444.2,298.9 L447.4,298.7 L451.7,301.7 L449.5,307.3 L456.9,311.9 L456.1,312.9 L456.3,313.4 L458.3,314.7 L458.4,315.7 L458.7,317.3 L456.4,319.0 L455.7,320.8 L455.7,321.2 L453.9,320.3 L451.1,325.2 L450.9,327.3 L452.9,330.5 L452.1,332.3 L448.3,333.2 L445.4,329.9 L440.2,327.9 L439.2,324.5 L440.0,321.1 L439.5,320.8 L436.1,324.5 L433.9,324.8 L431.5,324.5 L431.5,319.0 L429.9,317.5 L428.7,317.2 L425.5,317.8 L424.4,314.4 L420.4,313.3 L418.5,308.5 L415.1,309.7 L412.2,306.5 L411.5,302.2 L416.8,299.0 L420.1,297.4 L421.6,296.9 L422.6,299.5 L424.4,298.7 L428.3,300.3 L432.2,296.8 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">벨기에</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">서유럽 — 유럽연합 수도 브뤼셀이 있는 소국</text>
+</svg>

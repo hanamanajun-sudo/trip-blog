@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#c8dff0" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">쿠라사오 위치 — 카리브해 섬나라</text>
+<text x="400" y="72" text-anchor="middle" font-size="14" font-weight="500" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">대서양 / 카리브해</text>
+<g transform="translate(-1191.80,-863.83) scale(3.5000)">
+  <path d="M458.7,316.9 L457.7,317.2 L454.0,315.4 L451.0,312.3 L450.9,310.7 L458.7,316.9 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">쿠라사오</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">카리브해 도서국 — 베네수엘라 북쪽 약 65km 해상, 네덜란드 자치령</text>
+</svg>

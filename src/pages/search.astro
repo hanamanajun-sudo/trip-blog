@@ -1,6 +1,9 @@
 ---
 export const prerender = true;
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const postCount = allPosts.length;
 ---
 
 <BaseLayout title="검색 - lalalakorea" description="lalalakorea 블로그에서 여행, 나라 정보, 역사 글을 검색해보세요">
@@ -8,14 +11,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <div class="mb-8 text-center">
       <h1 class="text-3xl font-bold text-primary mb-2">
-        <i class="ph ph-magnifying-glass mr-2 text-accent"></i>블로그 검색
+        <i class="ph ph-magnifying-glass mr-2 text-accent" aria-hidden="true"></i>블로그 검색
       </h1>
-      <p class="text-muted-foreground text-sm">109개 글에서 원하는 여행지·나라 정보를 찾아보세요</p>
+      <p class="text-muted-foreground text-sm">{postCount}개 글에서 원하는 여행지·나라 정보를 찾아보세요</p>
     </div>
 
     <!-- 검색 입력창 -->
     <div class="relative mb-6">
-      <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-lg"></i>
+      <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-lg" aria-hidden="true"></i>
       <input
         id="search-page-input"
         type="text"
@@ -31,7 +34,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- 검색 결과 -->
     <div id="search-page-results">
       <div class="py-16 text-center text-muted-foreground">
-        <i class="ph ph-compass text-5xl mb-4 block text-accent/40"></i>
+        <i class="ph ph-compass text-5xl mb-4 block text-accent/40" aria-hidden="true"></i>
         <p class="text-base font-medium mb-1">검색어를 입력해보세요</p>
         <p class="text-sm">나라 이름, 여행지, 궁금한 주제 뭐든지 OK</p>
       </div>
@@ -83,7 +86,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     if (!query.trim()) {
       count.classList.add('hidden');
-      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-compass text-5xl mb-4 block text-accent/40"></i><p class="text-base font-medium mb-1">검색어를 입력해보세요</p><p class="text-sm">나라 이름, 여행지, 궁금한 주제 뭐든지 OK</p></div>';
+      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-compass text-5xl mb-4 block text-accent/40" aria-hidden="true"></i><p class="text-base font-medium mb-1">검색어를 입력해보세요</p><p class="text-sm">나라 이름, 여행지, 궁금한 주제 뭐든지 OK</p></div>';
       return;
     }
 
@@ -96,7 +99,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     if (found.length === 0) {
       count.classList.add('hidden');
-      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-smiley-sad text-5xl mb-4 block"></i><p class="text-base font-medium mb-1">"' + query + '" 검색 결과가 없어요</p><p class="text-sm">다른 키워드로 검색해보세요</p></div>';
+      results.innerHTML = '<div class="py-16 text-center text-muted-foreground"><i class="ph ph-smiley-sad text-5xl mb-4 block" aria-hidden="true"></i><p class="text-base font-medium mb-1">"' + query + '" 검색 결과가 없어요</p><p class="text-sm">다른 키워드로 검색해보세요</p></div>';
       return;
     }
 

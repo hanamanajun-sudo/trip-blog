@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#c8dff0" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">카보베르데 위치 — 대서양 섬나라</text>
+<text x="400" y="72" text-anchor="middle" font-size="14" font-weight="500" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">대서양 / 카리브해</text>
+<g transform="translate(-1119.00,-864.00) scale(3.5000)">
+  <path d="M412.4,295.7 L410.6,296.1 L409.8,295.9 L409.3,292.9 L413.4,290.9 L414.9,291.2 L415.9,292.8 L415.2,293.7 L412.4,295.7 Z M444.5,333.4 L443.4,335.2 L440.9,335.0 L439.6,334.3 L438.1,332.0 L438.8,327.2 L444.5,333.4 Z M417.6,298.2 L413.8,297.9 L416.7,296.2 L417.5,297.7 L417.6,298.2 Z M454.3,309.5 L458.5,310.8 L458.7,311.8 L458.1,313.2 L456.1,314.3 L454.9,314.2 L453.5,313.2 L454.3,311.2 L454.3,309.5 Z M428.3,336.3 L426.8,337.1 L425.8,336.7 L424.8,333.9 L426.7,332.8 L427.9,333.2 L428.5,334.9 L428.3,336.3 Z M432.5,302.0 L433.2,302.6 L433.5,303.0 L432.3,303.2 L429.6,302.5 L428.8,302.9 L428.1,304.5 L426.7,302.1 L426.8,301.2 L427.1,301.0 L429.0,301.6 L432.5,302.0 Z M454.8,301.3 L454.2,302.3 L453.4,300.8 L453.0,300.5 L452.8,298.4 L453.9,297.7 L454.8,301.3 Z M449.4,330.8 L448.9,330.9 L448.1,330.1 L448.9,327.2 L450.2,327.3 L450.6,328.3 L450.7,330.3 L449.4,330.8 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">카보베르데</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">대서양 도서국 — 세네갈 서쪽 570km 해상, 서아프리카 앞바다 화산 제도</text>
+</svg>

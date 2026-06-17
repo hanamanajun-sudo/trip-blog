@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#d4e8c8" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">체코 위치 — 중앙유럽</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 폴란드</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">슬로바키아</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 오스트리아</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">독일</text>
+<g transform="translate(-983.56,-807.94) scale(3.3215)">
+  <path d="M458.7,318.8 L455.7,319.3 L450.4,324.1 L449.6,327.9 L445.5,331.4 L437.6,332.6 L435.3,337.3 L435.0,336.9 L434.4,335.3 L430.0,333.6 L423.8,334.4 L420.8,332.3 L410.2,329.7 L409.3,334.1 L408.0,334.1 L407.6,334.6 L406.5,336.0 L406.3,337.4 L399.9,337.8 L381.1,321.0 L377.7,314.6 L379.3,311.6 L375.7,307.5 L374.4,303.5 L376.6,305.9 L380.2,302.0 L385.0,301.9 L392.8,296.3 L402.8,292.8 L401.8,290.2 L405.0,290.9 L407.1,294.4 L410.3,293.1 L410.5,290.6 L412.1,291.0 L413.7,291.7 L414.9,294.5 L422.9,298.4 L427.3,298.2 L427.9,298.9 L428.0,299.1 L427.7,299.7 L427.5,300.2 L425.5,302.0 L430.9,308.2 L435.2,305.5 L433.7,301.8 L440.4,305.0 L444.0,303.9 L444.2,304.1 L444.4,305.4 L444.1,306.1 L442.7,306.9 L442.8,307.2 L443.1,307.7 L445.8,310.2 L448.2,309.1 L455.0,311.8 L458.7,318.8 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">체코</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">중앙유럽 내륙국 — 독일·폴란드·슬로바키아·오스트리아 4국에 둘러싸임</text>
+</svg>

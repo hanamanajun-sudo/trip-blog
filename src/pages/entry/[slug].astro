@@ -5,28 +5,47 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const sorted = posts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
   const paths: any[] = [];
 
-  for (const post of posts) {
-    // 숫자 ID로 접근: /entry/10
-    paths.push({ params: { slug: post.id }, props: { post } });
+  for (let i = 0; i < sorted.length; i++) {
+    const post = sorted[i];
 
-    // 한국어 슬러그로도 접근: /entry/네팔-vs-한국-...
-    const koreanSlug = post.data.entry_slug;
-    if (koreanSlug && koreanSlug !== post.id) {
-      paths.push({ params: { slug: koreanSlug }, props: { post } });
+    const prevPost = sorted[i + 1]
+      ? { title: sorted[i + 1].data.title, url: `/entry/${sorted[i + 1].data.entry_slug || sorted[i + 1].id}` }
+      : null;
+    const nextPost = sorted[i - 1]
+      ? { title: sorted[i - 1].data.title, url: `/entry/${sorted[i - 1].data.entry_slug || sorted[i - 1].id}` }
+      : null;
+
+    // 숫자 ID로 접근: /entry/10
+    paths.push({ params: { slug: post.id }, props: { post, prevPost, nextPost } });
+
+    // 영문/한국어 슬러그로도 접근
+    const altSlug = post.data.entry_slug;
+    if (altSlug && altSlug !== post.id) {
+      paths.push({ params: { slug: altSlug }, props: { post, prevPost, nextPost } });
     }
   }
 
   return paths;
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
 
-// 항상 entry_slug URL을 canonical로 사용 (숫자 ID URL은 중복으로 처리되지 않도록)
+// 항상 entry_slug URL을 canonical로 사용
 const canonicalSlug = post.data.entry_slug || post.id;
 const canonicalUrl = `https://trip.lalalakorea.com/entry/${canonicalSlug}`;
+
+// 본문 첫 이미지 추출 (thumbnail 없을 때 OG로 사용)
+function getFirstImage(body: string): string | null {
+  const m = body.match(/!\[.*?\]\((\/images\/[^\s")]+)/);
+  return m ? m[1] : null;
+}
+const bodyFirstImage = getFirstImage(post.body ?? '');
 ---
 
 <BlogPost
@@ -35,9 +54,12 @@ const canonicalUrl = `https://trip.lalalakorea.com/entry/${canonicalSlug}`;
   category={post.data.category}
   description={post.data.description}
   thumbnail={post.data.thumbnail}
+  ogImage={bodyFirstImage || undefined}
   currentId={post.id}
   headings={headings}
   canonicalUrl={canonicalUrl}
+  prevPost={prevPost}
+  nextPost={nextPost}
 >
   <Content />
 </BlogPost>
