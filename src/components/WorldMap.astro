@@ -1,0 +1,400 @@
+---
+// WorldMap.astro — 지구 상식 시리즈 인터랙티브 세계지도
+---
+
+<div class="world-map-wrapper relative w-full rounded-2xl overflow-hidden border border-blue-100 bg-sky-50 shadow-sm select-none" style="aspect-ratio: 2/1; max-height: 420px;">
+
+  <!-- 지도 SVG -->
+  <svg id="world-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500"
+    class="w-full h-full" aria-label="지구 상식 시리즈 세계지도 — 나라를 클릭해 비교 글로 이동하세요">
+
+    <!-- 바다 -->
+    <rect width="1000" height="500" fill="#e0f2fe"/>
+
+    <!-- 대륙 윤곽 -->
+    <path d="M 33.3 -43.3 L 111.1 -43.3 L 166.7 -137.7 L 250.0 -194.7 L 305.6 -194.7 L 347.2 -108.5 L 319.4 -26.2 L 319.4 66.3 L 347.2 97.6 L 305.6 113.6 L 291.7 142.7 L 277.8 178.2 L 258.3 205.0 L 283.3 227.7 L 286.1 230.5 L 291.7 222.1 L 305.6 216.4 L 319.4 199.2 L 333.3 199.2 L 327.8 205.0 L 311.1 216.4 L 291.7 222.1 L 283.3 230.5 L 272.2 227.7 L 250.0 207.8 L 244.4 199.2 L 241.7 193.3 L 227.8 184.3 L 205.6 184.3 L 188.9 168.9 L 172.2 149.5 L 161.1 139.2 L 155.6 128.6 L 155.6 93.4 L 138.9 71.1 L 111.1 40.4 L 97.2 28.9 L 75.0 40.4 L 50.0 40.4 L 33.3 61.4 L 13.9 80.3 L 36.1 71.1 L 33.3 40.4 L 33.3 10.2 L 33.3 -43.3 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+    <path d="M 291.7 222.1 L 327.8 216.4 L 333.3 224.9 L 347.2 233.3 L 361.1 244.4 L 361.1 255.6 L 377.8 258.3 L 394.4 272.3 L 402.8 283.6 L 394.4 300.8 L 383.3 312.7 L 380.6 315.7 L 372.2 318.7 L 355.6 347.2 L 338.9 364.3 L 327.8 382.6 L 319.4 394.2 L 311.1 410.9 L 305.6 433.7 L 311.1 433.7 L 319.4 433.7 L 319.4 419.7 L 333.3 402.4 L 344.4 378.8 L 355.6 357.3 L 366.7 331.1 L 366.7 306.7 L 366.7 289.3 L 377.8 277.9 L 388.9 261.1 L 361.1 255.6 L 347.2 244.4 L 333.3 236.1 L 327.8 230.5 L 319.4 227.7 L 305.6 216.4 L 291.7 222.1 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+    <path d="M 472.2 139.2 L 477.8 113.6 L 477.8 97.6 L 486.1 97.6 L 494.4 80.3 L 500.0 80.3 L 505.6 80.3 L 522.2 61.4 L 533.3 51.2 L 550.0 40.4 L 561.1 10.2 L 577.8 -26.2 L 583.3 -26.2 L 572.2 3.5 L 583.3 28.9 L 577.8 51.2 L 566.7 61.4 L 561.1 61.4 L 550.0 61.4 L 544.4 61.4 L 541.7 51.2 L 527.8 56.4 L 513.9 56.4 L 513.9 80.3 L 522.2 80.3 L 527.8 80.3 L 538.9 71.1 L 550.0 80.3 L 566.7 89.1 L 577.8 80.3 L 583.3 80.3 L 600.0 105.8 L 594.4 121.2 L 588.9 121.2 L 572.2 128.6 L 561.1 135.7 L 550.0 128.6 L 538.9 135.7 L 533.3 135.7 L 527.8 135.7 L 516.7 135.7 L 500.0 128.6 L 494.4 135.7 L 483.3 135.7 L 472.2 135.7 L 472.2 139.2 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+    <path d="M 450.0 207.8 L 455.6 193.3 L 461.1 181.3 L 466.7 181.3 L 477.8 168.9 L 488.9 162.6 L 500.0 162.6 L 511.1 162.6 L 522.2 162.6 L 533.3 162.6 L 555.6 162.6 L 577.8 162.6 L 594.4 162.6 L 605.6 181.3 L 616.7 199.2 L 622.2 216.4 L 633.3 227.7 L 638.9 216.4 L 622.2 216.4 L 616.7 216.4 L 611.1 210.7 L 605.6 199.2 L 611.1 193.3 L 616.7 187.3 L 622.2 181.3 L 622.2 216.4 L 611.1 227.7 L 600.0 238.9 L 594.4 255.6 L 600.0 277.9 L 605.6 295.0 L 600.0 306.7 L 594.4 318.7 L 583.3 331.1 L 572.2 343.9 L 555.6 350.5 L 550.0 350.5 L 544.4 337.4 L 538.9 324.8 L 533.3 300.8 L 527.8 283.6 L 522.2 272.3 L 516.7 238.9 L 511.1 233.3 L 505.6 233.3 L 500.0 238.9 L 494.4 238.9 L 488.9 233.3 L 483.3 238.9 L 477.8 233.3 L 466.7 227.7 L 455.6 216.4 L 450.0 210.7 L 450.0 207.8 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+    <path d="M 577.8 -26.2 L 600.0 -26.2 L 644.4 -26.2 L 666.7 -62.3 L 694.4 -62.3 L 722.2 -62.3 L 777.8 -62.3 L 833.3 -62.3 L 861.1 -43.3 L 888.9 -43.3 L 944.4 -26.2 L 972.2 10.2 L 986.1 40.4 L 972.2 61.4 L 944.4 71.1 L 930.6 80.3 L 916.7 97.6 L 905.6 113.6 L 877.8 105.8 L 866.7 113.6 L 861.1 128.6 L 850.0 142.7 L 838.9 156.1 L 833.3 168.9 L 816.7 187.3 L 800.0 193.3 L 788.9 210.7 L 777.8 238.9 L 777.8 244.4 L 788.9 261.1 L 800.0 272.3 L 819.4 272.3 L 833.3 277.9 L 847.2 272.3 L 861.1 261.1 L 872.2 244.4 L 883.3 233.3 L 888.9 222.1 L 888.9 199.2 L 883.3 181.3 L 875.0 162.6 L 861.1 149.5 L 850.0 135.7 L 844.4 128.6 L 847.2 113.6 L 847.2 89.1 L 850.0 80.3 L 861.1 71.1 L 872.2 61.4 L 877.8 40.4 L 883.3 28.9 L 888.9 3.5 L 888.9 -26.2 L 861.1 -43.3 L 833.3 -62.3 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+    <path d="M 816.7 312.7 L 822.2 306.7 L 833.3 300.8 L 844.4 295.0 L 855.6 289.3 L 861.1 283.6 L 872.2 283.6 L 883.3 283.6 L 888.9 295.0 L 894.4 306.7 L 900.0 318.7 L 911.1 331.1 L 922.2 343.9 L 922.2 357.3 L 916.7 364.3 L 905.6 364.3 L 888.9 357.3 L 877.8 343.9 L 866.7 331.1 L 861.1 324.8 L 850.0 318.7 L 838.9 318.7 L 822.2 312.7 L 816.7 312.7 Z" fill="#bfdbfe" stroke="#93c5fd" stroke-width="0.8"/>
+
+    <!-- 핀 마커 -->
+    <g id="map-pins">
+      <a href="/entry/영국-vs-한국-비교땅-면적-지도-비교-인구" class="map-pin-link" data-name="영국" data-title="영국 vs 한국 비교(땅 면적, 지도 비교, 인구)" aria-label="영국 비교 글 보기">
+        <circle class="pin-outer" cx="494.4" cy="71.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="494.4" cy="71.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/콩고민주공화국-vs-한국-간략-비교땅-면적-인구-니라공고-화산-위치" class="map-pin-link" data-name="콩고민주공화국" data-title="콩고민주공화국 vs 한국 간략 비교(땅 면적, 인구, 니라공고 화산 위치)" aria-label="콩고민주공화국 비교 글 보기">
+        <circle class="pin-outer" cx="566.7" cy="258.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="566.7" cy="258.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/아이슬란드-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="아이슬란드" data-title="아이슬란드 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="아이슬란드 비교 글 보기">
+        <circle class="pin-outer" cx="447.2" cy="10.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="447.2" cy="10.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/프랑스-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="프랑스" data-title="프랑스 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="프랑스 비교 글 보기">
+        <circle class="pin-outer" cx="505.6" cy="105.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="505.6" cy="105.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/algeria-vs-korea-size-population-travel" class="map-pin-link" data-name="알제리" data-title="알제리 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호 알제리 " aria-label="알제리 비교 글 보기">
+        <circle class="pin-outer" cx="508.3" cy="168.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="508.3" cy="168.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/ivory-coast-vs-korea-size-population-travel" class="map-pin-link" data-name="코트디부아르" data-title="코트디부아르 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호 코" aria-label="코트디부아르 비교 글 보기">
+        <circle class="pin-outer" cx="483.3" cy="227.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="483.3" cy="227.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/오스트리아-vs-한국-비교땅-면적-지도-비교-인구" class="map-pin-link" data-name="오스트리아" data-title="오스트리아 vs 한국 비교(땅 면적, 지도 비교, 인구)" aria-label="오스트리아 비교 글 보기">
+        <circle class="pin-outer" cx="538.9" cy="99.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="538.9" cy="99.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/뉴질랜드-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="뉴질랜드" data-title="뉴질랜드 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="뉴질랜드 비교 글 보기">
+        <circle class="pin-outer" cx="983.3" cy="375.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="983.3" cy="375.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/도미니카공화국-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="도미니카공화국" data-title="도미니카공화국 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="도미니카공화국 비교 글 보기">
+        <circle class="pin-outer" cx="305.6" cy="196.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="305.6" cy="196.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/베트남-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="베트남" data-title="베트남 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="베트남 비교 글 보기">
+        <circle class="pin-outer" cx="800.0" cy="210.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="800.0" cy="210.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/australia-vs-korea-size-population-travel" class="map-pin-link" data-name="호주" data-title="호주 vs 한국 크기 비교 (인구, 시차,  여행 정보, 잡상식) - 한국 면적의 무려 77배 ㅎㄷ" aria-label="호주 비교 글 보기">
+        <circle class="pin-outer" cx="869.4" cy="327.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="869.4" cy="327.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/캐나다-vs-한국-간략-비교-땅-면적-인구-등" class="map-pin-link" data-name="캐나다" data-title="캐나다 vs 한국 간략 비교 (땅 면적, 인구 등)" aria-label="캐나다 비교 글 보기">
+        <circle class="pin-outer" cx="233.3" cy="61.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="233.3" cy="61.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/러시아-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="러시아" data-title="러시아 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="러시아 비교 글 보기">
+        <circle class="pin-outer" cx="666.7" cy="40.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="666.7" cy="40.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/saudi-arabia-vs-korea-size-population-travel" class="map-pin-link" data-name="사우디아라비아" data-title="사우디아라비아 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2034 월드컵 개최국 사우디아" aria-label="사우디아라비아 비교 글 보기">
+        <circle class="pin-outer" cx="625.0" cy="181.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="625.0" cy="181.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/czechia-vs-korea-size-population-travel" class="map-pin-link" data-name="체코" data-title="체코 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 본선 진출국 체코 알아보" aria-label="체코 비교 글 보기">
+        <circle class="pin-outer" cx="543.1" cy="90.0" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="543.1" cy="90.0" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/스위스-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="스위스" data-title="스위스 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="스위스 비교 글 보기">
+        <circle class="pin-outer" cx="522.2" cy="101.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="522.2" cy="101.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/중국-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="중국" data-title="중국 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="중국 비교 글 보기">
+        <circle class="pin-outer" cx="791.7" cy="146.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="791.7" cy="146.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/모로코-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="모로코" data-title="모로코 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="모로코 비교 글 보기">
+        <circle class="pin-outer" cx="480.6" cy="156.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="480.6" cy="156.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/네팔-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="네팔" data-title="네팔 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="네팔 비교 글 보기">
+        <circle class="pin-outer" cx="733.3" cy="168.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="733.3" cy="168.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/하와이-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="하와이" data-title="하와이 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="하와이 비교 글 보기">
+        <circle class="pin-outer" cx="62.5" cy="191.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="62.5" cy="191.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/curacao-vs-korea-size-population-travel" class="map-pin-link" data-name="쿠라사오" data-title="쿠라사오 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 사상 첫 본선 진출 " aria-label="쿠라사오 비교 글 보기">
+        <circle class="pin-outer" cx="308.3" cy="215.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="308.3" cy="215.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/ecuador-vs-korea-size-population-travel" class="map-pin-link" data-name="에콰도르" data-title="에콰도르 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 참가국 에콰도르 알아" aria-label="에콰도르 비교 글 보기">
+        <circle class="pin-outer" cx="283.3" cy="255.6" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="283.3" cy="255.6" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/터키-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="터키" data-title="터키 vs 한국 비교(튀르키예 땅 면적, 지도 비교, 인구수)" aria-label="터키 비교 글 보기">
+        <circle class="pin-outer" cx="597.2" cy="132.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="597.2" cy="132.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/핀란드-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="핀란드" data-title="핀란드 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="핀란드 비교 글 보기">
+        <circle class="pin-outer" cx="572.2" cy="16.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="572.2" cy="16.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/레바논-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안" class="map-pin-link" data-name="레바논" data-title="레바논 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안)" aria-label="레바논 비교 글 보기">
+        <circle class="pin-outer" cx="599.7" cy="149.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="599.7" cy="149.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/스웨덴-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="스웨덴" data-title="스웨덴 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="스웨덴 비교 글 보기">
+        <circle class="pin-outer" cx="550.0" cy="28.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="550.0" cy="28.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/이스라엘-vs-한국-간략-비교땅-면적-인구-팔레스타인-가자-위치" class="map-pin-link" data-name="이스라엘" data-title="이스라엘 vs 한국 간략 비교(땅 면적, 인구, 팔레스타인 가자 위치)" aria-label="이스라엘 비교 글 보기">
+        <circle class="pin-outer" cx="596.7" cy="157.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="596.7" cy="157.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/iraq-vs-korea-size-population-travel" class="map-pin-link" data-name="이라크" data-title="이라크 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 본선 진출 이라크 알아" aria-label="이라크 비교 글 보기">
+        <circle class="pin-outer" cx="622.2" cy="152.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="622.2" cy="152.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/포르투갈-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="포르투갈" data-title="포르투갈 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="포르투갈 비교 글 보기">
+        <circle class="pin-outer" cx="477.8" cy="130.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="477.8" cy="130.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/싱가포르-vs-한국-간략-비교-땅-면적-인구-지도-등" class="map-pin-link" data-name="싱가포르" data-title="싱가포르 vs 한국 간략 비교 (땅 면적, 인구, 지도 등)" aria-label="싱가포르 비교 글 보기">
+        <circle class="pin-outer" cx="788.9" cy="246.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="788.9" cy="246.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/brazil-vs-korea-size-population-travel" class="map-pin-link" data-name="브라질" data-title="브라질 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 최다 우승국 브라질 알" aria-label="브라질 비교 글 보기">
+        <circle class="pin-outer" cx="358.3" cy="292.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="358.3" cy="292.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/캘리포니아-vs-한국-땅-면적-지도-크기-비교-인구수" class="map-pin-link" data-name="캘리포니아" data-title="캘리포니아 vs 한국 (땅 면적, 지도 크기 비교, 인구수)" aria-label="캘리포니아 비교 글 보기">
+        <circle class="pin-outer" cx="169.4" cy="141.0" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="169.4" cy="141.0" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/tunisia-vs-korea-size-population-travel" class="map-pin-link" data-name="튀니지" data-title="튀니지 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호, 한니발" aria-label="튀니지 비교 글 보기">
+        <circle class="pin-outer" cx="525.0" cy="149.5" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="525.0" cy="149.5" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/ghana-vs-korea-size-population-travel" class="map-pin-link" data-name="가나" data-title="가나 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호 가나 알아" aria-label="가나 비교 글 보기">
+        <circle class="pin-outer" cx="502.8" cy="227.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="502.8" cy="227.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/mexico-vs-korea-size-population-travel" class="map-pin-link" data-name="멕시코" data-title="멕시코 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 개최국 멕시코 알아보기" aria-label="멕시코 비교 글 보기">
+        <circle class="pin-outer" cx="216.7" cy="181.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="216.7" cy="181.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/그리스-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="그리스" data-title="그리스 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="그리스 비교 글 보기">
+        <circle class="pin-outer" cx="561.1" cy="132.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="561.1" cy="132.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/수리남-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="수리남" data-title="수리남 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="수리남 비교 글 보기">
+        <circle class="pin-outer" cx="344.4" cy="238.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="344.4" cy="238.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/대만-vs-한국-간략-비교-땅-면적-인구-등" class="map-pin-link" data-name="대만" data-title="대만 vs 한국 간략 비교 (땅 면적, 인구 등)" aria-label="대만 비교 글 보기">
+        <circle class="pin-outer" cx="836.1" cy="181.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="836.1" cy="181.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/이탈리아-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="이탈리아" data-title="이탈리아 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="이탈리아 비교 글 보기">
+        <circle class="pin-outer" cx="533.3" cy="117.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="533.3" cy="117.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/iran-vs-korea-size-population-travel" class="map-pin-link" data-name="이란" data-title="이란 vs 한국 크기 비교, 지도 위치 및 인구, 여행 정보 등 (미국과 전쟁 중인 이란을 알아보기" aria-label="이란 비교 글 보기">
+        <circle class="pin-outer" cx="647.2" cy="156.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="647.2" cy="156.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/미얀마-vs-한국-간략-비교-땅-면적-인구수-위치-등" class="map-pin-link" data-name="미얀마" data-title="미얀마 vs 한국 간략 비교 (땅 면적, 인구수, 위치 등)" aria-label="미얀마 비교 글 보기">
+        <circle class="pin-outer" cx="766.7" cy="202.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="766.7" cy="202.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/우크라이나-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="우크라이나" data-title="우크라이나 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="우크라이나 비교 글 보기">
+        <circle class="pin-outer" cx="588.9" cy="93.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="588.9" cy="93.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/카타르-vs-한국-비교땅-면적-지도-비교-인구수-2022-월드컵-개최국" class="map-pin-link" data-name="카타르" data-title="카타르 vs 한국 비교(땅 면적, 지도 비교, 인구수)-2022 월드컵 개최국" aria-label="카타르 비교 글 보기">
+        <circle class="pin-outer" cx="642.2" cy="177.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="642.2" cy="177.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/cape-verde-vs-korea-size-population-travel" class="map-pin-link" data-name="카보베르데" data-title="카보베르데 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 사상 첫 본선 진출" aria-label="카보베르데 비교 글 보기">
+        <circle class="pin-outer" cx="433.3" cy="205.0" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="433.3" cy="205.0" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/uzbekistan-vs-korea-size-population-travel" class="map-pin-link" data-name="우즈베키스탄" data-title="우즈베키스탄 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 사상 첫 본선 진" aria-label="우즈베키스탄 비교 글 보기">
+        <circle class="pin-outer" cx="675.0" cy="124.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="675.0" cy="124.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/senegal-vs-korea-size-population-travel" class="map-pin-link" data-name="세네갈" data-title="세네갈 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호 세네갈 " aria-label="세네갈 비교 글 보기">
+        <circle class="pin-outer" cx="461.1" cy="210.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="461.1" cy="210.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/일본-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안" class="map-pin-link" data-name="일본" data-title="일본 vs 한국 비교(땅 면적, 지도, 섬 구성, 인구수, 여행, 날씨)" aria-label="일본 비교 글 보기">
+        <circle class="pin-outer" cx="883.3" cy="142.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="883.3" cy="142.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/통가-vs-한국-비교위치-지도-땅-면적-인구수" class="map-pin-link" data-name="통가" data-title="통가 vs 한국 비교(위치, 지도, 땅 면적, 인구수)" aria-label="통가 비교 글 보기">
+        <circle class="pin-outer" cx="990" cy="310" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="990" cy="310" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/남아프리카공화국-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="남아프리카공화국" data-title="남아프리카공화국 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="남아프리카공화국 비교 글 보기">
+        <circle class="pin-outer" cx="569.4" cy="334.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="569.4" cy="334.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/티베트-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="티베트" data-title="티베트 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="티베트 비교 글 보기">
+        <circle class="pin-outer" cx="744.4" cy="156.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="744.4" cy="156.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/예멘-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="예멘" data-title="예멘 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="예멘 비교 글 보기">
+        <circle class="pin-outer" cx="633.3" cy="205.0" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="633.3" cy="205.0" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/벨라루스-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="벨라루스" data-title="벨라루스 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="벨라루스 비교 글 보기">
+        <circle class="pin-outer" cx="577.8" cy="75.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="577.8" cy="75.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/panama-vs-korea-size-population-travel" class="map-pin-link" data-name="파나마" data-title="파나마 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 참가국 파나마 알아보기" aria-label="파나마 비교 글 보기">
+        <circle class="pin-outer" cx="277.8" cy="224.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="277.8" cy="224.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/jordan-vs-korea-size-population-travel" class="map-pin-link" data-name="요르단" data-title="요르단 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 역사상 첫 본선 진출 " aria-label="요르단 비교 글 보기">
+        <circle class="pin-outer" cx="602.8" cy="159.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="602.8" cy="159.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/아프카니스탄-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="아프가니스탄" data-title="아프가니스탄 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="아프가니스탄 비교 글 보기">
+        <circle class="pin-outer" cx="686.1" cy="152.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="686.1" cy="152.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/netherlands-vs-korea-size-population-travel" class="map-pin-link" data-name="네덜란드" data-title="네덜란드 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 우승후보 네덜란드 알" aria-label="네덜란드 비교 글 보기">
+        <circle class="pin-outer" cx="514.7" cy="79.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="514.7" cy="79.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/colombia-vs-korea-size-population-travel" class="map-pin-link" data-name="콜롬비아" data-title="콜롬비아 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 참가국 콜롬비아 알아" aria-label="콜롬비아 비교 글 보기">
+        <circle class="pin-outer" cx="294.4" cy="238.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="294.4" cy="238.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/belgium-vs-korea-size-population-travel" class="map-pin-link" data-name="벨기에" data-title="벨기에 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 유럽 축구 강호인데 한국보다 훨씬 작다" aria-label="벨기에 비교 글 보기">
+        <circle class="pin-outer" cx="512.5" cy="87.0" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="512.5" cy="87.0" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/germany-vs-korea-size-population-travel" class="map-pin-link" data-name="독일" data-title="독일 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 우승후보 독일 알아보기" aria-label="독일 비교 글 보기">
+        <circle class="pin-outer" cx="527.8" cy="84.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="527.8" cy="84.8" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/크로아티아-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="크로아티아" data-title="크로아티아 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="크로아티아 비교 글 보기">
+        <circle class="pin-outer" cx="543.1" cy="109.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="543.1" cy="109.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/paraguay-vs-korea-size-population-travel" class="map-pin-link" data-name="파라과이" data-title="파라과이 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 참가국 파라과이 알아" aria-label="파라과이 비교 글 보기">
+        <circle class="pin-outer" cx="338.9" cy="315.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="338.9" cy="315.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/스페인-vs-한국-비교땅-면적-지도-비교-인구" class="map-pin-link" data-name="스페인" data-title="스페인 vs 한국 비교(땅 면적, 지도 비교, 인구)" aria-label="스페인 비교 글 보기">
+        <circle class="pin-outer" cx="491.7" cy="128.6" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="491.7" cy="128.6" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/아이티-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="아이티" data-title="아이티 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="아이티 비교 글 보기">
+        <circle class="pin-outer" cx="300.0" cy="196.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="300.0" cy="196.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/필리핀-vs-한국-비교땅-면적-지도-비교-인구수-여행-치안" class="map-pin-link" data-name="필리핀" data-title="필리핀 vs 한국 비교(땅 면적, 지도 비교, 인구수, 여행, 치안)" aria-label="필리핀 비교 글 보기">
+        <circle class="pin-outer" cx="838.9" cy="216.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="838.9" cy="216.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/홍콩-vs-한국-비교땅-면적-지도-비교-인구" class="map-pin-link" data-name="홍콩" data-title="홍콩 vs 한국 비교(땅 면적, 지도 비교, 인구)" aria-label="홍콩 비교 글 보기">
+        <circle class="pin-outer" cx="817.2" cy="186.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="817.2" cy="186.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/몬테네그로-vs-한국-비교땅-면적-지도-위치-인구수-여행-치안-물가" class="map-pin-link" data-name="몬테네그로" data-title="몬테네그로 vs 한국 비교(땅 면적, 지도 위치, 인구수, 여행, 치안, 물가)" aria-label="몬테네그로 비교 글 보기">
+        <circle class="pin-outer" cx="553.9" cy="118.6" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="553.9" cy="118.6" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/scotland-vs-korea-size-population-travel" class="map-pin-link" data-name="스코틀랜드" data-title="스코틀랜드 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 본선 진출 스코틀랜" aria-label="스코틀랜드 비교 글 보기">
+        <circle class="pin-outer" cx="488.9" cy="56.4" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="488.9" cy="56.4" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/usa-vs-korea-size-population-travel" class="map-pin-link" data-name="미국" data-title="미국 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 공동 개최국 미국 알아보" aria-label="미국 비교 글 보기">
+        <circle class="pin-outer" cx="227.8" cy="135.7" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="227.8" cy="135.7" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/pakistan-vs-korea-size-population-travel" class="map-pin-link" data-name="파키스탄" data-title="파키스탄 vs 한국 비교 (지도 위치, 땅 면적, 인구수, 여행)" aria-label="파키스탄 비교 글 보기">
+        <circle class="pin-outer" cx="694.4" cy="162.6" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="694.4" cy="162.6" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/폴란드-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="폴란드" data-title="폴란드 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="폴란드 비교 글 보기">
+        <circle class="pin-outer" cx="555.6" cy="80.3" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="555.6" cy="80.3" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/우루과이-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="우루과이" data-title="우루과이 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="우루과이 비교 글 보기">
+        <circle class="pin-outer" cx="344.4" cy="347.2" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="344.4" cy="347.2" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/노르웨이-vs-한국-비교땅-면적-지도-비교-인구수" class="map-pin-link" data-name="노르웨이" data-title="노르웨이 vs 한국 비교(땅 면적, 지도 비교, 인구수)" aria-label="노르웨이 비교 글 보기">
+        <circle class="pin-outer" cx="527.8" cy="28.9" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="527.8" cy="28.9" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/egypt-vs-korea-size-population-travel" class="map-pin-link" data-name="이집트" data-title="이집트 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 아프리카 강호 이집트 " aria-label="이집트 비교 글 보기">
+        <circle class="pin-outer" cx="583.3" cy="172.1" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="583.3" cy="172.1" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/아르헨티나-vs-한국-비교-땅-면적-인구-등" class="map-pin-link" data-name="아르헨티나" data-title="아르헨티나 vs 한국 간략 비교 (땅 면적, 인구 등)" aria-label="아르헨티나 비교 글 보기">
+        <circle class="pin-outer" cx="322.2" cy="350.5" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="322.2" cy="350.5" r="4" fill="#2563eb"/>
+      </a>
+      <a href="/entry/bosnia-vs-korea-size-population-travel" class="map-pin-link" data-name="보스니아" data-title="보스니아 vs 한국 크기 비교 (인구, 시차, 여행 정보) - 2026 월드컵 본선 진출 보스니아 " aria-label="보스니아 비교 글 보기">
+        <circle class="pin-outer" cx="549.4" cy="112.8" r="7" fill="#3b82f6" opacity="0.25"/>
+        <circle class="pin-dot" cx="549.4" cy="112.8" r="4" fill="#2563eb"/>
+      </a>
+    </g>
+  </svg>
+
+  <!-- 호버 툴팁 -->
+  <div id="map-tooltip"
+    class="pointer-events-none absolute z-20 hidden bg-white rounded-xl shadow-xl border border-blue-100 px-4 py-3 max-w-[200px]"
+    style="transform: translate(-50%, -110%);"
+  >
+    <p id="tooltip-name" class="text-xs font-bold text-blue-700"></p>
+    <p id="tooltip-title" class="text-[11px] text-muted-foreground mt-0.5 leading-snug line-clamp-2"></p>
+    <p class="text-[10px] text-primary mt-1.5 font-medium">자세히 보기 →</p>
+  </div>
+</div>
+
+<!-- 카운터 뱃지 -->
+<div class="mt-3 flex items-center justify-between px-1">
+  <p class="text-xs text-muted-foreground">
+    <span class="font-semibold text-blue-700">75개</span> 나라를 한국과 비교했어요
+  </p>
+  <a href="/category/지구-상식" class="text-xs text-primary font-medium hover:underline flex items-center gap-1">
+    전체 목록 보기 <i class="ph ph-arrow-right text-xs" aria-hidden="true"></i>
+  </a>
+</div>
+
+<style>
+  .pin-outer { transition: r 0.2s, opacity 0.2s; }
+  .pin-dot   { transition: r 0.2s; }
+  .map-pin-link:hover .pin-outer { r: 11; opacity: 0.35; }
+  .map-pin-link:hover .pin-dot   { r: 5.5; fill: #1d4ed8; }
+  .map-pin-link:focus .pin-dot   { fill: #1d4ed8; outline: none; }
+
+  @keyframes pulse-ring {
+    0%   { r: 4;  opacity: 0.6; }
+    70%  { r: 10; opacity: 0; }
+    100% { r: 10; opacity: 0; }
+  }
+  /* 첫 로드 시 펄스 (첫 5개 핀만) */
+  .map-pin-link:nth-child(-n+5) .pin-outer {
+    animation: pulse-ring 2s ease-out 1;
+  }
+</style>
+
+<script is:inline>
+(function() {
+  var tooltip = document.getElementById('map-tooltip');
+  var tName   = document.getElementById('tooltip-name');
+  var tTitle  = document.getElementById('tooltip-title');
+  var wrapper = document.querySelector('.world-map-wrapper');
+  if (!tooltip || !wrapper) return;
+
+  document.querySelectorAll('.map-pin-link').forEach(function(el) {
+    el.addEventListener('mouseenter', function(e) {
+      var rect = wrapper.getBoundingClientRect();
+      var svgEl = wrapper.querySelector('svg');
+      var svgRect = svgEl.getBoundingClientRect();
+
+      // SVG viewBox(0~1000, 0~500) → 실제 화면 좌표 변환
+      var dot = el.querySelector('.pin-dot');
+      var cx = parseFloat(dot.getAttribute('cx'));
+      var cy = parseFloat(dot.getAttribute('cy'));
+      var scaleX = svgRect.width / 1000;
+      var scaleY = svgRect.height / 500;
+      var screenX = svgRect.left - rect.left + cx * scaleX;
+      var screenY = svgRect.top  - rect.top  + cy * scaleY;
+
+      tName.textContent  = el.dataset.name;
+      tTitle.textContent = el.dataset.title;
+      tooltip.style.left = screenX + 'px';
+      tooltip.style.top  = screenY + 'px';
+      tooltip.classList.remove('hidden');
+    });
+    el.addEventListener('mouseleave', function() {
+      tooltip.classList.add('hidden');
+    });
+  });
+})();
+</script>
