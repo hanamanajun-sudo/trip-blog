@@ -20,34 +20,119 @@ export async function getStaticPaths() {
 }
 
 const { posts, category } = Astro.props;
+
+function getFirstImage(body: string): string | null {
+  const m = body.match(/!\[.*?\]\((\/images\/[^\s")]+)/);
+  return m ? m[1] : null;
+}
+
+const categoryIcons: Record<string, string> = {
+  '해외 여행': 'ph-globe',
+  '국내 여행': 'ph-map-pin',
+  '나라 정보': 'ph-flag',
+  '역사': 'ph-book-open',
+  '여행': 'ph-airplane',
+  '캠핑': 'ph-tent',
+  '커피': 'ph-coffee',
+  '지구 상식': 'ph-planet',
+  '지구 위기& 재난 대비': 'ph-warning',
+  '유튜버 되기 자료': 'ph-video-camera',
+};
+const categoryGradients: Record<string, string> = {
+  '해외 여행': 'from-sky-400 to-blue-600',
+  '국내 여행': 'from-emerald-400 to-teal-600',
+  '나라 정보': 'from-violet-400 to-purple-600',
+  '역사': 'from-amber-400 to-orange-600',
+  '여행': 'from-cyan-400 to-sky-600',
+  '캠핑': 'from-green-400 to-emerald-600',
+  '커피': 'from-yellow-600 to-amber-800',
+  '지구 상식': 'from-blue-400 to-indigo-600',
+  '지구 위기& 재난 대비': 'from-red-400 to-rose-600',
+  '유튜버 되기 자료': 'from-pink-400 to-fuchsia-600',
+};
+const icon = categoryIcons[category] || 'ph-tag';
+const gradient = categoryGradients[category] || 'from-sky-400 to-blue-600';
 ---
 
-<BaseLayout title={`${category} | lalalakorea`}>
+<BaseLayout
+  title={`${category} | lalalakorea`}
+  description={`lalalakorea의 ${category} 카테고리 — 총 ${posts.length}개의 글`}
+>
+  <!-- 브레드크럼 -->
+  <nav aria-label="현재 위치" class="mb-5">
+    <ol class="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+      <li><a href="/" class="hover:text-primary transition-colors">홈</a></li>
+      <li aria-hidden="true" class="opacity-50">/</li>
+      <li class="text-foreground/70">{category}</li>
+    </ol>
+  </nav>
 
-  <div class="mb-8">
-    <a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors">← 전체 글</a>
-    <h1 class="text-3xl font-bold tracking-tight mt-2">{category}</h1>
-    <p class="text-muted-foreground mt-1">{posts.length}개의 글</p>
+  <!-- 카테고리 헤더 배너 -->
+  <div class={`rounded-2xl bg-gradient-to-br ${gradient} text-white px-8 py-10 mb-8 shadow-md`}>
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+        <i class={`ph ${icon} text-3xl`} aria-hidden="true"></i>
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">{category}</h1>
+        <p class="text-white/80 mt-1 text-sm">총 {posts.length}개의 글</p>
+      </div>
+    </div>
   </div>
 
-  <div class="grid gap-4">
+  <!-- 글 목록 -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
     {posts.map(post => {
       const formattedDate = new Intl.DateTimeFormat('ko-KR', {
         year: 'numeric', month: 'long', day: 'numeric',
       }).format(new Date(post.data.date));
+      const thumbnail = post.data.thumbnail || getFirstImage(post.body ?? '');
+      const href = `/entry/${post.data.entry_slug || post.id}`;
 
       return (
         <a
-          href={`/entry/${post.data.entry_slug || post.id}`}
-          class="group flex flex-col gap-2 rounded-lg border border-border bg-background p-5 shadow-sm transition-all hover:shadow-md hover:border-primary/30"
+          href={href}
+          class="group flex flex-col rounded-xl border border-border bg-card overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 hover:border-primary/40"
         >
-          <h2 class="text-lg font-semibold leading-snug tracking-tight group-hover:text-primary/80 transition-colors">
-            {post.data.title}
-          </h2>
-          <time class="text-xs text-muted-foreground">{formattedDate}</time>
+          {thumbnail ? (
+            <div class="overflow-hidden bg-muted h-36">
+              <img
+                src={thumbnail}
+                alt={post.data.title}
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div class={`flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${gradient} h-28`}>
+              <i class={`ph ${icon} text-4xl text-white/80`} aria-hidden="true"></i>
+            </div>
+          )}
+          <div class="flex flex-col gap-2 p-5 flex-1">
+            <h2 class="text-base font-bold leading-snug tracking-tight group-hover:text-primary transition-colors line-clamp-2">
+              {post.data.title}
+            </h2>
+            {post.data.description && (
+              <p class="text-sm text-muted-foreground line-clamp-2 flex-1">{post.data.description}</p>
+            )}
+            <div class="flex items-center justify-between mt-2">
+              <time class="flex items-center gap-1 text-xs text-muted-foreground">
+                <i class="ph ph-calendar text-xs" aria-hidden="true"></i>
+                {formattedDate}
+              </time>
+              <i class="ph ph-arrow-right text-sm text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true"></i>
+            </div>
+          </div>
         </a>
       );
     })}
   </div>
 
+  <!-- 전체 목록 링크 -->
+  <div class="mt-10 text-center">
+    <a href="/" class="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-5 py-2.5 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all">
+      <i class="ph ph-arrow-left" aria-hidden="true"></i>
+      전체 글 보기
+    </a>
+  </div>
 </BaseLayout>

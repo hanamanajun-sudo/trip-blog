@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="페이지를 찾을 수 없어요 | lalalakorea"
+  description="요청하신 페이지를 찾을 수 없습니다. 홈으로 돌아가거나 검색을 이용해 보세요."
+  noindex={true}
+>
+  <div class="flex flex-col items-center justify-center text-center py-24 px-4">
+    <div class="text-8xl font-black text-primary/20 leading-none select-none mb-4">404</div>
+    <i class="ph ph-map-trifold text-5xl text-accent/60 mb-6" aria-hidden="true"></i>
+    <h1 class="text-2xl font-bold text-foreground mb-3">페이지를 찾을 수 없어요</h1>
+    <p class="text-muted-foreground text-base max-w-sm mb-8">
+      주소가 바뀌었거나 삭제된 페이지입니다.<br />
+      홈으로 돌아가거나 검색으로 원하는 글을 찾아보세요.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 transition-colors"
+      >
+        <i class="ph ph-house" aria-hidden="true"></i>
+        홈으로 가기
+      </a>
+      <a
+        href="/search"
+        class="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-foreground hover:bg-primary/5 hover:border-primary/30 transition-all"
+      >
+        <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+        검색하기
+      </a>
+    </div>
+  </div>
+</BaseLayout>

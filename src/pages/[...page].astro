@@ -66,15 +66,15 @@ const pageTitle = isFirstPage
       <div class="absolute inset-0 opacity-10" style="background-image: url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");"></div>
       <div class="relative">
         <div class="flex items-center gap-3 mb-3">
-          <i class="ph ph-airplane-takeoff text-4xl text-white/90"></i>
+          <i class="ph ph-airplane-takeoff text-4xl text-white/90" aria-hidden="true"></i>
           <h1 class="text-4xl font-bold tracking-tight">lalalakorea</h1>
         </div>
         <p class="text-lg text-white/80 mb-6">세계 여행 · 나라 정보 · 역사 이야기</p>
         <div class="flex items-center gap-2 text-sm text-white/70">
-          <i class="ph ph-article text-base"></i>
+          <i class="ph ph-article text-base" aria-hidden="true"></i>
           <span>총 {page.total}개의 글</span>
           <span class="mx-2">·</span>
-          <i class="ph ph-tag text-base"></i>
+          <i class="ph ph-tag text-base" aria-hidden="true"></i>
           <span>{categories.length}개 카테고리</span>
         </div>
       </div>
@@ -95,7 +95,7 @@ const pageTitle = isFirstPage
       href="/"
       class="inline-flex items-center gap-1.5 rounded-full bg-primary text-white px-4 py-1.5 text-sm font-medium shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
     >
-      <i class="ph ph-squares-four text-sm"></i>
+      <i class="ph ph-squares-four text-sm" aria-hidden="true"></i>
       전체
     </a>
     {categories.map((cat: string) => (
@@ -142,7 +142,7 @@ const pageTitle = isFirstPage
                   {post.data.category}
                 </span>
                 <span class="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent px-2.5 py-0.5 text-xs font-semibold">
-                  <i class="ph ph-star text-xs"></i>
+                  <i class="ph ph-star text-xs" aria-hidden="true"></i>
                   최신글
                 </span>
               </div>
@@ -154,11 +154,11 @@ const pageTitle = isFirstPage
               )}
               <div class="flex items-center justify-between">
                 <time class="flex items-center gap-1 text-xs text-muted-foreground">
-                  <i class="ph ph-calendar text-xs"></i>
+                  <i class="ph ph-calendar text-xs" aria-hidden="true"></i>
                   {formattedDate}
                 </time>
                 <span class="flex items-center gap-1 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  읽기 <i class="ph ph-arrow-right"></i>
+                  읽기 <i class="ph ph-arrow-right" aria-hidden="true"></i>
                 </span>
               </div>
             </div>
@@ -193,10 +193,10 @@ const pageTitle = isFirstPage
               )}
               <div class="flex items-center justify-between mt-2">
                 <time class="flex items-center gap-1 text-xs text-muted-foreground">
-                  <i class="ph ph-calendar text-xs"></i>
+                  <i class="ph ph-calendar text-xs" aria-hidden="true"></i>
                   {formattedDate}
                 </time>
-                <i class="ph ph-arrow-right text-sm text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                <i class="ph ph-arrow-right text-sm text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" aria-hidden="true"></i>
               </div>
             </div>
           </a>
@@ -214,12 +214,12 @@ const pageTitle = isFirstPage
           href={page.url.prev}
           class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
         >
-          <i class="ph ph-arrow-left"></i>
+          <i class="ph ph-arrow-left" aria-hidden="true"></i>
           이전
         </a>
       ) : (
         <span class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed opacity-50">
-          <i class="ph ph-arrow-left"></i>
+          <i class="ph ph-arrow-left" aria-hidden="true"></i>
           이전
         </span>
       )}
@@ -254,12 +254,12 @@ const pageTitle = isFirstPage
           class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
         >
           다음
-          <i class="ph ph-arrow-right"></i>
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </a>
       ) : (
         <span class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed opacity-50">
           다음
-          <i class="ph ph-arrow-right"></i>
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </span>
       )}
     </nav>
