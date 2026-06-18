@@ -29,7 +29,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>lalalakorea</title>
+    <title>trip.lalalakorea</title>
     <link>${SITE}</link>
     <description>세계 여행, 나라 정보, 역사 이야기를 담은 블로그</description>
     <language>ko</language>
