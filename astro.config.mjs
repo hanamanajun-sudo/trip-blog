@@ -1,15 +1,16 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
-import react from '@astrojs/react';
+import rehypeImgSize from './src/plugins/rehype-img-size.mjs';
 
 export default defineConfig({
   site: 'https://trip.lalalakorea.com',
   trailingSlash: 'never',
   output: 'static',
   adapter: vercel(),
-  integrations: [tailwind(), react()],
+  integrations: [tailwind()],
   markdown: {
+    rehypePlugins: [rehypeImgSize],
     shikiConfig: {
       theme: 'github-light',
     },
