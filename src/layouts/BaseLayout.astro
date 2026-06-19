@@ -30,8 +30,36 @@ function toAbsolute(img?: string): string {
 }
 const siteOgImage = toAbsolute(ogImage);
 const canonicalURL = canonicalUrl ? new URL(canonicalUrl) : new URL(Astro.url.pathname, Astro.site);
-// jsonLd를 배열로 정규화 (여러 스키마 동시 출력 지원)
-const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+// 사이트 전역 스키마: WebSite(사이트링크 검색창) + Organization(지식그래프)
+const siteSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'trip.lalalakorea',
+    url: SITE,
+    description: '우리나라와 비교해서 알아보는 세계 여행·나라 정보·역사 이야기',
+    inLanguage: 'ko-KR',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE}/search?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'trip.lalalakorea',
+    url: SITE,
+    logo: `${SITE}/og-default.png`,
+    description: '세계 여행, 나라 정보, 역사 이야기를 담은 블로그',
+  },
+];
+// jsonLd를 배열로 정규화 (전역 스키마 + 페이지별 스키마 동시 출력)
+const jsonLdList = [
+  ...siteSchemas,
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 
 // 네비/푸터용 카테고리 목록 (글 수 많은 순)
 import { getCollection } from 'astro:content';
@@ -97,6 +125,9 @@ const totalPostCount = _posts.length;
   <!-- Sitemap -->
   <link rel="sitemap" href="/sitemap-index.xml" />
 
+  <!-- 페이지별 추가 head 태그 (rel prev/next 등) -->
+  <slot name="head" />
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VE98EN4HB0" is:inline></script>
   <script is:inline>
@@ -137,13 +168,13 @@ const totalPostCount = _posts.length;
         </a>
 
         <!-- 카테고리 드롭다운 -->
-        <div class="relative group">
-          <button aria-label="카테고리" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
+        <div class="relative group" id="cat-dropdown">
+          <button id="cat-toggle" aria-label="카테고리" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all">
             <i class="ph ph-squares-four text-base" aria-hidden="true"></i>
             <span class="hidden sm:inline">카테고리</span>
             <i class="ph ph-caret-down text-xs hidden sm:inline" aria-hidden="true"></i>
           </button>
-          <div class="absolute right-0 top-full pt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all z-50">
+          <div id="cat-menu" class="absolute right-0 top-full pt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all z-50">
             <ul class="rounded-xl border border-border bg-white shadow-xl py-2 max-h-[70vh] overflow-y-auto">
               {navCategories.map((cat) => (
                 <li>
@@ -244,6 +275,30 @@ const totalPostCount = _posts.length;
       </div>
     </div>
   </footer>
+
+  <!-- 모바일 카테고리 드롭다운: 터치에서도 열리도록 클릭 토글 -->
+  <style is:inline>
+    #cat-menu.is-open { opacity: 1 !important; visibility: visible !important; }
+  </style>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('cat-toggle');
+      var menu = document.getElementById('cat-menu');
+      var wrap = document.getElementById('cat-dropdown');
+      if (!btn || !menu || !wrap) return;
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = menu.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function(e) {
+        if (!wrap.contains(e.target)) {
+          menu.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
 
   <!-- Fuse.js 검색 (CDN, 빌드 과정에 영향 없음) -->
   <script is:inline define:vars={{ totalPostCount }}>window.__POST_COUNT__ = totalPostCount;</script>

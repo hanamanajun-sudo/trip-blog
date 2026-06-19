@@ -61,6 +61,8 @@ const pageTitle = isFirstPage
 ---
 
 <BaseLayout title={pageTitle}>
+  {page.url.prev && <link slot="head" rel="prev" href={`https://trip.lalalakorea.com${page.url.prev}`} />}
+  {page.url.next && <link slot="head" rel="next" href={`https://trip.lalalakorea.com${page.url.next}`} />}
 
   <!-- 히어로 섹션 (1페이지만) -->
   {isFirstPage && (

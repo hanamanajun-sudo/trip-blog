@@ -1,7 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 User-agent: Yeti
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 Sitemap: https://trip.lalalakorea.com/sitemap-index.xml
