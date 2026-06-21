@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1000" viewBox="0 0 760 1000" font-family="'Noto Sans KR', sans-serif">
+  <!-- 사막(전체 배경) -->
+  <rect width="760" height="1000" fill="#E6CE9C"/>
+  <text x="150" y="430" font-size="26" fill="#B79A5E" font-weight="700" opacity="0.8">사 막</text>
+  <text x="560" y="540" font-size="26" fill="#B79A5E" font-weight="700" opacity="0.8">사 막</text>
+
+  <!-- 지중해 -->
+  <rect width="760" height="92" fill="#7FB6D8"/>
+  <text x="40" y="55" font-size="24" fill="#1c4e6b" font-weight="700">지중해</text>
+
+  <!-- 홍해 -->
+  <path d="M 760 250 L 690 360 L 660 560 L 690 760 L 760 900 Z" fill="#7FB6D8"/>
+  <text x="678" y="640" font-size="20" fill="#1c4e6b" font-weight="700" transform="rotate(90 700 640)">홍해</text>
+
+  <!-- 나일강 녹지대(초록 띠) -->
+  <path d="M 410 960 C 425 850 360 800 392 720 C 424 640 348 580 388 500 C 428 420 356 360 384 280 C 398 232 372 190 386 150"
+        fill="none" stroke="#7FBF6B" stroke-width="46" stroke-linecap="round" opacity="0.85"/>
+  <!-- 나일 삼각주(델타) 녹지 -->
+  <path d="M 386 150 L 250 92 L 540 92 Z" fill="#7FBF6B" opacity="0.85"/>
+
+  <!-- 나일강 본류 -->
+  <path d="M 410 960 C 425 850 360 800 392 720 C 424 640 348 580 388 500 C 428 420 356 360 384 280 C 398 232 372 190 386 150"
+        fill="none" stroke="#2b6cb0" stroke-width="7" stroke-linecap="round"/>
+  <!-- 델타 분기 -->
+  <path d="M 386 150 L 300 95 M 386 150 L 386 92 M 386 150 L 470 95" fill="none" stroke="#2b6cb0" stroke-width="5"/>
+
+  <!-- 나세르호 -->
+  <ellipse cx="410" cy="965" rx="34" ry="22" fill="#2b6cb0"/>
+
+  <!-- 도시 점 + 라벨 -->
+  <circle cx="388" cy="168" r="6" fill="#c0392b"/>
+  <text x="402" y="174" font-size="22" fill="#222" font-weight="700">카이로</text>
+  <circle cx="396" cy="560" r="6" fill="#c0392b"/>
+  <text x="410" y="566" font-size="22" fill="#222" font-weight="700">룩소르</text>
+  <circle cx="412" cy="858" r="6" fill="#c0392b"/>
+  <text x="426" y="864" font-size="22" fill="#222" font-weight="700">아스완</text>
+  <text x="300" y="998" font-size="18" fill="#1c4e6b" font-weight="700">나세르호</text>
+
+  <!-- 나일강 라벨 -->
+  <text x="150" y="700" font-size="22" fill="#1c4e6b" font-weight="700" transform="rotate(-20 150 700)">나일강</text>
+
+  <!-- 제목 -->
+  <text x="380" y="985" font-size="13" fill="#8a734a" text-anchor="middle">이집트: 나일강 주변만 초록, 나머지는 사막</text>
+</svg>

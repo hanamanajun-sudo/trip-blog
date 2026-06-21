@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#f0dfa8" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">요르단 위치 — 중동 레반트</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 시리아</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">이라크 · 사우디아라비아</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 사우디아라비아 · 홍해(아카바만)</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">이스라엘 · 팔레스타인</text>
+<g transform="translate(-1055.10,-846.25) scale(3.4440)">
+  <path d="M401.2,285.8 L410.7,292.6 L412.5,293.1 L418.0,294.0 L449.8,273.3 L454.7,290.3 L453.5,290.7 L454.5,294.0 L456.1,293.4 L457.9,293.0 L458.7,295.1 L453.3,300.0 L420.3,310.0 L437.4,329.2 L431.9,332.6 L428.9,339.1 L416.9,341.6 L412.1,348.8 L404.3,354.6 L386.3,351.2 L389.9,330.5 L395.1,316.8 L394.6,315.2 L394.5,314.9 L397.2,304.5 L397.7,287.6 L401.2,285.8 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">요르단</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">중동 레반트 — 이스라엘·이라크·사우디 사이, 아카바만 접안</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect width="800" height="460" fill="#b8d4e8"/>
+<rect x="60" y="38" width="680" height="370" rx="24" fill="#d4e8c8" opacity="0.80"/>
+<text x="400" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a" font-family="Pretendard,'Noto Sans KR',sans-serif">네덜란드 위치 — 서유럽 북해 연안</text>
+<text x="400" y="68" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▲ 북해</text>
+<text x="755" y="210" text-anchor="end" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">독일</text>
+<text x="400" y="415" text-anchor="middle" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">▼ 벨기에</text>
+<text x="55" y="210" text-anchor="start" font-size="13" font-weight="600" fill="#1e3a5f" font-family="Pretendard,'Noto Sans KR',sans-serif">북해</text>
+<g transform="translate(-1125.48,-864.00) scale(3.5000)">
+  <path d="M445.1,340.8 L442.1,340.6 L440.8,339.0 L442.1,336.9 L442.6,333.0 L438.7,330.5 L435.6,330.6 L433.3,326.9 L431.1,328.1 L430.0,326.4 L428.5,327.8 L427.0,326.7 L425.4,329.0 L415.9,326.9 L415.1,326.3 L414.3,325.2 L417.8,324.2 L424.2,326.8 L421.0,324.3 L423.1,324.0 L420.4,320.1 L426.9,310.5 L430.4,298.3 L433.8,297.9 L439.3,291.9 L443.2,289.9 L454.1,288.4 L458.6,291.4 L458.6,293.2 L458.7,296.9 L457.0,303.7 L456.8,304.0 L453.7,304.1 L453.0,306.1 L456.7,308.2 L457.0,311.2 L453.6,314.8 L454.6,316.8 L453.9,318.1 L444.4,320.4 L447.5,327.2 L446.0,331.6 L446.7,333.1 L443.4,335.4 L445.8,337.8 L445.1,340.8 Z M423.6,328.4 L419.6,331.8 L415.7,330.2 L413.9,330.9 L413.0,328.4 L423.6,328.4 Z M448.5,287.2 L446.9,287.8 L446.5,287.7 L448.5,287.2 Z M434.4,291.2 L432.2,292.6 L432.0,292.4 L433.4,291.1 L434.4,291.2 Z M431.8,295.8 L430.6,297.2 L429.9,296.8 L429.7,296.4 L430.1,295.4 L431.8,293.6 L431.8,295.8 Z M420.4,321.5 L421.8,323.3 L420.3,323.7 L417.3,322.0 L420.4,321.5 Z" fill="#e84040" fill-opacity="0.92" stroke="#9b1c1c" stroke-width="0.50" vector-effect="non-scaling-stroke"/>
+</g>
+<text x="400" y="239" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Pretendard,'Noto Sans KR',sans-serif">네덜란드</text>
+<text x="400" y="452" text-anchor="middle" font-size="11" font-weight="400" fill="#475569" font-family="Pretendard,'Noto Sans KR',sans-serif">서유럽 북해 연안 — 라인강 하구, 저지대(Low Countries)</text>
+</svg>

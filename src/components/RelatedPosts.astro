@@ -27,7 +27,7 @@ function getFirstImage(body: string): string | null {
 {relatedPosts.length > 0 && (
   <div class="mt-10 pt-8 border-t border-border">
     <h2 class="text-lg font-bold tracking-tight mb-4 flex items-center gap-2">
-      <i class="ph ph-newspaper text-primary"></i>
+      <i class="ph ph-newspaper text-primary" aria-hidden="true"></i>
       같은 카테고리 글
     </h2>
 
@@ -55,7 +55,7 @@ function getFirstImage(body: string): string | null {
                 />
               ) : (
                 <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-sky-200">
-                  <i class="ph ph-image text-2xl text-primary/50"></i>
+                  <i class="ph ph-image text-2xl text-primary/50" aria-hidden="true"></i>
                 </div>
               )}
             </div>

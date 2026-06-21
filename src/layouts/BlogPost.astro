@@ -5,18 +5,26 @@ import ShareButtons from '../components/ShareButtons.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 
+interface AdjacentPost {
+  title: string;
+  url: string;
+}
+
 export interface Props {
   title: string;
   date: Date;
   category: string;
   description?: string;
   thumbnail?: string;
+  ogImage?: string;
   currentId?: string;
   headings?: { depth: number; slug: string; text: string }[];
   canonicalUrl?: string;
+  prevPost?: AdjacentPost | null;
+  nextPost?: AdjacentPost | null;
 }
 
-const { title, date, category, description, thumbnail, currentId, headings = [], canonicalUrl } = Astro.props;
+const { title, date, category, description, thumbnail, ogImage, currentId, headings = [], canonicalUrl, prevPost, nextPost } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric',
@@ -25,50 +33,81 @@ const formattedDate = new Intl.DateTimeFormat('ko-KR', {
 }).format(date);
 
 const siteUrl = 'https://trip.lalalakorea.com';
-const pageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const pageUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).toString();
+const categorySlug = slugify(category);
 
-const jsonLd = {
+// OG/구조화데이터용 이미지: thumbnail > 본문 첫 이미지(ogImage) > 기본 이미지
+const articleImage = thumbnail || ogImage || `${siteUrl}/og-default.png`;
+const absoluteArticleImage = articleImage.startsWith('http') ? articleImage : `${siteUrl}${articleImage}`;
+
+const blogPostingSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": title,
   "datePublished": date.toISOString(),
   "dateModified": date.toISOString(),
+  "image": [absoluteArticleImage],
   "author": {
     "@type": "Person",
-    "name": "lalalakorea",
+    "name": "trip.lalalakorea",
     "url": siteUrl
   },
   "publisher": {
     "@type": "Organization",
-    "name": "lalalakorea",
-    "url": siteUrl
+    "name": "trip.lalalakorea",
+    "url": siteUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/og-default.png`
+    }
   },
   "description": description || title,
   "url": pageUrl,
+  "articleSection": category,
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": pageUrl
-  },
-  ...(thumbnail ? { "image": thumbnail } : {})
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": category, "item": `${siteUrl}/category/${categorySlug}` },
+    { "@type": "ListItem", "position": 3, "name": title, "item": pageUrl }
+  ]
 };
 ---
 
 <BaseLayout
-  title={`${title} | lalalakorea`}
+  title={`${title} | trip.lalalakorea`}
   description={description}
-  ogImage={thumbnail}
-  jsonLd={jsonLd}
+  ogImage={thumbnail || ogImage}
+  jsonLd={[blogPostingSchema, breadcrumbSchema]}
   ogType="article"
   ogDatePublished={date.toISOString()}
   canonicalUrl={canonicalUrl}
 >
   <article class="mx-auto max-w-3xl">
 
+    <!-- 브레드크럼 -->
+    <nav aria-label="현재 위치" class="mb-5">
+      <ol class="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+        <li><a href="/" class="hover:text-primary transition-colors">홈</a></li>
+        <li aria-hidden="true" class="opacity-50">/</li>
+        <li><a href={`/category/${categorySlug}`} class="hover:text-primary transition-colors">{category}</a></li>
+        <li aria-hidden="true" class="opacity-50">/</li>
+        <li class="text-foreground/70 line-clamp-1 max-w-[60%]">{title}</li>
+      </ol>
+    </nav>
+
     <!-- 헤더 영역 -->
     <div class="mb-8 space-y-4">
       <!-- 카테고리 뱃지 -->
       <a
-        href={`/category/${slugify(category)}`}
+        href={`/category/${categorySlug}`}
         class="inline-flex items-center rounded-md border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent"
       >
         {category}
@@ -106,19 +145,52 @@ const jsonLd = {
       <slot />
     </div>
 
+    <!-- 작성자 박스 -->
+    <div class="mt-12 flex items-center gap-4 rounded-2xl border border-border bg-muted/40 p-5">
+      <div class="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-sky-700 flex items-center justify-center text-white text-2xl font-bold select-none">
+        L
+      </div>
+      <div>
+        <p class="font-semibold text-foreground">trip.lalalakorea</p>
+        <p class="text-sm text-muted-foreground mt-0.5">우리나라와 비교해서 알아보는 세계 이야기. 지구 위 모든 나라를 한국 기준으로 쉽게 풀어드립니다.</p>
+      </div>
+    </div>
+
     <!-- 관련 글 추천 -->
     {currentId && <RelatedPosts category={category} currentId={currentId} />}
 
     <!-- 소셜 공유 버튼 -->
     <ShareButtons title={title} url={pageUrl} />
 
-    <!-- 하단 네비게이션 -->
-    <div class="mt-8">
+    <!-- 이전/다음 글 네비게이션 -->
+    {(prevPost || nextPost) && (
+      <nav aria-label="이전/다음 글" class="mt-8 grid grid-cols-2 gap-3">
+        {prevPost ? (
+          <a href={prevPost.url} class="group flex flex-col gap-1 rounded-xl border border-border bg-card p-4 hover:border-primary/40 hover:shadow-md transition-all col-start-1">
+            <span class="text-xs text-muted-foreground flex items-center gap-1">
+              <i class="ph ph-arrow-left text-xs" aria-hidden="true"></i> 이전 글
+            </span>
+            <span class="text-sm font-semibold line-clamp-2 group-hover:text-primary transition-colors">{prevPost.title}</span>
+          </a>
+        ) : <div />}
+        {nextPost ? (
+          <a href={nextPost.url} class="group flex flex-col gap-1 rounded-xl border border-border bg-card p-4 hover:border-primary/40 hover:shadow-md transition-all text-right col-start-2">
+            <span class="text-xs text-muted-foreground flex items-center justify-end gap-1">
+              다음 글 <i class="ph ph-arrow-right text-xs" aria-hidden="true"></i>
+            </span>
+            <span class="text-sm font-semibold line-clamp-2 group-hover:text-primary transition-colors">{nextPost.title}</span>
+          </a>
+        ) : <div />}
+      </nav>
+    )}
+
+    <!-- 목록으로 -->
+    <div class="mt-6">
       <a
         href="/"
         class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
-        ← 목록으로 돌아가기
+        <i class="ph ph-arrow-left text-xs" aria-hidden="true"></i> 목록으로 돌아가기
       </a>
     </div>
 
