@@ -5,13 +5,17 @@ import { slugify } from '../utils/slugify';
 const SITE = 'https://trip.lalalakorea.com';
 const PAGE_SIZE = 20; // [...page].astro의 paginate pageSize와 일치
 
+function encodeSlug(slug) {
+  return slug.replace(/[^\x00-\x7F]/g, c => encodeURIComponent(c));
+}
+
 export async function GET() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const today = new Date().toISOString().split('T')[0];
 
   // 1) 개별 글
   const postUrls = posts.map(post => {
-    const slug = post.data.entry_slug || post.id;
+    const slug = encodeSlug(post.data.entry_slug || post.id);
     const date = new Date(post.data.date).toISOString().split('T')[0];
     return `  <url>
     <loc>${SITE}/entry/${slug}</loc>
@@ -24,7 +28,7 @@ export async function GET() {
   // 2) 카테고리 페이지
   const categories = [...new Set(posts.map(p => p.data.category))];
   const categoryUrls = categories.map(cat => `  <url>
-    <loc>${SITE}/category/${slugify(cat)}</loc>
+    <loc>${SITE}/category/${encodeSlug(slugify(cat))}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
