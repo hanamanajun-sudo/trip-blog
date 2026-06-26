@@ -149,11 +149,11 @@ const breadcrumbSchema = {
     <!-- 쿠팡 배너 (본문 아래) -->
     <CoupangBanner />
 
-    <!-- 관련 글 추천 -->
-    {currentId && <RelatedPosts category={category} currentId={currentId} />}
-
     <!-- 소셜 공유 버튼 -->
     <ShareButtons title={title} url={pageUrl} />
+
+    <!-- 관련 글 추천 -->
+    {currentId && <RelatedPosts category={category} currentId={currentId} />}
 
     <!-- 이전/다음 글 네비게이션 -->
     {(prevPost || nextPost) && (
