@@ -149,34 +149,6 @@ const breadcrumbSchema = {
     <!-- 쿠팡 배너 (본문 아래) -->
     <CoupangBanner />
 
-    <!-- 작성자 박스 -->
-    <div class="mt-4 rounded-2xl border border-border bg-muted/40 p-5">
-      <p class="text-xs text-muted-foreground mb-3 font-medium">이 글을 쓴 사람들</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <div class="flex items-center gap-3 flex-1">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-lg font-bold select-none">
-            L
-          </div>
-          <div>
-            <p class="font-semibold text-foreground text-sm">랄라</p>
-            <p class="text-xs text-muted-foreground mt-0.5">호기심 여행자. "이 나라 우리나라 몇 배야?" 질문 던지는 역할. 솔직한 감상 담당.</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 flex-1">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-lg font-bold select-none">
-            K
-          </div>
-          <div>
-            <p class="font-semibold text-foreground text-sm">케이</p>
-            <p class="text-xs text-muted-foreground mt-0.5">팩트 담당. 면적·인구·시차·물가 수치를 정리하고 비교표 만드는 역할.</p>
-          </div>
-        </div>
-      </div>
-      <p class="text-xs text-muted-foreground/60 mt-3 pt-3 border-t border-border">
-        두 캐릭터가 함께 만드는 블로그 · <a href="/about" class="hover:text-primary transition-colors underline underline-offset-2">블로그 소개 →</a>
-      </p>
-    </div>
-
     <!-- 관련 글 추천 -->
     {currentId && <RelatedPosts category={category} currentId={currentId} />}
 
@@ -213,6 +185,34 @@ const breadcrumbSchema = {
       >
         <i class="ph ph-arrow-left text-xs" aria-hidden="true"></i> 목록으로 돌아가기
       </a>
+    </div>
+
+    <!-- 작성자 박스 -->
+    <div class="mt-10 rounded-2xl border border-border bg-muted/40 p-5">
+      <p class="text-xs text-muted-foreground mb-3 font-medium">이 글을 쓴 사람들</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex items-center gap-3 flex-1">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-lg font-bold select-none">
+            L
+          </div>
+          <div>
+            <p class="font-semibold text-foreground text-sm">랄라</p>
+            <p class="text-xs text-muted-foreground mt-0.5">호기심 여행자. "이 나라 우리나라 몇 배야?" 질문 던지는 역할. 솔직한 감상 담당.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 flex-1">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-lg font-bold select-none">
+            K
+          </div>
+          <div>
+            <p class="font-semibold text-foreground text-sm">케이</p>
+            <p class="text-xs text-muted-foreground mt-0.5">팩트 담당. 면적·인구·시차·물가 수치를 정리하고 비교표 만드는 역할.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-muted-foreground/60 mt-3 pt-3 border-t border-border">
+        두 캐릭터가 함께 만드는 블로그 · <a href="/about" class="hover:text-primary transition-colors underline underline-offset-2">블로그 소개 →</a>
+      </p>
     </div>
 
   </article>
