@@ -57,10 +57,13 @@ const isFirstPage = page.currentPage === 1;
 const pageTitle = isFirstPage
   ? 'trip.lalalakorea - 세계 여행, 나라 정보, 역사 이야기'
   : `trip.lalalakorea - ${page.currentPage}페이지`;
+const pageDescription = isFirstPage
+  ? '우리나라와 비교해서 알아보는 세계 여행·나라 정보·역사 이야기 블로그입니다. 나라별 크기·인구·시차를 한눈에 확인하세요.'
+  : `trip.lalalakorea 블로그 ${page.currentPage}페이지 — 세계 여행, 나라 정보, 역사 이야기 글 목록입니다.`;
 
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout title={pageTitle} description={pageDescription}>
   {page.url.prev && <link slot="head" rel="prev" href={`https://trip.lalalakorea.com${page.url.prev}`} />}
   {page.url.next && <link slot="head" rel="next" href={`https://trip.lalalakorea.com${page.url.next}`} />}
 

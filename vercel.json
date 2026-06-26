@@ -3,6 +3,38 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/images/placeholder-germany-hero.jpg",
+      "destination": "/images/germany-hero.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/images/placeholder-brazil-hero.jpg",
+      "destination": "/images/brazil-hero.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/images/placeholder-가나-hero.jpg",
+      "destination": "/images/ghana-hero.jpg",
+      "permanent": true
+    },
+    {
+      "source": "/category/유튜버 되기 자료",
+      "destination": "/category/유튜버-되기-자료",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/m/entry/:slug",
+      "destination": "/entry/:slug",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/admin/(.*)",
