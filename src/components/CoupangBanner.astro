@@ -1,0 +1,27 @@
+---
+// 애드센스 신청 직전 false로 변경하면 전체 배너 비활성화
+const ENABLED = true;
+---
+
+{ENABLED && (
+  <div class="my-8">
+    <p class="text-xs text-muted-foreground text-center mb-2">
+      이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+    </p>
+    <div class="flex justify-center">
+      <div class="rounded-xl overflow-hidden">
+        <script src="https://ads-partners.coupang.com/g.js" is:inline></script>
+        <script is:inline>
+          new PartnersCoupang.G({
+            "id": 1000617,
+            "template": "carousel",
+            "trackingCode": "AF2072433",
+            "width": "300",
+            "height": "250",
+            "tsource": ""
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+)}

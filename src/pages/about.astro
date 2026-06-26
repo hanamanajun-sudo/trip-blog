@@ -1,0 +1,159 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="블로그 소개 | trip.lalalakorea"
+  description="우리나라와 비교해서 알아보는 세계 이야기. 지구 위 모든 나라를 한국 기준으로 쉽게 풀어드리는 trip.lalalakorea 블로그 소개입니다."
+>
+  <article class="mx-auto max-w-3xl">
+
+    <!-- 헤더 -->
+    <div class="mb-10">
+      <div class="flex items-center gap-2 mb-4">
+        <a href="/" class="text-sm text-muted-foreground hover:text-primary transition-colors">홈</a>
+        <span class="text-muted-foreground/50">/</span>
+        <span class="text-sm text-foreground/70">블로그 소개</span>
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight mb-3">trip.lalalakorea 소개</h1>
+      <p class="text-muted-foreground leading-relaxed">
+        "우리나라랑 비교하면 얼마나 큰 거야?" — 뉴스에서 외국 나라 이름이 나올 때마다 드는 이 궁금증에서 시작된 블로그입니다.
+        지구 위 모든 나라를 한국 기준으로 쉽고 재미있게 풀어드립니다.
+      </p>
+    </div>
+
+    <!-- 이 블로그가 다루는 것 -->
+    <section class="mb-12 rounded-2xl bg-gradient-to-br from-primary/5 to-sky-50 border border-primary/10 p-6">
+      <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+        <i class="ph ph-planet text-primary" aria-hidden="true"></i>
+        이런 걸 다룹니다
+      </h2>
+      <ul class="space-y-2.5">
+        <li class="flex items-start gap-2 text-sm text-foreground/80">
+          <i class="ph ph-check-circle text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+          <span><strong>나라 크기 비교</strong> — 한국 면적의 몇 배인지 지도로 직관적으로</span>
+        </li>
+        <li class="flex items-start gap-2 text-sm text-foreground/80">
+          <i class="ph ph-check-circle text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+          <span><strong>인구·수도·시차</strong> — 여행 전에 알면 좋은 기초 정보</span>
+        </li>
+        <li class="flex items-start gap-2 text-sm text-foreground/80">
+          <i class="ph ph-check-circle text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+          <span><strong>여행 실전 정보</strong> — 비행시간, 치안, 물가, 음식</span>
+        </li>
+        <li class="flex items-start gap-2 text-sm text-foreground/80">
+          <i class="ph ph-check-circle text-primary mt-0.5 flex-shrink-0" aria-hidden="true"></i>
+          <span><strong>지구 상식</strong> — 알고 보면 더 재미있는 나라별 문화·역사 이야기</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 작성자 소개 -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold mb-2">이 블로그를 만드는 두 캐릭터</h2>
+      <p class="text-sm text-muted-foreground mb-6">
+        실존 인물이 아닌 가상의 두 캐릭터가 역할을 나눠 글을 구성합니다.
+        랄라가 질문을 던지면 케이가 팩트로 받아치는 구조예요.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        <!-- 랄라 -->
+        <div class="rounded-2xl border border-border bg-card p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-2xl font-bold select-none flex-shrink-0">
+              L
+            </div>
+            <div>
+              <p class="font-bold text-lg">랄라</p>
+              <p class="text-xs text-muted-foreground">호기심 여행자 / 감상 담당</p>
+            </div>
+          </div>
+          <p class="text-sm text-foreground/80 leading-relaxed mb-3">
+            "이 나라 우리나라 몇 배야?" "거기 치안은 어때?" 궁금한 걸 직접 물어보는 역할.
+            솔직한 감상과 여행자 시점에서 현실적인 이야기를 풀어냅니다.
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-2.5 py-0.5 text-xs font-medium">반말체</span>
+            <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-2.5 py-0.5 text-xs font-medium">솔직한 감상</span>
+            <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-2.5 py-0.5 text-xs font-medium">여행자 시점</span>
+          </div>
+        </div>
+
+        <!-- 케이 -->
+        <div class="rounded-2xl border border-border bg-card p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-2xl font-bold select-none flex-shrink-0">
+              K
+            </div>
+            <div>
+              <p class="font-bold text-lg">케이</p>
+              <p class="text-xs text-muted-foreground">팩트 수집가 / 데이터 담당</p>
+            </div>
+          </div>
+          <p class="text-sm text-foreground/80 leading-relaxed mb-3">
+            면적, 인구, 시차, 물가, 비행시간 — 수치로 정리해서 비교표 만드는 역할.
+            "정확하게 말하자면..." 을 달고 사는 데이터 중독자.
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-xs font-medium">팩트 기반</span>
+            <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-xs font-medium">비교표</span>
+            <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-xs font-medium">데이터 정리</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 대화 예시 -->
+      <div class="mt-6 rounded-xl border border-border bg-muted/30 p-5">
+        <p class="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wide">이런 식으로 글이 끝납니다</p>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5">L</span>
+            <p class="text-sm bg-white rounded-xl rounded-tl-none border border-border px-3 py-2 text-foreground/80">
+              솔직히 이렇게 넓은 나란지 몰랐음. 우리나라가 진짜 작긴 작구나...
+            </p>
+          </div>
+          <div class="flex items-start gap-3 flex-row-reverse">
+            <span class="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5">K</span>
+            <p class="text-sm bg-white rounded-xl rounded-tr-none border border-border px-3 py-2 text-foreground/80">
+              정확하게는 한국의 약 77배. 가장 넓은 나라 Top 10 안에 드는 수준이야.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 연락처 / 정보 -->
+    <section class="rounded-2xl border border-border bg-card p-6">
+      <h2 class="text-lg font-bold mb-4">기타 안내</h2>
+      <dl class="space-y-3 text-sm">
+        <div class="flex gap-3">
+          <dt class="text-muted-foreground w-20 flex-shrink-0">운영</dt>
+          <dd class="text-foreground/80">개인 블로그 (비상업적 정보 제공 목적)</dd>
+        </div>
+        <div class="flex gap-3">
+          <dt class="text-muted-foreground w-20 flex-shrink-0">광고</dt>
+          <dd class="text-foreground/80">쿠팡 파트너스 / Google AdSense를 통한 광고가 게재될 수 있습니다</dd>
+        </div>
+        <div class="flex gap-3">
+          <dt class="text-muted-foreground w-20 flex-shrink-0">제휴 고지</dt>
+          <dd class="text-foreground/80">이 블로그는 쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다</dd>
+        </div>
+        <div class="flex gap-3">
+          <dt class="text-muted-foreground w-20 flex-shrink-0">시작</dt>
+          <dd class="text-foreground/80">2021년 — 가까운 일본·중국 비교에서 시작해 전 세계로 확장 중</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- 글 보러가기 -->
+    <div class="mt-10 text-center">
+      <a href="/" class="inline-flex items-center gap-2 rounded-xl bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition-all hover:shadow-md">
+        <i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>
+        전체 글 보러가기
+      </a>
+    </div>
+
+  </article>
+</BaseLayout>

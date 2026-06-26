@@ -12,6 +12,7 @@
     "@astrojs/vercel": "^8.2.11",
     "@tailwindcss/typography": "^0.5.15",
     "astro": "^5.18.1",
+    "image-size": "^2.0.2",
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
