@@ -8,7 +8,7 @@ description: 더쿠에서 화제였던 '천국처럼 느껴졌던 해외 리조�
 ---
 
 <div style="display:flex;margin:1rem 0;">
-  <div style="background:#f1f5f9;border-radius:14px 14px 14px 3px;padding:0.65rem 1rem;font-size:0.9rem;line-height:1.6;color:#1e293b;max-width:82%;"><strong style="color:#2563eb;">랄라</strong>&nbsp; 케이, 오늘 더쿠 눈팅하다가 완전 손 멈췄잖아. "천국처럼 느껴졌던 해외 리조트(숙소) BEST6"라는 글인데, 사진들이 죄다 현실도피 각이더라 ✨</div>
+  <div style="background:#ffffff;border:1px solid #cbd5e1;border-radius:14px 14px 14px 3px;padding:0.6rem 1rem;font-size:0.9rem;line-height:1.6;color:#1e293b;max-width:82%;box-shadow:0 1px 2px rgba(15,23,42,0.06);"><strong style="color:#2563eb;">랄라</strong>&nbsp; 케이, 오늘 더쿠 눈팅하다가 완전 손 멈췄잖아. "천국처럼 느껴졌던 해외 리조트(숙소) BEST6"라는 글인데, 사진들이 죄다 현실도피 각이더라 ✨</div>
 </div>
 
 <div style="display:flex;justify-content:flex-end;margin:1rem 0;">
@@ -16,7 +16,7 @@ description: 더쿠에서 화제였던 '천국처럼 느껴졌던 해외 리조�
 </div>
 
 <div style="display:flex;margin:1rem 0;">
-  <div style="background:#f1f5f9;border-radius:14px 14px 14px 3px;padding:0.65rem 1rem;font-size:0.9rem;line-height:1.6;color:#1e293b;max-width:82%;"><strong style="color:#2563eb;">랄라</strong>&nbsp; 괌 두짓타니부터 발리 두 곳(아야나·더카욘정글), 푸꾸옥 리젠트, 끄라비 라야바디, 칸쿤 스칼렛아르떼까지 총 6곳! 성격이 다 제각각이라 비교하는 재미가 있더라.</div>
+  <div style="background:#ffffff;border:1px solid #cbd5e1;border-radius:14px 14px 14px 3px;padding:0.6rem 1rem;font-size:0.9rem;line-height:1.6;color:#1e293b;max-width:82%;box-shadow:0 1px 2px rgba(15,23,42,0.06);"><strong style="color:#2563eb;">랄라</strong>&nbsp; 괌 두짓타니부터 발리 두 곳(아야나·더카욘정글), 푸꾸옥 리젠트, 끄라비 라야바디, 칸쿤 스칼렛아르떼까지 총 6곳! 성격이 다 제각각이라 비교하는 재미가 있더라.</div>
 </div>
 
 ## 한눈에 보는 해외 리조트 BEST6 요약
