@@ -7,11 +7,37 @@ description: 더쿠에서 화제였던 '천국처럼 느껴졌던 해외 리조�
   칸쿤 스칼렛아르떼)의 위치·특징·주변 여행 정보를 자세히 파헤쳐본다.
 ---
 
-> **랄라 🧳** 케이, 오늘 더쿠 눈팅하다가 완전 손 멈췄잖아. "천국처럼 느껴졌던 해외 리조트(숙소) BEST6"라는 글인데, 사진들이 죄다 현실도피 각이더라 ✨
->
-> **케이 📊** 나도 봤어. 근데 사진만 보고 넘기기엔 아깝지. 이 6곳이 정확히 어느 나라, 어느 위치에 있고 뭐가 진짜 강점인지는 글에 따로 안 나와 있더라고. 그래서 하나씩 파봤어.
->
-> **랄라 🧳** 괌 두짓타니부터 발리 두 곳(아야나·더카욘정글), 푸꾸옥 리젠트, 끄라비 라야바디, 칸쿤 스칼렛아르떼까지 총 6곳! 성격이 다 제각각이라 비교하는 재미가 있더라.
+<div style="max-width:420px;margin:1.5rem auto;border-radius:20px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(15,23,42,0.08);font-family:inherit;">
+  <div style="background:#2f3a4a;color:#f1f5f9;padding:0.7rem 1rem;font-size:0.82rem;font-weight:600;text-align:center;letter-spacing:-0.01em;">🌏 랄라 &amp; 케이의 여행 잡담방</div>
+  <div style="background:#b4c7d9;padding:1rem 0.75rem 1.1rem;">
+    <div style="display:flex;align-items:flex-end;gap:0.45rem;margin-bottom:0.3rem;">
+      <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.95rem;flex-shrink:0;">🧳</div>
+      <div style="max-width:75%;">
+        <div style="font-size:0.68rem;color:#334155;margin:0 0 3px 2px;font-weight:600;">랄라</div>
+        <div style="display:flex;align-items:flex-end;gap:0.35rem;">
+          <div style="background:#ffffff;border-radius:15px 15px 15px 3px;padding:0.55rem 0.85rem;font-size:0.83rem;line-height:1.5;color:#1e293b;box-shadow:0 1px 2px rgba(0,0,0,0.08);">케이, 오늘 더쿠 눈팅하다가 완전 손 멈췄잖아. &quot;천국처럼 느껴졌던 해외 리조트(숙소) BEST6&quot;라는 글인데, 사진들이 죄다 현실도피 각이더라 ✨</div>
+          <span style="font-size:0.62rem;color:#475569;flex-shrink:0;padding-bottom:2px;">오후 3:14</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin:0.55rem 0 0.3rem;">
+      <div style="display:flex;align-items:flex-end;gap:0.35rem;max-width:78%;">
+        <span style="font-size:0.62rem;color:#475569;flex-shrink:0;padding-bottom:2px;">오후 3:15</span>
+        <div style="background:#fee500;border-radius:15px 15px 3px 15px;padding:0.55rem 0.85rem;font-size:0.83rem;line-height:1.5;color:#1e293b;box-shadow:0 1px 2px rgba(0,0,0,0.08);">나도 봤어. 근데 사진만 보고 넘기기엔 아깝지. 이 6곳이 정확히 어느 나라, 어느 위치에 있고 뭐가 진짜 강점인지는 글에 따로 안 나와 있더라고. 그래서 하나씩 파봤어.</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-end;gap:0.45rem;margin-top:0.55rem;">
+      <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.95rem;flex-shrink:0;">🧳</div>
+      <div style="max-width:75%;">
+        <div style="font-size:0.68rem;color:#334155;margin:0 0 3px 2px;font-weight:600;">랄라</div>
+        <div style="display:flex;align-items:flex-end;gap:0.35rem;">
+          <div style="background:#ffffff;border-radius:15px 15px 15px 3px;padding:0.55rem 0.85rem;font-size:0.83rem;line-height:1.5;color:#1e293b;box-shadow:0 1px 2px rgba(0,0,0,0.08);">괌 두짓타니부터 발리 두 곳(아야나·더카욘정글), 푸꾸옥 리젠트, 끄라비 라야바디, 칸쿤 스칼렛아르떼까지 총 6곳! 성격이 다 제각각이라 비교하는 재미가 있더라.</div>
+          <span style="font-size:0.62rem;color:#475569;flex-shrink:0;padding-bottom:2px;">오후 3:15</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## 한눈에 보는 해외 리조트 BEST6 요약
 
