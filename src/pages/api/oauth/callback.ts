@@ -1,3 +1,5 @@
+import { env } from 'cloudflare:workers';
+
 export const prerender = false;
 
 export async function GET({ url }: any) {
@@ -15,8 +17,8 @@ export async function GET({ url }: any) {
     return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
   }
 
-  const clientId = process.env.GITHUB_CLIENT_ID || process.env.KEYSTATIC_GITHUB_CLIENT_ID;
-  const clientSecret = process.env.GITHUB_CLIENT_SECRET || process.env.KEYSTATIC_GITHUB_CLIENT_SECRET;
+  const clientId = (env as any).GITHUB_CLIENT_ID || (env as any).KEYSTATIC_GITHUB_CLIENT_ID;
+  const clientSecret = (env as any).GITHUB_CLIENT_SECRET || (env as any).KEYSTATIC_GITHUB_CLIENT_SECRET;
 
   const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',

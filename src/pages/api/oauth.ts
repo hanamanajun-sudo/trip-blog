@@ -1,3 +1,5 @@
+import { env } from 'cloudflare:workers';
+
 export const prerender = false;
 
 export async function GET({ url }: any) {
@@ -7,7 +9,7 @@ export async function GET({ url }: any) {
     return new Response('지원하지 않는 provider입니다', { status: 400 });
   }
 
-  const clientId = process.env.GITHUB_CLIENT_ID || process.env.KEYSTATIC_GITHUB_CLIENT_ID;
+  const clientId = (env as any).GITHUB_CLIENT_ID || (env as any).KEYSTATIC_GITHUB_CLIENT_ID;
   const callbackUrl = 'https://trip.lalalakorea.com/api/oauth/callback';
 
   const params = new URLSearchParams({
