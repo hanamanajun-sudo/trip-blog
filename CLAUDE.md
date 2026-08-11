@@ -3,7 +3,8 @@
 이 파일은 Claude가 이 블로그 작업 시 따라야 할 규칙을 기록한다.
 
 ## 프로젝트 개요
-- **사이트**: trip.lalalakorea.com (Astro v4 + Vercel, 콘텐츠는 `src/content/blog/*.md`)
+- **사이트**: trip.lalalakorea.com (Astro v5 + Cloudflare Workers, 콘텐츠는 `src/content/blog/*.md`)
+- **배포**: `wrangler.jsonc` 기준 `npm run cf:deploy`(빌드 + `wrangler deploy`)로 배포. Vercel은 2026-08-26 전후까지 롤백 안전망으로 유지(`vercel.json`, `@astrojs/vercel` 의존성 보존 중, 자세한 내용은 PROGRESS.md 2026-08-11/12 항목 참고)
 - **URL 구조**: `/entry/{entry_slug}` (entry_slug 없으면 파일 id 사용)
 - **주력 콘텐츠**: "지구 상식" 카테고리의 **나라 비교 시리즈** (우리나라와 크기·인구·시차 비교)
 

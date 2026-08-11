@@ -2,6 +2,45 @@
 
 ---
 
+## 2026-08-11/12 작업 — Vercel → Cloudflare Workers 이전 완료
+
+### 배경
+lalalakorea.com(같은 계정의 자매 사이트)이 2026-08-08/09에 먼저 Cloudflare Workers로 이전 완료. 그 경험(런타임 fs 의존성 제거, 25MiB 파일 제한, Windows 빌드 이슈, page 라우팅 버그, DNS 컷오버 절차)을 참고해 trip.lalalakorea.com도 동일하게 이전.
+
+### 오늘 한 일
+1. **스택 확인** — trip-blog는 Astro v5.18(`output: 'static'`) + `@astrojs/vercel`, Decap CMS용 서버 라우트 3개(`api/oauth.ts`, `api/oauth/callback.ts`, `api/decap-config.ts`, 전부 `prerender = false`)가 있어 순수 정적 사이트는 아님. lalalakorea(Next.js)와 스택이 달라 문제 유형도 다름 — fs 런타임 의존성 문제는 없었고(Astro 콘텐츠 컬렉션이라 빌드 시점에 이미 정적화됨), 핵심은 3개 API 라우트의 `process.env` 처리와 `vercel.json` 변환이었음
+2. **어댑터 교체** — `@astrojs/vercel` → `@astrojs/cloudflare`. 최신 14.x는 astro 7 요구(설치 실패) → astro 5.7+와 호환되는 `12.6.13`으로 버전 고정 (lalalakorea의 opennextjs-cloudflare 버전 고정 이슈와 동일 패턴)
+3. **env 접근 방식 변경** — Cloudflare Workers 런타임엔 `process.env`가 없음 → `oauth.ts`/`callback.ts`를 `import { env } from 'cloudflare:workers'` 방식으로 교체
+4. **vercel.json → Cloudflare 방식 변환** — redirects 6개 → `public/_redirects`(플레이스홀더 이미지, 태그, `/m/entry/` 등, 전부 301), headers 4개 → `public/_headers`(admin noindex, `_astro` 1년 캐시, images 30일 캐시, favicon 7일 캐시)
+5. **Workers 배포 구성** — `wrangler.jsonc` 신규 작성 (Pages 아님, lalalakorea와 동일하게 Workers 방식). `public/.assetsignore`에 `_worker.js` 추가해 서버 코드가 정적 자산으로 그대로 노출되는 것 방지. `compatibility_date`를 미래 날짜로 잘못 넣었다가 배포 시점 API가 거부 → 과거 날짜로 수정
+6. **프리뷰 검증 후 배포** — `trip-lalalakorea.hanamanajun.workers.dev`에서 홈/RSS/CMS 설정/admin/리다이렉트/캐시헤더/OAuth 시크릿 전달까지 curl로 전수 확인
+7. **GitHub OAuth 시크릿 등록** — Vercel엔 `KEYSTATIC_GITHUB_CLIENT_ID`/`SECRET`으로 등록돼 있던 값을 `wrangler secret put`으로 Worker에 재등록 (사용자가 직접 값 입력, Claude는 시크릿 값 자체를 다루지 않음 — `vercel env pull`은 자동 권한 분류기가 시크릿 유출 위험으로 차단함)
+8. **실제 도메인 OAuth 로그인 테스트의 한계 발견** — DNS 컷오버 전에 workers.dev 프리뷰에서 미리 전체 로그인 흐름을 테스트하려 했으나 불가능함을 확인: GitHub OAuth App은 콜백 URL을 하나만 등록 가능(`trip.lalalakorea.com` 고정)이라, 다른 도메인(workers.dev)에서 열면 GitHub이 애초에 인증 페이지 진입을 막음. 즉 이런 구조에서는 실제 로그인 테스트는 DNS 컷오버 후에만 가능 — 다음에 유사 마이그레이션 시 참고할 것
+9. **git 브랜치 전략** — master에 바로 커밋하지 않고 `cloudflare-migration` 브랜치 사용(lalalakorea의 `cloudflare-migration-prep`과 동일 패턴). 이유: master에 바로 push하면 Vercel이 다음 배포 때 cloudflare 어댑터로 재빌드를 시도해 DNS 컷오버 전까지의 Vercel 롤백 안전망이 깨짐
+10. **DNS 컷오버** — `wrangler.jsonc`에 `routes: [{pattern: "trip.lalalakorea.com", custom_domain: true}]` 추가 후 `wrangler deploy`. lalalakorea 때와 동일하게 "기존 외부 DNS 레코드가 있어 실패" 에러 발생 → Cloudflare 대시보드에서 기존 `trip` CNAME(→ vercel-dns) 레코드를 사용자가 직접 삭제 → 재배포로 커스텀 도메인 연결 성공. Claude의 wrangler 토큰은 zone read-only라 DNS 레코드 삭제는 대시보드에서 사용자가 직접 수행해야 했음
+11. **서치콘솔 검증 확인** — `google-site-verification` TXT 레코드는 서브도메인(`trip`)이 아니라 apex(`lalalakorea.com`)에 있는 Domain 타입 속성이라 `trip` CNAME 삭제와 무관하게 보존됨을 nslookup으로 확인
+12. **merge 시점 원격 충돌 처리** — master push 시도 시 원격에 Decap CMS 자동 커밋(콘텐츠 수정 수십 건, 새 글/이미지)이 먼저 올라와 있어 거부됨 → 강제 push 대신 `git merge origin/master`로 안전하게 통합(충돌 없음) → 병합된 최신 콘텐츠까지 포함해 재빌드·재배포 후 push
+13. **최종 검증** — 사용자가 브라우저에서 `https://trip.lalalakorea.com/admin/`으로 실제 GitHub 로그인 끝까지 성공 확인 (팝업 → 인증 → CMS 글 목록 진입)
+
+### 완료된 항목
+- [x] `@astrojs/cloudflare@12.6.13` 설치 + `astro.config.mjs` 어댑터 교체
+- [x] `oauth.ts`/`callback.ts` env 접근 방식을 `cloudflare:workers`로 교체
+- [x] `vercel.json` redirects/headers → `public/_redirects`/`public/_headers`
+- [x] `wrangler.jsonc` 작성, `package.json`에 `cf:preview`/`cf:deploy` 스크립트 추가
+- [x] workers.dev 프리뷰 배포 + 전체 라우트 curl 검증
+- [x] GitHub OAuth 시크릿(`KEYSTATIC_GITHUB_CLIENT_ID`/`SECRET`) Worker에 재등록
+- [x] `cloudflare-migration` 브랜치 → master merge, 원격 콘텐츠 커밋과 충돌 없이 통합
+- [x] **실제 도메인 이전 완료** — `trip.lalalakorea.com`을 Cloudflare Worker 커스텀 도메인으로 연결, 기존 `trip` CNAME(Vercel) 삭제
+- [x] 서치콘솔 apex TXT 레코드 무영향 확인
+- [x] 실제 브라우저 GitHub OAuth 로그인 최종 확인 (사용자 확인 완료)
+
+### 다음에 할 일
+- [ ] **Vercel 프로젝트(trip-blog) 삭제 검토** — lalalakorea와 동일하게 2주 정도 안정성 지켜본 뒤 정지/삭제 검토 (목표 시점: 2026-08-26 전후). 그때까지 `vercel.json`, `@astrojs/vercel` 의존성은 롤백 안전망으로 유지
+- [ ] **서치콘솔 모니터링** — 호스팅 변경 후 1~2주간 크롤 오류·색인 상태 확인
+- [ ] **CLAUDE.md 갱신** — "Astro v4 + Vercel" 문구를 "Astro v5 + Cloudflare Workers"로 수정 필요
+
+---
+
 ## 2026-07-25 작업
 
 ### 오늘 한 일
