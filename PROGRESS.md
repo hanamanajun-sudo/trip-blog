@@ -2,6 +2,33 @@
 
 ---
 
+## 2026-08-24 작업 — Worker 트래픽 스파이크(봇) 원인 진단 및 라우팅 수정
+
+### 배경
+Cloudflare 관찰 가능성(Observability)에서 08:27 한 순간에 Worker 호출이 4,000건 가까이 급증한 것을 발견. 로그를 보니 전부 `GET /packages/pretendard/dist/web/static/woff(2)-dynamic-subset/*.woff(2)` (Pretendard 폰트 서브셋 파일) 요청이었음.
+
+### 오늘 한 일
+1. **원인 진단** — `BaseLayout.astro`와 git 히스토리 전체를 확인한 결과, 이 사이트는 처음부터 Pretendard를 jsdelivr CDN(`cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/...`)에서만 불러왔고, 로컬 self-host `/packages/pretendard/...` 파일은 프로젝트에 존재한 적이 없음을 확인. 즉 정상 트래픽이 이 URL을 만들어낼 방법이 없으므로, Pretendard를 로컬 self-host하는 흔한 템플릿 구조를 그대로 흉내낸 **봇/스캐너의 존재하지 않는 경로 두드리기**로 결론
+2. **근본 원인 특정** — `dist/_routes.json`이 `include: ["/*"]`로 되어 있어, 실존하지 않는 경로조차 매번 Worker를 실제로 invoke해 Astro의 SSR 404 처리(`BaseLayout`의 `getCollection('blog')` 실행 포함)를 거치고 있었음. `@astrojs/cloudflare` 어댑터는 `_routes.json`을 빌드마다 자동 생성하는데, Cloudflare 플랫폼 제약상 exclude 규칙이 최대 100개로 캡되어 있고 이미 이미지 파일들로 거의 다 차 있어 `/packages/*`처럼 실존하지 않는 경로는 자동으로 절대 포함될 수 없는 구조였음
+3. **수정** — `astro.config.mjs`의 `cloudflare()` 어댑터에 공식 지원 옵션인 `routes.extend.exclude`로 `/packages/*`를 영구 등록. 재빌드 후 `dist/_routes.json`에 정상 반영 확인
+4. **배포 및 검증** — `npm run cf:deploy`로 배포. 라이브 도메인에 curl로 직접 확인: `/packages/pretendard/...` 요청이 `HTTP 404` + `CF-Cache-Status: HIT`로 응답(= Worker를 안 거치고 Cloudflare Edge에서 바로 처리됨을 확인), 홈페이지는 여전히 정상 200 확인
+5. **WAF Rate Limiting 검토 후 보류** — 클라우드플레어 AI가 IP 기반 Rate Limiting 규칙(50회/10초 → Block)을 제안했으나, 검토 결과 이 경로는 정상적으로 절대 발생할 수 없는 경로라 오탐 위험이 없으므로 Rate Limiting(threshold 방식)보다 단순 경로 매칭 **Block** 규칙이 더 적합하다는 결론(초안: `http.host eq "trip.lalalakorea.com" and http.request.uri.path contains "/packages/"`). 다만 라우팅 수정만으로 이미 Worker 비용/쿼터 문제는 해결됐고, 오늘 스파이크도 한 순간에 몰린 일회성 정황이라 WAF 규칙 적용은 지금 하지 않고 **재발 시 대응**하기로 사용자와 합의
+
+### 완료된 항목
+- [x] Worker 호출 스파이크 원인 진단 (코드 레벨에서 봇/스캐너 트래픽으로 확정)
+- [x] `astro.config.mjs`에 `routes.extend.exclude: [{ pattern: '/packages/*' }]` 추가
+- [x] 빌드 검증 (`dist/_routes.json`에 `/packages/*` exclude 반영 확인)
+- [x] `npm run cf:deploy` 배포 완료
+- [x] 라이브 도메인 curl 검증 (`CF-Cache-Status: HIT` + 404, 홈페이지 200 정상)
+- [x] WAF Rate Limiting 필요성 검토 — Block 규칙 초안까지 정리, 적용은 보류하고 모니터링으로 전환하기로 결정
+
+### 다음에 할 일
+- [ ] Cloudflare 관찰 가능성에서 유사 스파이크(짧은 시간에 대량 요청) 재발 여부 계속 모니터링
+- [ ] 재발 시 WAF Block 커스텀 규칙 적용 (`http.host eq "trip.lalalakorea.com" and http.request.uri.path contains "/packages/"`)
+- [ ] `astro.config.mjs` 변경사항 git 커밋 필요 (현재 배포는 완료됐으나 커밋은 아직 안 함 — 다음 세션에서 확인)
+
+---
+
 ## 2026-08-11/12 작업 — Vercel → Cloudflare Workers 이전 완료
 
 ### 배경
