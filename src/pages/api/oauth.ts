@@ -2,6 +2,9 @@ import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
+const SITE_ORIGIN = 'https://trip.lalalakorea.com';
+const STATE_COOKIE = 'cms_oauth_state';
+
 export async function GET({ url }: any) {
   const provider = url.searchParams.get('provider');
 
@@ -10,12 +13,19 @@ export async function GET({ url }: any) {
   }
 
   const clientId = (env as any).GITHUB_CLIENT_ID || (env as any).KEYSTATIC_GITHUB_CLIENT_ID;
-  const callbackUrl = 'https://trip.lalalakorea.com/api/oauth/callback';
+  const callbackUrl = `${SITE_ORIGIN}/api/oauth/callback`;
+
+  // CSRF 방어용 state. HttpOnly 쿠키에 심어두고 콜백에서 대조한다.
+  // 이게 없으면 공격자 페이지가 대신 팝업을 열어 인증을 완주시킬 수 있다
+  // (이미 앱을 승인한 사용자는 GitHub 동의 화면 없이 그냥 통과하므로).
+  const state = crypto.randomUUID();
 
   const params = new URLSearchParams({
     client_id: clientId || '',
     redirect_uri: callbackUrl,
-    scope: 'repo,user',
+    // trip-blog는 public 저장소라 repo(=모든 private 저장소 접근) 대신 public_repo면 충분하다.
+    scope: 'public_repo,read:user',
+    state,
   });
 
   const githubAuthUrl = `https://github.com/login/oauth/authorize?${params}`;
@@ -31,15 +41,16 @@ export async function GET({ url }: any) {
 <script>
   (function() {
     var provider = 'github';
-    var origin = window.opener && window.opener.origin;
+    var siteOrigin = ${JSON.stringify(SITE_ORIGIN)};
 
-    // 1단계: 핸드셰이크 메시지 전송
+    // 1단계: 핸드셰이크 메시지 전송 (대상 오리진 고정)
     if (window.opener) {
-      window.opener.postMessage('authorizing:' + provider, origin || '*');
+      window.opener.postMessage('authorizing:' + provider, siteOrigin);
     }
 
     // 2단계: 부모의 에코백을 기다린 후 GitHub로 이동
     window.addEventListener('message', function onMsg(e) {
+      if (e.origin !== siteOrigin) return;
       if (e.data === 'authorizing:' + provider) {
         window.removeEventListener('message', onMsg);
         window.location.href = ${JSON.stringify(githubAuthUrl)};
@@ -55,5 +66,11 @@ export async function GET({ url }: any) {
 </body>
 </html>`;
 
-  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(html, {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'Set-Cookie': `${STATE_COOKIE}=${state}; HttpOnly; Secure; SameSite=Lax; Path=/api/oauth; Max-Age=600`,
+    },
+  });
 }
