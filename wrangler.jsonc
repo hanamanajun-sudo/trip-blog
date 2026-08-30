@@ -11,7 +11,11 @@
   ],
   "assets": {
     "binding": "ASSETS",
-    "directory": "./dist"
+    "directory": "./dist",
+    // astro.config.mjs의 trailingSlash:"never"와 맞춘다.
+    // 기본값 auto-trailing-slash는 /about -> /about/ 로 307을 내보내서
+    // sitemap과 canonical이 가리키는 URL이 전부 리다이렉트가 돼버린다.
+    "html_handling": "drop-trailing-slash"
   },
   "observability": {
     "enabled": true
