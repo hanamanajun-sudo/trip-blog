@@ -37,6 +37,7 @@ collections:
           - 유튜버 되기 자료
         default: 해외 여행
       - { label: "URL 슬러그", name: entry_slug, widget: string, required: false }
+      - { label: "공개 대기 (켜면 사이트에 안 보임)", name: draft, widget: boolean, default: false, required: false }
       - { label: 요약 설명, name: description, widget: text, required: false }
       - { label: 본문, name: body, widget: markdown }
 `;
