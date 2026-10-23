@@ -4,7 +4,6 @@ import { slugify } from '../utils/slugify';
 import ShareButtons from '../components/ShareButtons.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import TableOfContents from '../components/TableOfContents.astro';
-import CoupangBanner from '../components/CoupangBanner.astro';
 
 interface AdjacentPost {
   title: string;
@@ -145,9 +144,6 @@ const breadcrumbSchema = {
     ">
       <slot />
     </div>
-
-    <!-- 쿠팡 배너 (본문 아래) -->
-    <CoupangBanner />
 
     <!-- 소셜 공유 버튼 -->
     <ShareButtons title={title} url={pageUrl} />
