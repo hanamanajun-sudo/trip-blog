@@ -3,7 +3,7 @@ title: 캘리포니아 vs 한국 크기 비교 (인구, 시차, 여행 정보) -
 date: 2026-10-23
 category: 지구 상식
 entry_slug: california-vs-korea-size-population-travel
-draft: true
+draft: false
 description: 캘리포니아는 한국 면적의 약 4.2배, 인구는 한국보다 적은 약 3,900만 명인 미국 서부의 대표 주다.
   면적·인구·시차에 로스앤젤레스·샌프란시스코·요세미티 여행 정보까지 한국과 비교해 정리했다.
 ---
